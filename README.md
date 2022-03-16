@@ -6,17 +6,18 @@ The core idea is to create a web application that will help users drink responsi
 
 ### Contribution rules
 
-1. Create an Issue.
-2. Create a Branch for that issue. Name the branch "issue/#" where # is issue number.
-3. Push your commits to the branch.
-4. Pull Request. Write "Resolves #%" where % is the number of the issue in the pull request comment.
-5. Wait for code review.
+1. Create an Issue and/or assign yourself to the issue.
+3. Create a Branch for that issue. Name the branch "#-name-of-issue" where # is issue number.
+4. Push your commits to the branch.
+5. Pull Request. Write "Resolves #%" where % is the number of the issue in the pull request comment.
+6. Wait for code review.
+7. Remove branch after merging.
 
 **Naming conventions**
 
 Issues should be named starting with: "Fix/Add"
 
-Branches should be named: "issue/#" where # is the issue number.
+Branches should be named: "#-name-of-issue" where # is the issue number.
 
 -----------------------------------------------
 
