@@ -1,4 +1,4 @@
-# Drinking-buddy 🍻 :chicken:
+# Drinking-buddy 🍻
 The core idea is to create a web application that will help users drink responsibly and to provide a more enjoyable experience while drinking.
 
 ------------------------------------------
@@ -9,7 +9,7 @@ The core idea is to create a web application that will help users drink responsi
 1. Create an Issue and/or assign yourself to the issue.
 3. Create a Branch for that issue. Name the branch "#-name-of-issue" where # is issue number.
 4. Push your commits to the branch.
-5. Pull Request. Write "Resolves #%" where % is the number of the issue in the pull request comment.
+5. Pull Request. Write "Resolves #%" where % is the number of the issue in the pull request comment, and a text explaining what you did.
 6. Wait for code review.
 7. Remove branch after merging.
 
