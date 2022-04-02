@@ -1,6 +1,6 @@
 
 
-class DrinkingBuddyModel {
+class TravelBuddyModel {
 
   currentAccommodation;
   currentFlight;
@@ -128,4 +128,4 @@ class DrinkingBuddyModel {
 }
 
 
-export default DrinkingBuddyModel;
+export default TravelBuddyModel;
