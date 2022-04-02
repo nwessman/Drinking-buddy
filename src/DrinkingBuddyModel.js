@@ -12,11 +12,15 @@ class DrinkingBuddyModel {
   
   observers;
 
-  constructor(){
+  constructor(accArray = [], flightArray=[], activityArray = []){
     this.observers = [];
-    this.startDate = startDate;
-    this.endDate = endDate;
+    this.startDate = {};
+    this.endDate = {};
     this.searchParams = {};
+
+    this.accomondations = accArray; 
+    this.flights = flightArray;
+    this.activities = activityArray;
   }
 
   addObserver(callback) {
@@ -87,7 +91,7 @@ class DrinkingBuddyModel {
   }
 
   /**
-   * 
+   * Remove accommodation from list.
    */
   removeFromAccommodation(){
     //TODO
@@ -101,14 +105,14 @@ class DrinkingBuddyModel {
   }
 
   /**
-   * 
+   * Add activity to list.
    */
   addToActivities(){
   //TODO
   }
 
   /**
-   * 
+   * Remove activity from list.
    */
   removeFromActivities(){
     //TODO
