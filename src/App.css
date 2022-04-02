@@ -6,6 +6,31 @@
   padding: 0;
   font-family: 'Lato', sans-serif;
 }
+
+.searchWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+}
+
+.search {
+  position: relative;
+  display: inline-block;
+  min-width: 100px;
+}
+
+.searchInputs {
+  border: 20px solid transparent;
+  opacity: 0.8;
+  font-size: 18px;
+}
+
+.dates{
+  text-align: center;
+}
+
+
 .background_image{
   background-image: radial-gradient(at center center, #2d7e9270 0%, #1c40617c 100%), url("./images/view.jpg");
   background-size: cover;
@@ -64,8 +89,6 @@
      font-size: 1.2rem;
      size: 1.2rem;
      align-items: right;
-  
-   
     
      
    }
