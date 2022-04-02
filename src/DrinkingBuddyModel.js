@@ -2,27 +2,21 @@
 
 class DrinkingBuddyModel {
 
-  promille;
-  startTime;
-  endTime;
-  drinkTypes;
-  priceClass;
-  searchParams; // = {type: online/your store, query: "input"}
-  store;
-  preferences;
+  currentAccommodation;
+  currentFlight;
+
+  searchParams;
+
+  startDate;
+  endDate;
+  
   observers;
 
-  constructor(promille = 1, startTime = 18, endTime = 24, drinkTypes =  [], priceClass = "standard", store = "", preferences = []){
+  constructor(){
     this.observers = [];
-    this.promille = promille;
-    this.startTime = startTime;
-    this.endTime = endTime;
-    this.drinkTypes = drinkTypes;
-    this.priceClass = priceClass;
-    this.store = store;
-    this.preferences = preferences;
-
-    this.searchParams = {type: "online"};
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.searchParams = {};
   }
 
   addObserver(callback) {
@@ -51,55 +45,80 @@ class DrinkingBuddyModel {
   }
 
   /**
-   * Set the type of the search, in this case "Online" or "Store".
-   * @param {*} type 
+   * Set current location.
+   * @param {*} query 
    */
-  setSearchType(type){
-    this.searchParams.type = type; 
+  setCurrentLocation(){
+    //TODO
   }
 
   /**
-   * Set the free text query of search.
+   * Set destination of users choice.
    * @param {*} query 
    */
-  setSearchQuery(query){
-    this.searchParams.query = query;
+  setSearchDestination(){
+    //TODO
   }
 
   doSearch(params){
-    //Todo 
+    //TODO 
   }
 
-  addToPreferences(drink){
-    //todo 
+  setStartDate(){
+    //TODO  
   }
 
-  removeFromPrefences(drink){
-    //todo
+  setEndDate(){
+    //TODO  
   }
 
-  addDrinkTypeToFilter(type){
-    //todo
+  /**
+   * Accomondation currently checked by user.
+   */
+  setCurrentAccommodation(id){
+    //TODO
   }
 
-  removeDrinkTypeFromFilter(type){
-   //todo 
+  /**
+   * Add accomondation to list.
+   */
+  addToAccommodation(){
+    //TODO 
   }
 
-  changePriceClass(priceClass){
-    //todo
+  /**
+   * 
+   */
+  removeFromAccommodation(){
+    //TODO
   }
 
-  changePromille(promille){
-    //todo
+  /**
+   * Acitivity currently checked by user.
+   */
+  setCurrentActivity(){
+    //TODO
   }
 
-  changeStartTime(startTime){
-    //todo
+  /**
+   * 
+   */
+  addToActivities(){
+  //TODO
   }
 
-  changeEndTime(endtime){
-    //todo
+  /**
+   * 
+   */
+  removeFromActivities(){
+    //TODO
+  }
+
+  /**
+   * Flight currently checked by user.
+   */
+  setCurrentFlight(){
+    //TODO
   }
 
 }
