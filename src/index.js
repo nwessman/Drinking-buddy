@@ -3,9 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import TravelBuddyModel from './TravelBuddyModel.js'
+
+let model = new TravelBuddyModel();
+
 
 ReactDOM.render(
-    <App />,
+    <App model={model}/>,
   document.getElementById('root')
 );
 
