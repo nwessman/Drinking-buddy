@@ -52,28 +52,28 @@ class TravelBuddyModel {
    * Set current location.
    * @param {*} query 
    */
-  setCurrentLocation(){
-    //TODO
+  setCurrentLocation(from){
+    this.searchParams.from = from;
   }
 
   /**
    * Set destination of users choice.
    * @param {*} query 
    */
-  setSearchDestination(){
-    //TODO
+  setSearchDestination(to){
+    this.searchParams.to = to;
   }
 
   doSearch(params){
     //TODO 
   }
 
-  setStartDate(){
-    //TODO  
+  setStartDate(date){
+    this.startDate = date;
   }
 
-  setEndDate(){
-    //TODO  
+  setEndDate(date){
+    this.endDate = date; 
   }
 
   /**
