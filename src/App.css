@@ -1,11 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-react-calendars/styles/material.css";
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: 'Lato', sans-serif;
 }
+
+.searchWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+}
+
+.search {
+  margin-left: 10px;
+  display: inline-block;
+  min-width: 100px;
+}
+
+.searchInputs {
+  border: 20px solid transparent;
+  opacity: 0.8;
+  font-size: 18px;
+}
+
+.dates{
+  text-align: center;
+}
+
+
 .background_image{
   background-image: radial-gradient(at center center, #2d7e9270 0%, #1c40617c 100%), url("./images/view.jpg");
   background-size: cover;
@@ -64,8 +96,6 @@
      font-size: 1.2rem;
      size: 1.2rem;
      align-items: right;
-  
-   
     
      
    }
