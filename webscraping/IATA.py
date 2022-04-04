@@ -41,10 +41,6 @@ for letter in alphabet:
       output += '],\n'
       output += '"Country":"' + dest[len(dest)-1] + '"\n'
       output += '},'
-      
-      
-      #rowInfo = re.sub("[\(\[].*?[\)\]]", "", columns[0].text.strip()) + " {" + re.sub("[\(\[].*?[\)\]]", "",columns[2].text.strip()) + "} {"+re.sub("[\(\[].*?[\)\]]", "", columns[3].text.strip()) + "}\n"
-      #output += rowInfo
 
 output = output[:-1]
 output += ']\n}'
