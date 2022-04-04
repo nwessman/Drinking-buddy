@@ -13,8 +13,7 @@ firebase_admin.initialize_app(cred, {
 })
 
 # The app only has access as defined in the Security Rules
-ref = db.reference('Airports') #'travelbuddy-700b8-default-rtdb'
-#airports_ref = ref.child('AAA')  # IATA
+ref = db.reference() #'travelbuddy-700b8-default-rtdb'
 
 f = open("output.txt", "r", encoding='utf-8')
 
@@ -22,14 +21,3 @@ airports = json.loads(f.read())
 f.close()
 
 ref.set(airports)
-
-#ref.set({
-#  'AAA' : {
-#    'country' : 'Sweden',
-#    'name' : 'arlanda',
-#    'cities' : {'stockholm' : 'none' , 'uppsala' : 'none' }
-#  }
-#})
-
-
-#print(ref.get())
