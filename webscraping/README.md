@@ -1,3 +1,4 @@
+# Webscrape AITA codes from Wikipedia :chicken:
 We needed the AITA codes for each city/airport for Skyscanner API _Best Flights_ search. This adds a directory `webscraping` that contains the two scripts and a json (as txt).
 
 * AITA.py - Script to webscrape all AITA codes from Wikipedia and then writes them as a JSON 
@@ -6,6 +7,7 @@ We needed the AITA codes for each city/airport for Skyscanner API _Best Flights_
 
 **NOTE 1**
 This only needs to be run once by site admin, which already **HAVE** been done. 
+
 **NOTE 2**
 The website does not use this code. This folder is just for showcasing and version tracking.
 
