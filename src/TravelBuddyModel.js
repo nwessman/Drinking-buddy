@@ -1,3 +1,6 @@
+import firebaseConfig from "./firebaseConfig.js";
+import firebase from "firebase/app";
+import "firebase/database";
 
 
 class TravelBuddyModel {
@@ -64,8 +67,18 @@ class TravelBuddyModel {
     this.searchParams.to = to;
   }
 
-  doSearch(params){
+  doSearch(){
     //TODO 
+    firebase.initializeApp(firebaseConfig);
+    firebase.database().ref("Airports/8258").get().then((snapshot) => {
+      if(snapshot.exists()) {
+        console.log(snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    })
   }
 
   setStartDate(date){
