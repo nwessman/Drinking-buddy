@@ -22,13 +22,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 15%;
 }
 
 .search {
   margin-left: 10px;
   display: inline-block;
   min-width: 100px;
+  margin-bottom: -400px;
 }
 
 .searchInputs {
