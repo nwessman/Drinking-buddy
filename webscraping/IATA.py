@@ -10,7 +10,7 @@ base_URL = "https://en.wikipedia.org/wiki/List_of_airports_by_IATA_airport_code:
 f = open("output.txt","w", encoding='utf-8')
 
 
-output = '{\n"Airports":['
+output = '['
 
 for letter in alphabet:
   URL = base_URL + letter
@@ -43,6 +43,6 @@ for letter in alphabet:
       output += '},'
 
 output = output[:-1]
-output += ']\n}'
+output += ']'
 f.write(output)
 f.close() 
