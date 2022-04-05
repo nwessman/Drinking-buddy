@@ -3,6 +3,7 @@ import './App.css';
 import React, {useEffect, useState} from 'react';
 import NavigationView from './views/NavigationView';
 import Show from '../src/reactjs/show'
+<<<<<<< HEAD
 import StartSearchView from './views/StartSearchView';
 import { API_KEY, BASE_URL } from './apiConfig';
 
@@ -21,10 +22,18 @@ function App() {
       }
     )
   }, []);
+=======
+
+const Search=require('./reactjs/StartSearchPresenter.js').default;
+
+//const picture = new URL("./images/background.jpg", import.meta.url);
+function App(props) {
+>>>>>>> origin/main
   return (
     <>
       <div className='background_image'>
          <Show><NavigationView></NavigationView></Show>
+<<<<<<< HEAD
          <Show><StartSearchView>{(typeof pdata.results=== 'undefined') ? (
            <div><p>Data is loading...</p></div>
          ): (
@@ -32,6 +41,9 @@ function App() {
 
          )}</StartSearchView></Show>
         
+=======
+         <Show><Search model={props.model}/></Show>
+>>>>>>> origin/main
         </div>
    </>
 
