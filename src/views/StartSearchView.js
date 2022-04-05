@@ -54,7 +54,7 @@ function StartSearchView(props){
                 <DateRangePickerComponent placeholder="Choose Date Range" change = {onCalenderChange}/>
             </div>
             <div className="search">
-                <button style = {{opacity: .8}}><IoIosSearch onClick = {onClickSearchACB}  size="50px"/></button>
+                <button onClick = {onClickSearch} style = {{opacity: .8}}><IoIosSearch onClick = {onClickSearchACB}  size="50px"/></button>
             </div>
 
             </div>
