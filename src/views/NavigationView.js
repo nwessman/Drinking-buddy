@@ -7,9 +7,14 @@ function NavigationView(props){
     //     return props.onSideBarClick();
     // }
     function renderMenuItems(item, index){
+
+        function someCB(){
+            window.location.hash = item.hash;
+        }
+        
         return (
         <li key={index} className={item.cName}>
-            <a href={item.path}>
+            <a onClick = {someCB} >
             {item.icon}
             <span>{item.title}</span>
             </a>
@@ -22,7 +27,6 @@ return (
     <div className="navigationbar">
         <h2 className="name_logo">TravelBuddy</h2>
         <ul className="menuBar">
-            
         {MenuItems.map(renderMenuItems)}
         </ul>
     </div>

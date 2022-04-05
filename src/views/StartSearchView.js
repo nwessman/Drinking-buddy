@@ -26,9 +26,13 @@ function StartSearchView(props){
         end = evt.value[1];
     }
 
+    function someCB(){
+        window.location.hash = "activities";
+    }
+
 
     return (
-        <div className="searchWrapper">
+        <div className="background_image">
             
             <div className ="search">
                 <input type = "text" placeholder = "From" className="searchInputs" onChange = {onFromChange}/>
@@ -39,10 +43,10 @@ function StartSearchView(props){
                 <DateRangePickerComponent placeholder="Choose Date Range" change = {onCalenderChange}/>
             </div>
             <div className="search">
-                <button style = {{opacity: .8}}><IoIosSearch onClick = {onClickSearch}  size="50px"/></button>
+                <button onClick = {someCB} style = {{opacity: .8}}><IoIosSearch onClick = {onClickSearch}  size="50px"/></button>
             </div>
-            
-        </div>  
+             
+        </div>
         );
 }
 export default StartSearchView;
