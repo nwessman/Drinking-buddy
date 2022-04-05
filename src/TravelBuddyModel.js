@@ -1,3 +1,5 @@
+import resolvePromise from "./resolvePromise.js";
+import {searchHotels} from "./geoSource.js"
 
 
 class TravelBuddyModel {
@@ -17,11 +19,13 @@ class TravelBuddyModel {
     this.startDate = {};
     this.endDate = {};
     this.searchParams = {};
+    this.searchResultsPromiseState = {};
 
     this.accomondations = accArray; 
     this.flights = flightArray;
     this.activities = activityArray;
   }
+  setSearchQuery(long){this.searchParams.longitude=long}
 
   addObserver(callback) {
       this.observers = [...this.observers, callback];
@@ -65,7 +69,7 @@ class TravelBuddyModel {
   }
 
   doSearch(params){
-    //TODO 
+    resolvePromise(searchHotels(params), this.searchResultsPromiseState);
   }
 
   setStartDate(date){
