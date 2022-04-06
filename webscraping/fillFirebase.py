@@ -15,7 +15,7 @@ firebase_admin.initialize_app(cred, {
 # The app only has access as defined in the Security Rules
 ref = db.reference() #'travelbuddy-700b8-default-rtdb'
 
-f = open("output.txt", "r", encoding='utf-8')
+f = open("combinedOutput.json", "r", encoding='utf-8')
 
 airports = json.loads(f.read())
 f.close()

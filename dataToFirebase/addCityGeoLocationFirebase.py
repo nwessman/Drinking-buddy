@@ -1,3 +1,4 @@
+
 # import pandas as pd
 # import firebase_admin
 # from firebase_admin import credentials
@@ -14,6 +15,7 @@
 
 # f.write(json.dumps(cities))
 # f.close()
+
 # # Fetch the service account key JSON file contents
 # cred = credentials.Certificate('../webscraping/travelbuddy-700b8-firebase-adminsdk-rimpp-d82b8f7841.json')
 

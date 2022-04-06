@@ -6,10 +6,19 @@ function NavigationView(props){
     // function ACB(){
     //     return props.onSideBarClick();
     // }
+    function navigateStartSearchCB(){
+        window.location.hash = "startsearch";
+    }
+
     function renderMenuItems(item, index){
+        
+        function someCB(){
+            window.location.hash = item.hash;
+        }
+        
         return (
         <li key={index} className={item.cName}>
-            <a href={item.path}>
+            <a onClick = {someCB} >
             {item.icon}
             <span>{item.title}</span>
             </a>
@@ -20,9 +29,8 @@ function NavigationView(props){
 
 return (
     <div className="navigationbar">
-        <h2 className="name_logo">TravelBuddy</h2>
+        <h2 onClick={navigateStartSearchCB} className="name_logo">TravelBuddy</h2>
         <ul className="menuBar">
-            
         {MenuItems.map(renderMenuItems)}
         </ul>
     </div>

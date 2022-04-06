@@ -35,12 +35,24 @@ function StartSearchView(props){
         end = evt.value[1];
     }
 
-   
+    function onClickSearchACB(){
+        window.location.hash = "flights";
+    }
 
+    function navigateStartSearchACB() {
+        window.location.hash = "startsearch";
+        
+    }
 
 
     return (
-        <div className="searchWrapper">
+            <div className="background_image">
+
+                <div className='navigationbar'>
+                    <h2 className='name_logo' onClick={navigateStartSearchACB}>TravelBuddy</h2>
+                </div>
+
+                <div className='searchWrapper'>
             
             <div className ="search">
                 <input type = "text" placeholder = "From" className="searchInputs" onChange = {onFromChange}/>
@@ -51,11 +63,11 @@ function StartSearchView(props){
                 <DateRangePickerComponent placeholder="Choose Date Range" change = {onCalenderChange}/>
             </div>
             <div className="search">
-                <button style = {{opacity: .8}}><IoIosSearch onClick = {onClickSearchCoor/*onClickSearch*/}  size="50px"/></button>
-                <div></div>
+                <button onClick = {onClickSearch} style = {{opacity: .8}}><IoIosSearch onClick = {onClickSearchACB}  size="50px"/></button>
             </div>
-            
-        </div>  
+
+            </div>
+            </div>
         );
 }
 export default StartSearchView;
