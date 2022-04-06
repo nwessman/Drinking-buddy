@@ -73,14 +73,27 @@ class TravelBuddyModel {
     
     let fromOkey = true;
     let toOkey = true;
+    let refFrom = "Cities/" + this.searchParams.from;
+    let refTo = "Cities/" + this.searchParams.to;
 
+    firebase.database().ref("refFrom").get().then((snapshot) => {
+      if(snapshot.exists()) {
+        console.log(snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    })
+
+    /*
     firebase.database().ref("Airports").orderByChild('Cities').equalTo(this.searchParams.from).on("value", function(snapshot) {
       console.log("snap: " + JSON.stringify(snapshot));
       snapshot.forEach(function(data) {
           console.log("child.Cities: " + data.val().Cities);
       });
     });
-
+    */
     /*
     firebase.database().ref("Airports").orderByChild('AITA').equalTo('WKB').on("value", function(snapshot) {
       snapshot.forEach(function(data) {
