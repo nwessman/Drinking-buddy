@@ -18,13 +18,15 @@ function StartSearchView(props){
 
     function onFromChange(evt){
         //from = evt.target.value;
-        return props.setSearchLatEv(evt.target.value);
+        //return props.setSearchLatEv(evt.target.value);
+        return props.setLat(evt.target.value);
     }
 
     function onToChange(evt){
         //to = evt.target.value;
         //return props.setSearchEvent(evt.target.value);
-        return props.setSearchLongEv(evt.target.value);
+        //return props.setSearchLongEv(evt.target.value);
+        return props.setLong(evt.target.value);
     }
 
     function onCalenderChange(evt) {

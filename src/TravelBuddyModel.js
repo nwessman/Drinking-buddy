@@ -25,7 +25,8 @@ class TravelBuddyModel {
     this.flights = flightArray;
     this.activities = activityArray;
   }
-  setSearchQuery(long){this.searchParams.longitude=long}
+  setSearchLongQuery(long){this.searchParams.query.longitute=long}
+  setSearchLatQuery(lat){this.searchParams.query.latitute=lat}
 
   addObserver(callback) {
       this.observers = [...this.observers, callback];
