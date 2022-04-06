@@ -4,11 +4,12 @@ import { IoIosSearch, IoMdSwap } from "react-icons/io";
 import "../App.css";
 
 
+
 function StartSearchView(props){
     
     let to, from, start, end;
 
-
+    
     function onClickSearchCoor(){
         //props.onSearchClick(to,from,start,end);
         console.log("search is being made...");

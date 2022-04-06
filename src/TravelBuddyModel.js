@@ -1,5 +1,5 @@
 import resolvePromise from "./resolvePromise.js";
-import {searchHotels} from "./geoSource.js"
+//import {searchHotels} from "./geoSource.js"
 
 
 class TravelBuddyModel {
@@ -69,9 +69,9 @@ class TravelBuddyModel {
     this.searchParams.to = to;
   }
 
-  doSearch(params){
-    resolvePromise(searchHotels(params), this.searchResultsPromiseState);
-  }
+  // doSearch(params){
+  //   resolvePromise(searchHotels(params), this.searchResultsPromiseState);
+  // }
 
   setStartDate(date){
     this.startDate = date;
