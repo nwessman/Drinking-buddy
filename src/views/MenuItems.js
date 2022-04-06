@@ -7,21 +7,22 @@ import * as RiIcons from "react-icons/ri"
     export const MenuItems = [
     {
         title: "Flights",
-        path:"/flights",
+        hash:"#flights",
         icon:<IoIcons.IoAirplaneSharp></IoIcons.IoAirplaneSharp>,
-        cName: "menuItems"
+        cName: "menuItems",
+
         
     },
     {
         title: "Hotels",
-        path:"/hotels",
+        hash:"#hotels",
         icon:<RiIcons.RiHotelFill></RiIcons.RiHotelFill>,
         cName: "menuItems"
         
     },
     {
         title: "Activites",
-        path:"/activites",
+        hash:"#activities",
         icon:<IoIcons.IoAccessibilitySharp></IoIcons.IoAccessibilitySharp>,
         cName: "menuItems"
         
