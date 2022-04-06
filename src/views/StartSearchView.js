@@ -4,21 +4,30 @@ import { IoIosSearch, IoMdSwap } from "react-icons/io";
 import "../App.css";
 
 
+
 function StartSearchView(props){
     
     let to, from, start, end;
 
-
-    function onClickSearch(evt){
-        props.onSearchClick(to,from,start,end);
+    
+    function onClickSearchCoor(){
+        //props.onSearchClick(to,from,start,end);
+        console.log("search is being made...");
+        return props.searchEvent();
+     
     }
 
     function onFromChange(evt){
-        from = evt.target.value;
+        //from = evt.target.value;
+        //return props.setSearchLatEv(evt.target.value);
+        return props.setLat(evt.target.value);
     }
 
     function onToChange(evt){
-        to = evt.target.value;
+        //to = evt.target.value;
+        //return props.setSearchEvent(evt.target.value);
+        //return props.setSearchLongEv(evt.target.value);
+        return props.setLong(evt.target.value);
     }
 
     function onCalenderChange(evt) {
