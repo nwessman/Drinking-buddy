@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import TravelBuddyModel from './TravelBuddyModel.js'
+import firebaseConfig from './firebaseConfig.js'
+//import firebase from 'firebase/app'
+
+//firebase.initializeApp(firebaseConfig);
 
 let model = new TravelBuddyModel();
 
