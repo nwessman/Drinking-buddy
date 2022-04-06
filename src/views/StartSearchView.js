@@ -26,8 +26,8 @@ function StartSearchView(props){
         end = evt.value[1];
     }
 
-    function onClickSearchACB(){
-        window.location.hash = "flights";
+    function navigateHotelsACB(){
+        window.location.hash = "hotels";
     }
 
     function navigateStartSearchACB() {
@@ -47,14 +47,14 @@ function StartSearchView(props){
             
             <div className ="search">
                 <input type = "text" placeholder = "From" className="searchInputs" onChange = {onFromChange}/>
-                <IoMdSwap style = {{ opacity: 0.6}} size = "30px"/>
+                    <IoMdSwap style = {{ opacity: 0.6}} size = "30px"/>
                 <input type = "text" placeholder= "To" className="searchInputs" onChange = {onToChange}/>
             </div>
             <div className="search">
                 <DateRangePickerComponent placeholder="Choose Date Range" change = {onCalenderChange}/>
             </div>
             <div className="search">
-                <button onClick = {onClickSearch} style = {{opacity: .8}}><IoIosSearch onClick = {onClickSearchACB}  size="50px"/></button>
+                <button onClick = {onClickSearch} style = {{opacity: .8}}><IoIosSearch onClick = {navigateHotelsACB}  size="50px"/></button>
             </div>
 
             </div>
