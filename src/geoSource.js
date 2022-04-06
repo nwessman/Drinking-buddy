@@ -1,5 +1,3 @@
-import { API_KEY} from "./apiConfig";
-
 function getHotels(params){
     // REQUIRES OBJECT {startDate, endDate, lat, lng}
     const options = {
