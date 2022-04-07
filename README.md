@@ -1,5 +1,9 @@
 # Travel-buddy :earth_africa:	
 ## Mid project review 
+
+### Tips for testing the website
+Choose larger cities Stockholm/Berlin for example and with short date span. Too large spans of dates won't return hotels.
+
 ### Short description of your project
 The core idea is to create a web application that will help users to get a more enjoyable travel experience by creating a route of their flights as well as giving them options for hotel and activities.  
 
