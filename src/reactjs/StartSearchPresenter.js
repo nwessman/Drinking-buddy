@@ -1,7 +1,6 @@
 import StartSearchView from "../views/StartSearchView";
 import React from "react";
-//import { searchHotels } from "../geoSource";
-import {getHotels} from '../geoSource.js'
+import { getHotels } from "../geoSource";
 
 
 export default function Search(props){
@@ -11,13 +10,13 @@ export default function Search(props){
     //searchHotels({query:"burger", type: "main course"})
     //props.model.doSearch(props.model.searchParams);
     // GET HOTELS BEHÖVER OBJEKT {startDate, endDate, lat, lng}
-    getHotels({lat: "59.2669", lng: "15.1965", startDate: "2022-09-30", endDate: "2022-10-01"})
+    // REQUIRES OBJECT {startDate, endDate, lat, lng}
 
   }
   function setSearchLatCB(val){
     props.model.setSearchLatQuery(val);
-
   }
+
   function setSearchLongCB(val){
     props.model.setSearchLongQuery(val);
   }

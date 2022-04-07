@@ -3,10 +3,18 @@ import {searchHotels} from "./geoSource.js"
 import firebase from 'firebase/app';
 import firebaseConfig from './firebaseConfig.js';
 import "firebase/database";
+import { getHotels } from "./geoSource.js";
 
 class TravelBuddyModel {
 
+  accommodationList;
   currentAccommodation;
+  locationToLng;
+  locationToLat;
+  LocationTo;
+
+
+
   currentFlight;
 
   searchParams;
@@ -18,6 +26,7 @@ class TravelBuddyModel {
   observers;
 
   constructor(accArray = [], flightArray=[], activityArray = []){
+    this.accommodationList = [];
     this.observers = [];
     this.startDate = {};
     this.endDate = {};
@@ -128,7 +137,21 @@ class TravelBuddyModel {
           reject(null);
         })});
       }).then((value) => {
-        console.log(value);
+        this.locationToLat = value[1].lat;
+        this.locationToLng = value[1].lng;
+        console.log("startdate: " + this.startDate + "enddate: " +  this.endDate + "to lat: " + this.locationToLat + "to lng" + this.locationToLng);
+        if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
+          // REQUIRES OBJECT {startDate, endDate, lat, lng}
+          getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
+          .then(response => response.json())
+          .then(response => {
+                  console.log(response);
+                  this.setAccommodationList(response.result);
+                  this.notifyObservers();
+                  window.location.hash = "hotels";
+                  }
+            ).catch(err => console.error(err));
+        }
       });
 
       const theModel = this;
@@ -147,6 +170,10 @@ class TravelBuddyModel {
 
   setStartDate(date){
     this.startDate = date;
+  }
+
+  setAccommodationList(l){
+    this.accommodationList = l;
   }
 
   setEndDate(date){
