@@ -51,6 +51,16 @@ We also plan on having some sort of persistency by allowing users to log in and 
 │   ├── fillFirebase.py                 // Fills the firebase with the data created in the other files
 └
 ```
+
+### The minimum we expect that you have by deadline is:
+
+:heavy_check_mark:	 That you have setup the basic framework code (e.g. the skeleton)
+
+:heavy_check_mark:	 Have initial layout of your app
+
+:heavy_check_mark:	 Showing the data from at least one API call
+
+
 ------------------------------------------
 
 
