@@ -1,6 +1,8 @@
 import resolvePromise from "./resolvePromise.js";
 //import {searchHotels} from "./geoSource.js"
-
+import firebase from 'firebase/app';
+import firebaseConfig from './firebaseConfig.js';
+import "firebase/database";
 
 class TravelBuddyModel {
 
@@ -71,14 +73,15 @@ class TravelBuddyModel {
 
   doSearch(){
     //TODO 
-    firebase.initializeApp(firebaseConfig);
-    
+        
     let fromOkey = true;
     let toOkey = true;
-    let refFrom = "Cities/" + this.searchParams.from;
-    let refTo = "Cities/" + this.searchParams.to;
 
-    firebase.database().ref("refFrom").get().then((snapshot) => {
+
+    console.log("from: " + this.searchParams.from);
+    console.log("to: " + this.searchParams.to);
+
+    firebase.database().ref("Cities").child(this.searchParams.from).get().then((snapshot) => {
       if(snapshot.exists()) {
         console.log(snapshot.val());
       } else {
@@ -87,7 +90,7 @@ class TravelBuddyModel {
     }).catch((error) => {
       console.error(error);
     })
-
+    
     /*
     firebase.database().ref("Airports").orderByChild('Cities').equalTo(this.searchParams.from).on("value", function(snapshot) {
       console.log("snap: " + JSON.stringify(snapshot));
