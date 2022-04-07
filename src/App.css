@@ -28,7 +28,7 @@
   margin-left: 10px;
   display: inline-block;
   min-width: 100px;
-  margin-bottom: -400px;
+  margin-bottom: -40%;
 }
 
 .searchInputs {
@@ -52,14 +52,13 @@
 }
 .navigationbar{
   background: #08243f;
-  height: 15vh;
+  height: 10vh;
   width: 100%;
   display: flex;
 }
 .menuItems {
   padding: 30px 80px 0px 90px;
   font-size: 1.2rem;
-  
 }
 
 .menuItems a {
@@ -78,6 +77,7 @@
 }
 .menuItems a:hover {
   background-color:#407fdd;
+  cursor: pointer;
   
 }
 .navigation_toggle {
@@ -88,10 +88,11 @@
 }
 .name_logo {
   color: rgba(255, 255, 255, 0.85);
- padding: 10px 0px 0px 20px;
- display: inline-block;
+ padding: 20px 0px 0px 20px;
+ cursor: pointer;
 
 }
+
 @media(max-width: 800px)
 {
    .navigation_toggle {
