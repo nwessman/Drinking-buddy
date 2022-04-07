@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import TravelBuddyModel from './TravelBuddyModel.js'
-import firebaseConfig from './firebaseConfig.js'
-//import firebase from 'firebase/app'
+import TravelBuddyModel from './TravelBuddyModel.js';
+import firebaseConfig from './firebaseConfig.js';
+import firebase from 'firebase/app';
 
-//firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 let model = new TravelBuddyModel();
 

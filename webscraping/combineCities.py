@@ -13,11 +13,11 @@ f.close()
 dict = {}
 
 for cityInfo in cities:
-  city = cityInfo["city"].replace('.', '').replace('/','')
+  city = cityInfo["city"].replace('.', '').replace('/','').lower()
   long = cityInfo["lng"]
   lat = cityInfo["lat"]
   airport = []
-  for airportInfo in airports:
+  for airportInfo in airports["Airports"]:
     for airportCity in airportInfo["Cities"]:
       if(city.strip() == airportCity.strip()):
         airport.append(airportInfo["AITA"])

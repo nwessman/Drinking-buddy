@@ -1,6 +1,8 @@
 import resolvePromise from "./resolvePromise.js";
 //import {searchHotels} from "./geoSource.js"
-
+import firebase from 'firebase/app';
+import firebaseConfig from './firebaseConfig.js';
+import "firebase/database";
 
 class TravelBuddyModel {
 
@@ -69,9 +71,51 @@ class TravelBuddyModel {
     this.searchParams.to = to;
   }
 
-  // doSearch(params){
-  //   resolvePromise(searchHotels(params), this.searchResultsPromiseState);
-  // }
+  doSearch(){
+    
+    let fromOkey = true;
+    let toOkey = true;
+
+    // try because empty or wrong params in search input will crash this function 
+    try {
+      console.log("from: " + this.searchParams.from);
+      console.log("to: " + this.searchParams.to);
+
+      let from = this.searchParams.from.toLowerCase();
+      let to = this.searchParams.to.toLowerCase();
+
+      // Get info about From location
+      firebase.database().ref("Cities").child(from).get().then((snapshot) => {
+        if(snapshot.exists()) {
+          console.log(snapshot.val());
+        } else {
+          console.log("No data available");
+          fromOkey = false;
+        }
+      }).catch((error) => {
+        console.error(error);
+        fromOkey = false;
+      })
+
+      // Get info about To location
+      firebase.database().ref("Cities").child(to).get().then((snapshot) => {
+        if(snapshot.exists()) {
+          console.log(snapshot.val());
+        } else {
+          console.log("No data available");
+          toOkey = false;
+        }
+      }).catch((error) => {
+        console.error(error);
+        toOkey = false;
+      })
+    } catch(error) {
+      console.log("Error in doSearch: " + error);
+      fromOkey = false;
+      toOkey = false;
+      // FIX: Reroute back to search (or dont reroute until results are given from this function)
+    }
+  }
 
   setStartDate(date){
     this.startDate = date;
