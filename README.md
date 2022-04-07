@@ -25,32 +25,30 @@ We also plan on having some sort of persistency by allowing users to log in and 
 │   ├── images
 │   │   ├── [Contains images]
 │   ├── react
-│   │   ├── AcommodationPresenter.js
-│   │   ├── ActivityPresenter.js
-│   │   ├── FlightPresenter.js
-│   │   ├── NavigationPresenter.js
-│   │   ├── StartSearchPresenter.js
+│   │   ├── AccommodationPresenter.js   // Present accommodation view
+│   │   ├── ActivityPresenter.js        // Present activity view
+│   │   ├── FlightPresenter.js          // Present flight view
+│   │   ├── NavigationPresenter.js      // Present navigation view
+│   │   ├── StartSearchPresenter.js     // Present search view
 │   │   ├── show.js
 │   ├── views
-│   │   ├── AcommodationView.js
-│   │   ├── ActivityView.js
-│   │   ├── FlightView.js
-│   │   ├── MenuItem.js
-│   │   ├── NavigationView.js
-│   │   ├── StartSearchView.js
-│   │   ├── navigation.js
-│   ├── App.js
-│   ├── App.test.js
-│   ├── TravelBuddyModel.js
-│   ├── firebaseConfig.js
-│   ├── geoSource.js
-│   ├── resolvePromise.js
+│   │   ├── AccommodationView.js        // Accommodation view
+│   │   ├── ActivityView.js             // Activity view
+│   │   ├── FlightView.js               // Flight view
+│   │   ├── MenuItem.js                 // List of menu items 
+│   │   ├── NavigationView.js           // Navigation view
+│   │   ├── StartSearchView.js          // The search view
+│   │   ├── navigation.js               // Makes search start view
+│   ├── App.js                          // App
+│   ├── TravelBuddyModel.js             // The apps model, containing application state and functions
+│   ├── geoSource.js                    // Fetch from hotel api
+│   ├── resolvePromise.js               // Resolve promise
 │   ├── 
 ├── webscraping
-│   ├── IATA.py
-│   ├── addCityGeoLocationFirebase.py
-│   ├── combineCities.py
-│   ├── fillFirebase.py
+│   ├── IATA.py                         // Scrapes Wikipedia for airport AITA codes
+│   ├── addCityGeoLocationFirebase.py   // Fill firebase with coordinate data from CSV file
+│   ├── combineCities.py                // Combines AITA and coordinate databases to one
+│   ├── fillFirebase.py                 // Fills the firebase with the data created in the other files
 └
 ```
 ------------------------------------------
