@@ -10,7 +10,7 @@ function StartSearchView(props){
     let to, from, start, end;
 
     
-    function onClickSearchCoor(){
+    function onSearchClick(){
         //props.onSearchClick(to,from,start,end);
         console.log("search is being made...");
         return props.searchEvent();
@@ -63,7 +63,7 @@ function StartSearchView(props){
                 <DateRangePickerComponent placeholder="Choose Date Range" change = {onCalenderChange}/>
             </div>
             <div className="search">
-                <button onClick = {onClickSearch} style = {{opacity: .8}}><IoIosSearch onClick = {navigateHotelsACB}  size="50px"/></button>
+                <button onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch onClick = {navigateHotelsACB}  size="50px"/></button>
             </div>
 
             </div>
