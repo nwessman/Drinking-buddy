@@ -24,6 +24,21 @@ We also plan on having some sort of persistency by allowing users to log in and 
 ├── src
 │   ├── images
 │   │   ├── [Contains images]
+│   ├── react
+│   │   ├── AcommodationPresenter.js
+│   │   ├── ActivityPresenter.js
+│   │   ├── FlightPresenter.js
+│   │   ├── NavigationPresenter.js
+│   │   ├── StartSearchPresenter.js
+│   │   ├── show.js
+│   ├── views
+│   ├── App.js
+│   ├── App.test.js
+│   ├── TravelBuddyModel.js
+│   ├── firebaseConfig.js
+│   ├── geoSource.js
+│   ├── resolvePromise.js
+│   ├── 
 ├── public
 │   ├──
 └
