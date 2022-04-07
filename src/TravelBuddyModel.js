@@ -3,10 +3,18 @@ import {searchHotels} from "./geoSource.js"
 import firebase from 'firebase/app';
 import firebaseConfig from './firebaseConfig.js';
 import "firebase/database";
+import { getHotels } from "./geoSource.js";
 
 class TravelBuddyModel {
 
+  AccommodationList;
   currentAccommodation;
+  locationToLng;
+  locationToLat;
+  LocationTo;
+
+
+
   currentFlight;
 
   searchParams;
@@ -128,7 +136,12 @@ class TravelBuddyModel {
           reject(null);
         })});
       }).then((value) => {
-        console.log(value);
+        this.locationToLat = value[1].child("lat");
+        this.locationToLng = value[1].child("lng");
+        console.log("startdate: " + this.startDate + "enddate: " +  this.endDate + "to lat: " + this.locationToLat + "to lng" + this.locationToLng);
+        if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
+          getHotels(this.startDate, this.endDate, this.locationToLat, this.locationToLng);
+        }
       });
 
       const theModel = this;
@@ -147,6 +160,10 @@ class TravelBuddyModel {
 
   setStartDate(date){
     this.startDate = date;
+  }
+
+  setAccommodationList(l){
+    this.AccommodationList = l;
   }
 
   setEndDate(date){
