@@ -23,10 +23,16 @@ export default function Search(props){
   }
 
   function doSearch(from, to, start, end){
+    function formatDateCB(date) {
+      var newDate = new Date(date); 
+      newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset()); 
+      return newDate.toISOString().split('T')[0];
+    }
+    
     props.model.setCurrentLocation(from);
     props.model.setSearchDestination(to);
-    props.model.setStartDate(start);
-    props.model.setEndDate(end);
+    props.model.setStartDate(formatDateCB(start));
+    props.model.setEndDate(formatDateCB(end));
 
     props.model.doSearch();
   }
