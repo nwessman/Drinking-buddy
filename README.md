@@ -32,6 +32,13 @@ We also plan on having some sort of persistency by allowing users to log in and 
 │   │   ├── StartSearchPresenter.js
 │   │   ├── show.js
 │   ├── views
+│   │   ├── AcommodationView.js
+│   │   ├── ActivityView.js
+│   │   ├── FlightView.js
+│   │   ├── MenuItem.js
+│   │   ├── NavigationView.js
+│   │   ├── StartSearchView.js
+│   │   ├── navigation.js
 │   ├── App.js
 │   ├── App.test.js
 │   ├── TravelBuddyModel.js
