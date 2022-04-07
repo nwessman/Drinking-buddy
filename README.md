@@ -1,5 +1,24 @@
-# Drinking-buddy 🍻
-The core idea is to create a web application that will help users drink responsibly and to provide a more enjoyable experience while drinking.
+# Travel-buddy :earth_africa:	
+## Mid project review 
+### Short description of your project
+The core idea is to create a web application that will help users to get a more enjoyable travel experience by creating a route of their flights as well as giving them options for hotel and activities.  
+
+* These options will be created based on:
+* The users’ current position &  where the user want to travel
+* The users’ preference on which activities they prefer
+* The users’ preference on budget for accommodation & flights
+
+These options will together create a summary list of their chosen flight, hotel and activity.
+
+### What you have done
+We have created the layout for the app which currently has the ability to search for cities and will provide acommodations for the search. The api we used to find acommodations uses latitutes and longitudes to decide which acommodations to display. This created the need for us to translate user input (cities) to coordinates. We did this by webscrape a list of cities, their corresponding coordinates and which airports belong to that city. We then filled a Firebase Database with this information so we can do coordinate and airport look ups on only city name searches.
+
+### What you still plan to do
+Our app only shows acommodations on searches now. We are going to extend this to flights and activities as well. Our flight api is based on aiport AITA codes, that is why we also already have that in our database.
+We also plan on having some sort of persistency by allowing users to log in and save their plans.
+
+### Your project file structure (short description/purpose of each file)
+
 
 ------------------------------------------
 
