@@ -114,7 +114,6 @@
     top: 15vh;
     background-color: #1c40617c;
     font-size: 1.2rem;
-    
    
    }
 
@@ -122,10 +121,32 @@
      padding: 40px 0px 60px 0px;
 
    }
-   body {
+   .body {
      overflow-x: hidden;
    }
+   .box{
+     flex:1;
+     display: flex;
+   }
+
 }
+.box {
+  width: 1090px;
+  height: 80vh;
+  justify-content: center;
+  background-color: #968d97;
+  opacity: 0.7;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: auto;
+}
+.boxItems{
+  justify-content: center;
+  text-align: center;
+  padding: 20px 40px 10px 40px;
+
+}
+
 
 @keyframes App-logo-spin {
   from {
