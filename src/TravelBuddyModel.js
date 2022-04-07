@@ -72,25 +72,49 @@ class TravelBuddyModel {
   }
 
   doSearch(){
-    //TODO 
-        
+    
     let fromOkey = true;
     let toOkey = true;
 
+    // try because empty or wrong params in search input will crash this function 
+    try {
+      console.log("from: " + this.searchParams.from);
+      console.log("to: " + this.searchParams.to);
 
-    console.log("from: " + this.searchParams.from);
-    console.log("to: " + this.searchParams.to);
+      let from = this.searchParams.from.toLowerCase();
+      let to = this.searchParams.to.toLowerCase();
 
-    firebase.database().ref("Cities").child(this.searchParams.from).get().then((snapshot) => {
-      if(snapshot.exists()) {
-        console.log(snapshot.val());
-      } else {
-        console.log("No data available");
-      }
-    }).catch((error) => {
-      console.error(error);
-    })
-    
+      // Get info about From location
+      firebase.database().ref("Cities").child(from).get().then((snapshot) => {
+        if(snapshot.exists()) {
+          console.log(snapshot.val());
+        } else {
+          console.log("No data available");
+          fromOkey = false;
+        }
+      }).catch((error) => {
+        console.error(error);
+        fromOkey = false;
+      })
+
+      // Get info about To location
+      firebase.database().ref("Cities").child(to).get().then((snapshot) => {
+        if(snapshot.exists()) {
+          console.log(snapshot.val());
+        } else {
+          console.log("No data available");
+          toOkey = false;
+        }
+      }).catch((error) => {
+        console.error(error);
+        toOkey = false;
+      })
+    } catch(error) {
+      console.log("Error in doSearch: " + error);
+      fromOkey = false;
+      toOkey = false;
+      //Reroute back to search
+    }
     /*
     firebase.database().ref("Airports").orderByChild('Cities').equalTo(this.searchParams.from).on("value", function(snapshot) {
       console.log("snap: " + JSON.stringify(snapshot));
