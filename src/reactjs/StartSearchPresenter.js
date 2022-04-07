@@ -24,9 +24,15 @@ export default function Search(props){
 
   function doSearch(from, to, start, end){
     function formatDateCB(date) {
-      var newDate = new Date(date); 
-      newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset()); 
-      return newDate.toISOString().split('T')[0];
+      try {
+        var newDate = new Date(date); 
+        newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset()); 
+        return newDate.toISOString().split('T')[0];
+      } catch {
+        // To do: Gör någon form av flagga för att sök-inputen är fel
+        props.model.setStartDate(null);
+        props.model.setEndDate(null);
+      }
     }
     
     props.model.setCurrentLocation(from);
