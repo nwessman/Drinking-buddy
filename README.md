@@ -18,8 +18,16 @@ Our app only shows acommodations on searches now. We are going to extend this to
 We also plan on having some sort of persistency by allowing users to log in and save their plans.
 
 ### Your project file structure (short description/purpose of each file)
-
-
+```bash
+├── public
+│   ├── [Contains images and similiar]
+├── src
+│   ├── images
+│   │   ├── [Contains images]
+├── public
+│   ├──
+└
+```
 ------------------------------------------
 
 
