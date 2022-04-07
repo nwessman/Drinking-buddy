@@ -89,10 +89,10 @@ class TravelBuddyModel {
       let toSnapshot;
 
       // Get info about From location
-      const fromPromise = new Promise((resolve, reject) => {
+      const promiseClusterFuck = new Promise((resolve, reject) => {
         firebase.database().ref("Cities").child(from).get().then((snapshot) => {
           if(snapshot.exists()) {
-            console.log(snapshot.val());
+            console.log("snap 1" + snapshot.val());
             fromSnapshot = snapshot.val();
             resolve(fromSnapshot);
           } else {
@@ -105,14 +105,18 @@ class TravelBuddyModel {
           fromOkey = false;
           reject(null);
         })
-      });
-      // Get info about To location
-      const toPromise = new Promise((resolve, reject) => {
+      }).then((value) => {
+        // Get info about To location 
+        console.log("getFrom value "+value);
+        const result = []
+        result[0] = value;
+        return new Promise((resolve, reject) => {
         firebase.database().ref("Cities").child(to).get().then((snapshot) => {
           if(snapshot.exists()) {
-            console.log(snapshot.val());
+            console.log("snap 2: " + snapshot.val());
             toSnapshot = snapshot.val();
-            resolve(toSnapshot);
+            result[1] = toSnapshot;
+            resolve(result);
           } else {
             console.log("No data available");
             toOkey = false;
@@ -122,21 +126,16 @@ class TravelBuddyModel {
           console.error(error);
           toOkey = false;
           reject(null);
-        })
+        })});
+      }).then((value) => {
+        console.log(value);
       });
 
       const theModel = this;
-
       function notifyACB(){
         theModel.notifyObservers();
       }
-
-      fromPromise.then(toPromise);
-      //resolvePromise(, this.searchResultsPromiseState, notifyACB);
-
-      //console.log("snapshot from: " + fromSnapshot + " to: " + toSnapshot);
-
-
+      resolvePromise(promiseClusterFuck, this.searchResultsPromiseState, notifyACB);
 
     } catch(error) {
       console.log("Error in doSearch: " + error);
