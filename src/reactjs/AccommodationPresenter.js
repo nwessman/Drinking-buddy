@@ -5,7 +5,7 @@ import React from "react";
 export default function Accommodations(props){
   
   function ObserverACB(){
-    setHotelsList(props.model.AccommodationList)
+    setHotelsList(props.model.accommodationList)
   }
   function isTakenDownACB(){
     props.model.removeObserver(ObserverACB);
@@ -16,9 +16,9 @@ export default function Accommodations(props){
     return isTakenDownACB;
   }
   
-  const [HotelsList, setHotelsList] = React.useState(props.model.AccommodationList);
+  const [HotelsList, setHotelsList] = React.useState(props.model.accommodationList);
   React.useEffect(wasCreatedACB, []);
   
-  return <AccommodationView hotels={props.model.AccommodationList}
+  return <AccommodationView hotels={props.model.accommodationList}
   />;
 }

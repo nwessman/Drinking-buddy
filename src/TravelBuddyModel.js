@@ -7,7 +7,7 @@ import { getHotels } from "./geoSource.js";
 
 class TravelBuddyModel {
 
-  AccommodationList;
+  accommodationList;
   currentAccommodation;
   locationToLng;
   locationToLat;
@@ -26,6 +26,7 @@ class TravelBuddyModel {
   observers;
 
   constructor(accArray = [], flightArray=[], activityArray = []){
+    this.accommodationList = [];
     this.observers = [];
     this.startDate = {};
     this.endDate = {};
@@ -136,11 +137,20 @@ class TravelBuddyModel {
           reject(null);
         })});
       }).then((value) => {
-        this.locationToLat = value[1].child("lat");
-        this.locationToLng = value[1].child("lng");
+        this.locationToLat = value[1].lat;
+        this.locationToLng = value[1].lng;
         console.log("startdate: " + this.startDate + "enddate: " +  this.endDate + "to lat: " + this.locationToLat + "to lng" + this.locationToLng);
         if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
-          getHotels(this.startDate, this.endDate, this.locationToLat, this.locationToLng);
+          // REQUIRES OBJECT {startDate, endDate, lat, lng}
+          getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
+          .then(response => response.json())
+          .then(response => {
+                  console.log(response);
+                  this.setAccommodationList(response.result);
+                  this.notifyObservers();
+                  window.location.hash = "hotels";
+                  }
+            ).catch(err => console.error(err));
         }
       });
 
@@ -163,7 +173,7 @@ class TravelBuddyModel {
   }
 
   setAccommodationList(l){
-    this.AccommodationList = l;
+    this.accommodationList = l;
   }
 
   setEndDate(date){
