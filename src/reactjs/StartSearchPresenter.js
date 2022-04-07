@@ -24,9 +24,16 @@ export default function Search(props){
 
   function doSearch(from, to, start, end){
     function formatDateCB(date) {
-      var newDate = new Date(date); 
-      newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset()); 
-      return newDate.toISOString().split('T')[0];
+      try{
+        var newDate = new Date(date); 
+        newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset()); 
+        return newDate.toISOString().split('T')[0];
+      } catch(error) {
+        console.log("Empty dates in search");
+        // Todo: better error handling
+        props.model.setStartDate(null);
+        props.model.setEndDate(null);
+      }
     }
     
     props.model.setCurrentLocation(from);
