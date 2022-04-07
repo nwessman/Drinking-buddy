@@ -7,24 +7,27 @@ import "../App.css";
 
 function StartSearchView(props){
     
-    let from, to, start, end;
+    let to, from, start, end;
 
     
-    function onClickSearch(){
-        props.onSearchClick(from,to,start,end);
+    function onSearchClick(){
+        //props.onSearchClick(to,from,start,end);
+        console.log("search is being made...");
+        return props.searchEvent();
+     
     }
 
     function onFromChange(evt){
-        from = evt.target.value;
+        //from = evt.target.value;
         //return props.setSearchLatEv(evt.target.value);
-        //return props.setLat(evt.target.value);
+        return props.setLat(evt.target.value);
     }
 
     function onToChange(evt){
-        to = evt.target.value;
+        //to = evt.target.value;
         //return props.setSearchEvent(evt.target.value);
         //return props.setSearchLongEv(evt.target.value);
-        //return props.setLong(evt.target.value);
+        return props.setLong(evt.target.value);
     }
 
     function onCalenderChange(evt) {

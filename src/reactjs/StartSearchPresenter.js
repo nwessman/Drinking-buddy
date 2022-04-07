@@ -22,7 +22,8 @@ export default function Search(props){
     props.model.setSearchLongQuery(val);
   }
 
-  function doSearch(from, to, start, end){
+  function saveSearchParams(from, to, start, end){
+
     function formatDateCB(date) {
       var newDate = new Date(date); 
       newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset()); 
@@ -33,9 +34,8 @@ export default function Search(props){
     props.model.setSearchDestination(to);
     props.model.setStartDate(formatDateCB(start));
     props.model.setEndDate(formatDateCB(end));
-
-    props.model.doSearch();
+    //console.log("Start date: " + formatDateCB(start) + "End date: " + formatDateCB(end))
   }
 
-  return <StartSearchView onSearchClick={doSearch} searchEvent={serachForHotelsCB} setLat={setSearchLatCB} setLong={setSearchLongCB}/>;
+  return <StartSearchView onSearchClick={saveSearchParams} searchEvent={serachForHotelsCB} setLat={setSearchLatCB} setLong={setSearchLongCB}/>;
 }

@@ -1,3 +1,4 @@
+
 export default {
   apiKey: "AIzaSyCS1G5aAtpFzXHNn-RKU9qwEb59sB0g6CQ",
   authDomain: "travelbuddy-700b8.firebaseapp.com",
