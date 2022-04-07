@@ -10,7 +10,7 @@ function StartSearchView(props){
     let from, to, start, end;
 
     
-    function onClickSearch(){
+    function onSearchClick(){
         props.onSearchClick(from,to,start,end);
     }
 
