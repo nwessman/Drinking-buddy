@@ -29,7 +29,7 @@ function NavigationView(props){
 
 return (
     <div className="navigationbar">
-        <h2 onClick={navigateStartSearchCB} className="name_logo">TravelBuddy</h2>
+        <h1 onClick={navigateStartSearchCB} className="name_logo">TravelBuddy</h1>
         <ul className="menuBar">
         {MenuItems.map(renderMenuItems)}
         </ul>

@@ -46,7 +46,7 @@ function StartSearchView(props){
             <div className="background_image">
 
                 <div className='navigationbar'>
-                    <h2 className='name_logo' onClick={navigateStartSearchACB}>TravelBuddy</h2>
+                    <h1 className='name_logo' onClick={navigateStartSearchACB}>TravelBuddy</h1>
                 </div>
 
                 <div className='searchWrapper'>
