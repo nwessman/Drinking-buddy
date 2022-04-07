@@ -113,33 +113,8 @@ class TravelBuddyModel {
       console.log("Error in doSearch: " + error);
       fromOkey = false;
       toOkey = false;
-      //Reroute back to search
+      // FIX: Reroute back to search (or dont reroute until results are given from this function)
     }
-    /*
-    firebase.database().ref("Airports").orderByChild('Cities').equalTo(this.searchParams.from).on("value", function(snapshot) {
-      console.log("snap: " + JSON.stringify(snapshot));
-      snapshot.forEach(function(data) {
-          console.log("child.Cities: " + data.val().Cities);
-      });
-    });
-    */
-    /*
-    firebase.database().ref("Airports").orderByChild('AITA').equalTo('WKB').on("value", function(snapshot) {
-      snapshot.forEach(function(data) {
-          console.log("child.Cities: " + data.val().Cities);
-      });
-  });*/
-    /*
-    firebase.database().ref("Airports/8258").get().then((snapshot) => {
-      if(snapshot.exists()) {
-        console.log(snapshot.val());
-      } else {
-        console.log("No data available");
-      }
-    }).catch((error) => {
-      console.error(error);
-    })
-    */
   }
 
   setStartDate(date){
