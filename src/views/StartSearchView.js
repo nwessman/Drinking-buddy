@@ -46,7 +46,7 @@ function StartSearchView(props){
             <div className="background_image">
 
                 <div className='navigationbar'>
-                    <h2 className='name_logo' onClick={navigateStartSearchACB}>TravelBuddy</h2>
+                    <h1 className='name_logo' onClick={navigateStartSearchACB}>TravelBuddy</h1>
                 </div>
 
                 <div className='searchWrapper'>
@@ -60,7 +60,7 @@ function StartSearchView(props){
                 <DateRangePickerComponent placeholder="Choose Date Range" change = {onCalenderChange}/>
             </div>
             <div className="search">
-                <button onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch onClick = {navigateHotelsACB}  size="50px"/></button>
+                <button onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch size="50px"/></button>
             </div>
 
             </div>

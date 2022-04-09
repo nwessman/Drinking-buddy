@@ -1,15 +1,24 @@
 import resolvePromise from "./resolvePromise.js";
-//import {searchHotels} from "./geoSource.js"
+import {searchHotels} from "./geoSource.js"
 import firebase from 'firebase/app';
 import firebaseConfig from './firebaseConfig.js';
 import "firebase/database";
+import { getHotels } from "./geoSource.js";
 
 class TravelBuddyModel {
 
+  accommodationList;
   currentAccommodation;
+  locationToLng;
+  locationToLat;
+  LocationTo;
+
+
+
   currentFlight;
 
   searchParams;
+  searchResultsPromiseState;
 
   startDate;
   endDate;
@@ -17,6 +26,7 @@ class TravelBuddyModel {
   observers;
 
   constructor(accArray = [], flightArray=[], activityArray = []){
+    this.accommodationList = [];
     this.observers = [];
     this.startDate = {};
     this.endDate = {};
@@ -84,31 +94,72 @@ class TravelBuddyModel {
       let from = this.searchParams.from.toLowerCase();
       let to = this.searchParams.to.toLowerCase();
 
-      // Get info about From location
-      firebase.database().ref("Cities").child(from).get().then((snapshot) => {
-        if(snapshot.exists()) {
-          console.log(snapshot.val());
-        } else {
-          console.log("No data available");
-          fromOkey = false;
-        }
-      }).catch((error) => {
-        console.error(error);
-        fromOkey = false;
-      })
+      let fromSnapshot;
+      let toSnapshot;
 
-      // Get info about To location
-      firebase.database().ref("Cities").child(to).get().then((snapshot) => {
-        if(snapshot.exists()) {
-          console.log(snapshot.val());
-        } else {
-          console.log("No data available");
+      // Get info about From location
+      const promiseClusterFuck = new Promise((resolve, reject) => {
+        firebase.database().ref("Cities").child(from).get().then((snapshot) => {
+          if(snapshot.exists()) {
+            console.log("snap 1" + snapshot.val());
+            fromSnapshot = snapshot.val();
+            resolve(fromSnapshot);
+          } else {
+            console.log("No data available");
+            fromOkey = false;
+            reject(null);
+          }
+        }).catch((error) => {
+          console.error(error);
+          fromOkey = false;
+          reject(null);
+        })
+      }).then((value) => {
+        // Get info about To location 
+        console.log("getFrom value "+value);
+        const result = []
+        result[0] = value;
+        return new Promise((resolve, reject) => {
+        firebase.database().ref("Cities").child(to).get().then((snapshot) => {
+          if(snapshot.exists()) {
+            console.log("snap 2: " + snapshot.val());
+            toSnapshot = snapshot.val();
+            result[1] = toSnapshot;
+            resolve(result);
+          } else {
+            console.log("No data available");
+            toOkey = false;
+            reject(null);
+          }
+        }).catch((error) => {
+          console.error(error);
           toOkey = false;
+          reject(null);
+        })});
+      }).then((value) => {
+        this.locationToLat = value[1].lat;
+        this.locationToLng = value[1].lng;
+        console.log("startdate: " + this.startDate + "enddate: " +  this.endDate + "to lat: " + this.locationToLat + "to lng" + this.locationToLng);
+        if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
+          // REQUIRES OBJECT {startDate, endDate, lat, lng}
+          getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
+          .then(response => response.json())
+          .then(response => {
+                  console.log(response);
+                  this.setAccommodationList(response.result);
+                  this.notifyObservers();
+                  window.location.hash = "hotels";
+                  }
+            ).catch(err => console.error(err));
         }
-      }).catch((error) => {
-        console.error(error);
-        toOkey = false;
-      })
+      });
+
+      const theModel = this;
+      function notifyACB(){
+        theModel.notifyObservers();
+      }
+      resolvePromise(promiseClusterFuck, this.searchResultsPromiseState, notifyACB);
+
     } catch(error) {
       console.log("Error in doSearch: " + error);
       fromOkey = false;
@@ -119,6 +170,10 @@ class TravelBuddyModel {
 
   setStartDate(date){
     this.startDate = date;
+  }
+
+  setAccommodationList(l){
+    this.accommodationList = l;
   }
 
   setEndDate(date){
