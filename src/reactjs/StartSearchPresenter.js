@@ -41,6 +41,8 @@ export default function Search(props){
     props.model.setEndDate(formatDateCB(end));
 
     props.model.doSearch();
+
+
   }
 
   return <StartSearchView onSearchClick={doSearch} searchEvent={serachForHotelsCB} setLat={setSearchLatCB} setLong={setSearchLongCB}/>;
