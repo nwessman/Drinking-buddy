@@ -191,12 +191,13 @@ class TravelBuddyModel {
       getHotelsReview(id).then(
         response => {return response.json()}
       ).then(response => {
-        console.log(response);
-          this.setAccomodationReviews(response.result);
-          this.setCurrentAccomodation(response.result.hotel_id);
-          console.log(this.currentAccReviews);
-          this.notifyObservers();
-          window.location.hash="#details_acc";
+          console.log(response);
+
+            this.setAccomodationReviews(response.result);
+            this.setCurrentAccomodation(response.result.hotel_id);
+            console.log(this.currentAccReviews);
+            this.notifyObservers();
+            window.location.hash="#details_acc";
         }
       ).catch(error => console.log(error));
      

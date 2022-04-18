@@ -4,11 +4,11 @@ import "../App.css";
 export default function DetailsAccView(props){
     function renderReviews(hotel){
         return (
-        <table>
+        <div key={hotel.review_hash}>
             <div >Review title: {hotel.hotel_id}</div>
             <div>Review pros: {hotel.pros}</div>
             <div>Average score: {hotel.average_score}</div>
-       </table>
+       </div>
        );
 
     }
