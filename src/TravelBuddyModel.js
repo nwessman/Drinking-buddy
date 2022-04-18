@@ -1,9 +1,7 @@
 import resolvePromise from "./resolvePromise.js";
-import {searchHotels} from "./geoSource.js"
 import firebase from 'firebase/app';
-import firebaseConfig from './firebaseConfig.js';
 import "firebase/database";
-import { getHotels } from "./geoSource.js";
+import { getHotels, getHotelsReview } from "./geoSource.js";
 
 class TravelBuddyModel {
 
@@ -12,27 +10,26 @@ class TravelBuddyModel {
   locationToLng;
   locationToLat;
   LocationTo;
-
-
-
   currentFlight;
-
   searchParams;
   searchResultsPromiseState;
-
+  currentAccPromiseState;
+  currentAccReviews;
   startDate;
   endDate;
   
   observers;
 
-  constructor(accArray = [], flightArray=[], activityArray = []){
+  constructor(accArray = [], flightArray=[], activityArray = [], currentAccommodation){
     this.accommodationList = [];
     this.observers = [];
     this.startDate = {};
     this.endDate = {};
     this.searchParams = {};
     this.searchResultsPromiseState = {};
-
+    this.currentAccPromiseState = {};
+    this.currentAccReviews= [];
+    this.currentAccommodation = currentAccommodation;
     this.accomondations = accArray; 
     this.flights = flightArray;
     this.activities = activityArray;
@@ -54,6 +51,7 @@ class TravelBuddyModel {
   }
 
   notifyObservers(payload) {
+    console.log(this.observers);
       this.observers.forEach(
           function invokeObserverCB(obs) { 
               try {
@@ -183,9 +181,29 @@ class TravelBuddyModel {
   /**
    * Accomondation currently checked by user.
    */
-  setCurrentAccommodation(id){
-    //TODO
+  setCurrentAccomodation(id){
+    this.currentAccommodation=id;
   }
+  setAccomodationReviews(list){
+    this.currentAccReviews=list;
+  }
+  viewDetailsOfAccomodation(id){
+      getHotelsReview(id).then(
+        response => {return response.json()}
+      ).then(response => {
+        console.log(response);
+          this.setAccomodationReviews(response.result);
+          this.setCurrentAccomodation(response.result.hotel_id);
+          console.log(this.currentAccReviews);
+          this.notifyObservers();
+          window.location.hash="#details_acc";
+        }
+      ).catch(error => console.log(error));
+     
+     // resolvePromise(getHotelsReview(id), this.currentAccPromiseState, notifyACB);
+    }
+
+
 
   /**
    * Add accomondation to list.
