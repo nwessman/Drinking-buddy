@@ -1,12 +1,13 @@
 import React from "react";
 import DetailsAccView from "../views/DetailsAccView";
-import {getHotelsReview} from "../geoSource"
+
 export default
 function DetailsAcc(props){
-    const [currentAccReviews, setCurrentAccReviews] = React.useState(props.model.currentAccReviews);
+    const [, setCurrentAccReviews] = React.useState(props.model.currentAccReviews);
+    const [, setCurrentAccPhoto] = React.useState(props.model.currentAccPhoto)
     function detailsObserverACB(){
-        console.log("uppdaterar acc_reviews");
         setCurrentAccReviews(props.model.currentAccReviews);
+        setCurrentAccPhoto(props.model.currentAccPhoto);
         
       }
       function isTakenDownACB(){
@@ -17,11 +18,17 @@ function DetailsAcc(props){
         props.model.addObserver(detailsObserverACB);
         return isTakenDownACB;
       }
+
       React.useEffect(wasCreatedACB,[]);
+
+      function onClickChangePic(index){
+        props.model.setCurrentAccPhoto(index);
+
+      }
 
     return(
         <DetailsAccView
-        accomodationDetails={props.model.currentAccReviews}/>
+        accomodationReviews={props.model.currentAccReviews} accomodationPhoto={props.model.currentAccPhoto} allAccPhotos={props.model.accPhotos} photoIndex={props.model.photoIndex} onClickChange={onClickChangePic}/>
         
     );
 }

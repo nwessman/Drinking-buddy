@@ -9,7 +9,6 @@ import Flights from './reactjs/FlightPresenter';
 const Search=require('./reactjs/StartSearchPresenter.js').default;
 const Activities=require('./reactjs/ActivityPresenter.js').default;
 const Details=require('./reactjs/DetailsAccPresenter.js').default;
-
 function App(props) {
   require("./views/navigation.js");
 

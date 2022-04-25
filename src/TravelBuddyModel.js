@@ -15,9 +15,11 @@ class TravelBuddyModel {
   searchResultsPromiseState;
   currentAccPromiseState;
   currentAccReviews;
+  accPhotos;
+  currentAccPhoto;
   startDate;
   endDate;
-  
+  photoIndex;
   observers;
 
   constructor(accArray = [], flightArray=[], activityArray = [], currentAccommodation){
@@ -29,10 +31,14 @@ class TravelBuddyModel {
     this.searchResultsPromiseState = {};
     this.currentAccPromiseState = {};
     this.currentAccReviews= [];
+    this.accPhotos = [];
     this.currentAccommodation = currentAccommodation;
     this.accomondations = accArray; 
     this.flights = flightArray;
     this.activities = activityArray;
+    this.currentAccPhoto = [];
+    this.photoIndex = 0;
+
   }
   setSearchLongQuery(long){this.searchParams.query.longitute=long}
   setSearchLatQuery(lat){this.searchParams.query.latitute=lat}
@@ -40,6 +46,7 @@ class TravelBuddyModel {
   addObserver(callback) {
       this.observers = [...this.observers, callback];
   }
+
 
   removeObserver(callback) {
       function removeCallbackCB(element) {
@@ -187,15 +194,38 @@ class TravelBuddyModel {
   setAccomodationReviews(list){
     this.currentAccReviews=list;
   }
-  viewDetailsOfAccomodation(id){
-      getHotelsReview(id).then(
-        response => {return response.json()}
-      ).then(response => {
-          console.log(response);
+  setAccomodationPhotos(list){
+    this.accPhotos=list;
+  }
+  setCurrentAccPhoto(index){
+    if(this.photoIndex !== index || index === 0){
+      this.photoIndex = index;
+      this.currentAccPhoto = this.accPhotos[index];
+      console.log("index:" + this.photoIndex);
+      console.log(this.currentAccPhoto);
+      this.notifyObservers({photoIndex: index});
+    }
+    else console.log("fel foto index: "+this.photoIndex);
+    
 
-            this.setAccomodationReviews(response.result);
-            this.setCurrentAccomodation(response.result.hotel_id);
+  }
+  viewDetailsOfAccomodation(id){
+    let arr = [];
+      Promise.all(getHotelsReview(id)).then(function(responses){
+        return  Promise.all(responses.map(response => {return response.json()}))
+      }
+       
+      ).then(responses => {
+            this.setAccomodationReviews(responses[0].result);
+            arr = responses[1].map(({url_max}) => url_max); 
+            this.setAccomodationPhotos(arr);
+            //this.photoIndex = 0;
+            this.setCurrentAccPhoto(0);
             console.log(this.currentAccReviews);
+           console.log("photos array:");
+            console.log(this.accPhotos);
+           console.log("current photo:");
+          console.log(this.currentAccPhoto);
             this.notifyObservers();
             window.location.hash="#details_acc";
         }
