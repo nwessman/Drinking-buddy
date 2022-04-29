@@ -1,9 +1,7 @@
 import resolvePromise from "./resolvePromise.js";
-import {searchHotels} from "./geoSource.js"
 import firebase from 'firebase/app';
-import firebaseConfig from './firebaseConfig.js';
 import "firebase/database";
-import { getHotels } from "./geoSource.js";
+import { getHotels, getHotelsReview } from "./geoSource.js";
 
 class TravelBuddyModel {
 
@@ -12,30 +10,35 @@ class TravelBuddyModel {
   locationToLng;
   locationToLat;
   LocationTo;
-
-
-
   currentFlight;
-
   searchParams;
   searchResultsPromiseState;
-
+  currentAccPromiseState;
+  currentAccReviews;
+  accPhotos;
+  currentAccPhoto;
   startDate;
   endDate;
-  
+  photoIndex;
   observers;
 
-  constructor(accArray = [], flightArray=[], activityArray = []){
+  constructor(accArray = [], flightArray=[], activityArray = [], currentAccommodation){
     this.accommodationList = [];
     this.observers = [];
     this.startDate = {};
     this.endDate = {};
     this.searchParams = {};
     this.searchResultsPromiseState = {};
-
+    this.currentAccPromiseState = {};
+    this.currentAccReviews= [];
+    this.accPhotos = [];
+    this.currentAccommodation = currentAccommodation;
     this.accomondations = accArray; 
     this.flights = flightArray;
     this.activities = activityArray;
+    this.currentAccPhoto = [];
+    this.photoIndex = 0;
+
   }
   setSearchLongQuery(long){this.searchParams.query.longitute=long}
   setSearchLatQuery(lat){this.searchParams.query.latitute=lat}
@@ -43,6 +46,7 @@ class TravelBuddyModel {
   addObserver(callback) {
       this.observers = [...this.observers, callback];
   }
+
 
   removeObserver(callback) {
       function removeCallbackCB(element) {
@@ -54,6 +58,7 @@ class TravelBuddyModel {
   }
 
   notifyObservers(payload) {
+    console.log(this.observers);
       this.observers.forEach(
           function invokeObserverCB(obs) { 
               try {
@@ -183,9 +188,53 @@ class TravelBuddyModel {
   /**
    * Accomondation currently checked by user.
    */
-  setCurrentAccommodation(id){
-    //TODO
+  setCurrentAccomodation(id){
+    this.currentAccommodation=id;
   }
+  setAccomodationReviews(list){
+    this.currentAccReviews=list;
+  }
+  setAccomodationPhotos(list){
+    this.accPhotos=list;
+  }
+  setCurrentAccPhoto(index){
+    if(this.photoIndex !== index || index === 0){
+      this.photoIndex = index;
+      this.currentAccPhoto = this.accPhotos[index];
+      console.log("index:" + this.photoIndex);
+      console.log(this.currentAccPhoto);
+      this.notifyObservers({photoIndex: index});
+    }
+    else console.log("fel foto index: "+this.photoIndex);
+    
+
+  }
+  viewDetailsOfAccomodation(id){
+    let arr = [];
+      Promise.all(getHotelsReview(id)).then(function(responses){
+        return  Promise.all(responses.map(response => {return response.json()}))
+      }
+       
+      ).then(responses => {
+            this.setAccomodationReviews(responses[0].result);
+            arr = responses[1].map(({url_max}) => url_max); 
+            this.setAccomodationPhotos(arr);
+            //this.photoIndex = 0;
+            this.setCurrentAccPhoto(0);
+            console.log(this.currentAccReviews);
+           console.log("photos array:");
+            console.log(this.accPhotos);
+           console.log("current photo:");
+          console.log(this.currentAccPhoto);
+            this.notifyObservers();
+            window.location.hash="#details_acc";
+        }
+      ).catch(error => console.log(error));
+     
+     // resolvePromise(getHotelsReview(id), this.currentAccPromiseState, notifyACB);
+    }
+
+
 
   /**
    * Add accomondation to list.

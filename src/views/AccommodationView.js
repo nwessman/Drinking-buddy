@@ -8,21 +8,25 @@ export default function AccommodationView(props){
     try {
         return (
             <div className = "background_image">
-                <Navigation></Navigation>
-                <span>List of Hotel options</span>
-                <ul>
+                <Navigation></Navigation>   
+                
+                <div className="box">
                 {
                 props.hotels.map(e => {
                     return (
-                        <div>   
-                            <img src={e.main_photo_url}/>
-                            <span>{e.address}</span>
-                            <span>{e.min_total_price}</span>
-                        </div>
+                        <div key={e.hotel_id} className="boxItems" onClick={function clickCB(){
+                            return props.chosenAccomodation(e.hotel_id);
+                        }}>   
+                            
+                            <img src={e.main_photo_url} alt="Error 404" height="80"/>
+                            <div>{e.address}</div>
+                            <div>{e.min_total_price} kr</div>
+                            </div>
                         );
                     })
                 }
-                </ul>
+                </div>
+                {props.children}
                 </div>
             );
         

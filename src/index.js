@@ -12,9 +12,10 @@ firebase.initializeApp(firebaseConfig);
 let model = new TravelBuddyModel();
 
 
+
 ReactDOM.render(
-    <App model={model}/>,
-  document.getElementById('root')
+    <App model={model} />,
+  document.getElementById('root', 'container')
 );
 
 // If you want to start measuring performance in your app, pass a function

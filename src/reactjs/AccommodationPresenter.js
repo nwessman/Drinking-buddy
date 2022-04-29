@@ -3,6 +3,8 @@ import React from "react";
 
 
 export default function Accommodations(props){
+  const [HotelsList, setHotelsList] = React.useState(props.model.accommodationList);
+  const [AccPopUp, setAccPopUp] = React.useState(false);
   
   function ObserverACB(){
     setHotelsList(props.model.accommodationList)
@@ -15,10 +17,15 @@ export default function Accommodations(props){
     props.model.addObserver(ObserverACB);
     return isTakenDownACB;
   }
+  function clickCB(id){
+    props.model.viewDetailsOfAccomodation(id);
+    setAccPopUp(!AccPopUp);
+
+  }
   
-  const [HotelsList, setHotelsList] = React.useState(props.model.accommodationList);
+ 
   React.useEffect(wasCreatedACB, []);
   
-  return <AccommodationView hotels={props.model.accommodationList}
+  return <AccommodationView hotels={props.model.accommodationList} chosenAccomodation={clickCB}
   />;
 }
