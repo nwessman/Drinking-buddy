@@ -9,10 +9,10 @@ function StartSearchView(props){
     
     let from, to, start, end;
     
-    const [location, setLocation ] = React.useState("");
+/*     const [location, setLocation ] = React.useState("");
     const [destination, setDestination] = React.useState("");
     const [startDate, setStart] = React.useState("");
-    const [endDate, setEnd] = React.useState("");
+    const [endDate, setEnd] = React.useState(""); */
 
     
     function onSearchClick(){
@@ -22,14 +22,14 @@ function StartSearchView(props){
 
     function onFromChange(evt){
         from = evt.target.value;
-        setLocation(from);
+//        setLocation(from);
         //return props.setSearchLatEv(evt.target.value);
         //return props.setLat(evt.target.value);
     }
 
     function onToChange(evt){
         to = evt.target.value;
-        setDestination(to);
+ //       setDestination(to);
         //return props.setSearchEvent(evt.target.value);
         //return props.setSearchLongEv(evt.target.value);
         //return props.setLong(evt.target.value);
@@ -39,12 +39,12 @@ function StartSearchView(props){
         try{
             start = evt.value[0];
             end = evt.value[1];
-            setStart(start);
-            setEnd(end);
+ //           setStart(start);
+  //          setEnd(end);
         }
         catch(error){
-            setStart("");
-            setEnd("");
+ //           setStart("");
+//            setEnd("");
     }
 
     }
@@ -71,7 +71,7 @@ function StartSearchView(props){
                 <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
             </div>
             <div className="search">
-                <button disabled = {!location || !destination || !startDate || !endDate} onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch size="50px"/></button>
+                <button  onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch size="50px"/></button>
             </div>
 
             </div>
