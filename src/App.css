@@ -208,6 +208,12 @@ padding-top: 10px;
   cursor: pointer;
 
 }
+.leaflet-container{
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+}
 
 
 @media(max-width: 800px)

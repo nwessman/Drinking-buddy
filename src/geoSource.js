@@ -15,4 +15,8 @@ function getHotelsReview(params){
  
 }
 
-export {getHotels, getHotelsReview};
+function getActivites(){
+    return fetch("https://api.geoapify.com/v2/places?categories=commercial.supermarket&filter=circle:18.0710935,59.3251172,5000&bias=proximity:18.0710935,59.3251172&limit=20&apiKey=fb2c7d7c2d3d4ef2b898bb7d0ae99881","GET")
+}
+
+export {getHotels, getHotelsReview, getActivites};
