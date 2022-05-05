@@ -238,38 +238,8 @@ padding-top: 10px;
    .menuItems {
      padding: 40px 0px 60px 0px;
 
-<<<<<<< HEAD
-   }
-   .body {
-     overflow-x: hidden;
-   }
-   .box{
-     flex:1;
-     display: flex;
-   }
-
-}
-.box {
-  width: 1090px;
-  height: 80vh;
-  justify-content: center;
-  background-color: #968d97;
-  opacity: 0.7;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin: auto;
-}
-.boxItems{
-  justify-content: center;
-  text-align: center;
-  padding: 20px 40px 10px 40px;
-
-}
-
-=======
    }*/
    
->>>>>>> 62b8a526da1930089fb5a93a70ef40c5d20b2718
 
 }
 
