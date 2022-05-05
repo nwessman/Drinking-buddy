@@ -1,12 +1,16 @@
 import resolvePromise from "./resolvePromise.js";
 import firebase from 'firebase/app';
 import "firebase/database";
-import { getHotels, getHotelsReview } from "./geoSource.js";
+import { getFlights, getHotels, getHotelsReview } from "./geoSource.js";
 
 class TravelBuddyModel {
 
+  flightsDepart;
+  flightsReturn;
   accommodationList;
   currentAccommodationID;
+  locationFromIATA;
+  locationToIATA;
   locationToLng;
   locationToLat;
   LocationTo;
@@ -24,6 +28,8 @@ class TravelBuddyModel {
 
   constructor(accArray = [], flightArray=[], activityArray = [], currentAccommodation){
     this.accommodationList = [];
+    this.flightsDepart = {};
+    this.flightsReturn = {};
     this.observers = [];
     this.startDate = {};
     this.endDate = {};
@@ -87,20 +93,21 @@ class TravelBuddyModel {
   }
 
   doSearch(){
-    
+
     let fromOkey = true;
     let toOkey = true;
 
     // try because empty or wrong params in search input will crash this function 
     try {
-      console.log("from: " + this.searchParams.from);
-      console.log("to: " + this.searchParams.to);
-
       let from = this.searchParams.from.toLowerCase();
       let to = this.searchParams.to.toLowerCase();
 
       let fromSnapshot;
       let toSnapshot;
+
+
+  
+
 
       // Get info about From location
       const promiseClusterFuck = new Promise((resolve, reject) => {
@@ -158,7 +165,18 @@ class TravelBuddyModel {
                   }
             ).catch(err => console.error(err));
         }
+        
+        console.log("get flights");
+        console.log("Before: startDate: " + JSON.stringify(this.startDate) + " endDate: " +  JSON.stringify(this.endDate) + " airport[0]: " + JSON.stringify(value[0].airport[0]) + " aiport[1]: "+ JSON.stringify(value[1].airport[0]));
+        if(this.startDate && this.endDate && value[0].airport[0] && value[1].airport[0]){
+          getFlights({fromIATA: value[0].airport[0], toIATA: value[1].airport[0], startDate: this.startDate, endDate: this.endDate})
+          .then(results => results.json()).then(results => {
+            console.log("Cluster fuck results: " + JSON.stringify(results));
+          })
+        } else {console.log("startDate: " + JSON.stringify(this.startDate) + " endDate: " +  JSON.stringify(this.endDate) + " airport[0]: " + JSON.stringify(value[0].airport[0]) + " aiport[1]: "+ JSON.stringify(value[1].airport[0]))}
+
       });
+
 
       const theModel = this;
       function notifyACB(){

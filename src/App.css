@@ -209,6 +209,33 @@ padding-top: 10px;
 
 }
 
+.flightsContainer {
+  display:flex;
+  background-color: white;
+  opacity: 0.5;
+  width: auto;
+  height: auto;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.flightsItem {
+  display:inline-block;
+  margin: 20px;
+  width: 100%;
+}
+
+.flightBar {
+  height: 4px; 
+  width: 200px; 
+  background-color: black;
+}
+
+.flight {
+  display:inline;
+}
+
 
 @media(max-width: 800px)
 {
