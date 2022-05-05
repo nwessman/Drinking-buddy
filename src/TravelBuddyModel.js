@@ -6,7 +6,7 @@ import { getHotels, getHotelsReview } from "./geoSource.js";
 class TravelBuddyModel {
 
   accommodationList;
-  currentAccommodation;
+  currentAccommodationID;
   locationToLng;
   locationToLat;
   LocationTo;
@@ -32,7 +32,7 @@ class TravelBuddyModel {
     this.currentAccPromiseState = {};
     this.currentAccReviews= [];
     this.accPhotos = [];
-    this.currentAccommodation = currentAccommodation;
+    this.currentAccommodationID = currentAccommodation;
     this.accomondations = accArray; 
     this.flights = flightArray;
     this.activities = activityArray;
@@ -149,9 +149,10 @@ class TravelBuddyModel {
           // REQUIRES OBJECT {startDate, endDate, lat, lng}
           getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
           .then(response => response.json())
-          .then(response => {
+          .then(response => { // Response is query.json, response.result contains hotels.
                   console.log(response);
                   this.setAccommodationList(response.result);
+                  firebase.database().ref("model/accommodationList").set(this.accommodationList);
                   this.notifyObservers();
                   window.location.hash = "hotels";
                   }
@@ -188,51 +189,66 @@ class TravelBuddyModel {
   /**
    * Accomondation currently checked by user.
    */
-  setCurrentAccomodation(id){
-    this.currentAccommodation=id;
+  setCurrentAccomodationID(id){
+    this.currentAccommodationID=id;
+    firebase.database().ref("model/currentAccommodationID").set(this.currentAccommodationID);
+    
   }
   setAccomodationReviews(list){
     this.currentAccReviews=list;
+    firebase.database().ref("model/currentAccReviews").set(this.currentAccReviews);
+    
   }
   setAccomodationPhotos(list){
     this.accPhotos=list;
+    firebase.database().ref("model/accPhotos").set(this.accPhotos);
+    
   }
-  setCurrentAccPhoto(index){
-    if(this.photoIndex !== index || index === 0){
-      this.photoIndex = index;
-      this.currentAccPhoto = this.accPhotos[index];
-      console.log("index:" + this.photoIndex);
-      console.log(this.currentAccPhoto);
-      this.notifyObservers({photoIndex: index});
-    }
-    else console.log("fel foto index: "+this.photoIndex);
+
+  setPhotoIndex(index){
+    this.photoIndex = index;
+      firebase.database().ref("model/photoIndex").set(this.photoIndex);
+  }
+
+  setCurrentAccPhoto(){
+    //if(this.photoIndex !== index || index === 0){
+      this.currentAccPhoto = this.accPhotos[0];
+      firebase.database().ref("model/currentAccPhoto").set(this.currentAccPhoto);
+      this.notifyObservers();
+      // console.log("index:" + this.photoIndex);
+      // console.log(this.currentAccPhoto);
+    //}
+    //else console.log("fel foto index: "+this.photoIndex);
     
 
   }
   viewDetailsOfAccomodation(id){
+    if(id !== this.currentAccommodationID){
     let arr = [];
       Promise.all(getHotelsReview(id)).then(function(responses){
         return  Promise.all(responses.map(response => {return response.json()}))
       }
        
       ).then(responses => {
+            this.setCurrentAccomodationID(id);
             this.setAccomodationReviews(responses[0].result);
             arr = responses[1].map(({url_max}) => url_max); 
             this.setAccomodationPhotos(arr);
-            //this.photoIndex = 0;
-            this.setCurrentAccPhoto(0);
-            console.log(this.currentAccReviews);
-           console.log("photos array:");
-            console.log(this.accPhotos);
-           console.log("current photo:");
-          console.log(this.currentAccPhoto);
+            this.setPhotoIndex(0)
+            this.setCurrentAccPhoto();
+          //   console.log(this.currentAccReviews);
+          //  console.log("photos array:");
+          //   console.log(this.accPhotos);
+          //  console.log("current photo:");
+          // console.log(this.currentAccPhoto);
             this.notifyObservers();
             window.location.hash="#details_acc";
         }
       ).catch(error => console.log(error));
      
      // resolvePromise(getHotelsReview(id), this.currentAccPromiseState, notifyACB);
-    }
+    } else { window.location.hash="#details_acc"; }
+  }
 
 
 
