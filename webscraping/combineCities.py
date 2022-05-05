@@ -19,7 +19,7 @@ for cityInfo in cities:
   airport = []
   for airportInfo in airports["Airports"]:
     for airportCity in airportInfo["Cities"]:
-      if(city.strip() == airportCity.strip()):
+      if(city.strip() == airportCity.strip().lower()):
         airport.append(airportInfo["AITA"])
 
   dict[city] = {
