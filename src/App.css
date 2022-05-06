@@ -56,7 +56,7 @@
 }
 .navigationbar{
   background: #08243f;
-  height: 15vh;
+  height: 12vh;
   width: 100%;
   display: flex;
 
@@ -97,9 +97,9 @@
 
 }
 .box {
-  height: 76vh;
+  height: 81vh;
   background-image: url("./images/opaque_backg.png");
-  margin: 3vh 10vh 0vh 10vh;
+  margin: 1vh 10vh 0vh 10vh;
   border-radius: 4px;
   overflow-x: visible;
   overflow-y: auto;
@@ -204,17 +204,40 @@ padding-top: 10px;
   position: relative;
   color: #08243f;
   margin-top: 20%;
- 
   cursor: pointer;
 
 }
-.leaflet-container{
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
+.leafletMap{
+  margin-left:50vw;
+  position: relative;
+  width: 50vw;
+  height: 82vh;
+
+
 
 }
+.searchActivity{
+  top: 80px;
+  position:absolute;
+  left: 20px;
+  height: 20px;
+  min-width: 100px;
+  margin-left: 60px;
 
+}
+.searchAButton{
+
+ margin-left: 190px;
+
+}
+.searchInputA{
+  border: 10px solid transparent;
+  width: 180px;
+  opacity: 0.8;
+  font-size: 18px;
+  padding-bottom: -80px;
+
+}
 
 @media(max-width: 800px)
 {

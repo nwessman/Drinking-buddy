@@ -21,7 +21,6 @@ class TravelBuddyModel {
   endDate;
   photoIndex;
   observers;
-  position;
 
   constructor(accArray = [], flightArray=[], activityArray = [], currentAccommodation){
     this.accommodationList = [];
@@ -39,7 +38,6 @@ class TravelBuddyModel {
     this.activities = activityArray;
     this.currentAccPhoto = [];
     this.photoIndex = 0;
-    this.position=[];
 
   }
   setSearchLongQuery(long){this.searchParams.query.longitute=long}
@@ -147,7 +145,6 @@ class TravelBuddyModel {
         this.locationToLat = value[1].lat;
         this.locationToLng = value[1].lng;
         console.log("startdate: " + this.startDate + "enddate: " +  this.endDate + "to lat: " + this.locationToLat + "to lng" + this.locationToLng);
-        this.position = [this.locationToLat,this.locationToLng];
         if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
           // REQUIRES OBJECT {startDate, endDate, lat, lng}
           getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
