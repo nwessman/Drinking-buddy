@@ -10,33 +10,51 @@ import {
   } from 'react-leaflet'
 
 function ActivityView(props){
-    const position = [51.505, -0.09];
+    //const position = [props.position];
+   // let position = [];
+   const position = [props.latitude,props.longitude];
+    console.log("Position" + position);
+    try
+    {
+        return (
 
-    return (
-        <div className = "background_image">
-            <Navigation></Navigation>
-            <div className="activity">
-            <MapContainer className="leafletMap" center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
-            </MapContainer>
-   
-            <div className="searchActivity">
-                <input type = "text" placeholder = "Search..." className="searchInputA"/>
+            <div className = "background_image">
+                <Navigation></Navigation>
+                <div className="activity">
+                <MapContainer className="leafletMap" center={position} zoom={13} scrollWheelZoom={true}>
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker position={position}>
+                        <Popup>
+                            A pretty CSS3 popup. <br /> Easily customizable.
+                        </Popup>
+                    </Marker>
+                </MapContainer>
+       
+                <div className="searchActivity">
+                    <input type = "text" placeholder = "Search..." className="searchInputA"/>
+                </div>
+                <div className="searchActivity">
+                <button  className="searchAButton" style = {{opacity: .8}}><IoIosSearch size="35px"/></button>
+                </div>
+                </div>
+                
             </div>
-            <div className="searchActivity">
-            <button  className="searchAButton" style = {{opacity: .8}}><IoIosSearch size="35px"/></button>
-            </div>
-            </div>
-            
-        </div>
-        );
+            );
+
+    }
+   catch{
+        return (
+
+            <div className = "background_image">
+                <Navigation></Navigation>
+                Null || undefined position
+                </div>
+                );
+
+    }
+    
 }
 export default ActivityView;

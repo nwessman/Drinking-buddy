@@ -21,6 +21,7 @@ class TravelBuddyModel {
   endDate;
   photoIndex;
   observers;
+  position;
 
   constructor(accArray = [], flightArray=[], activityArray = [], currentAccommodation){
     this.accommodationList = [];
@@ -38,6 +39,8 @@ class TravelBuddyModel {
     this.activities = activityArray;
     this.currentAccPhoto = [];
     this.photoIndex = 0;
+    this.locationToLat = 59.334591;
+    this.locationToLng = 18.063240;
 
   }
   setSearchLongQuery(long){this.searchParams.query.longitute=long}
@@ -84,6 +87,10 @@ class TravelBuddyModel {
    */
   setSearchDestination(to){
     this.searchParams.to = to;
+  }
+  setPosition(arr){
+    this.position = arr;
+    console.log("Position array:" + this.position);
   }
 
   doSearch(){
@@ -142,29 +149,33 @@ class TravelBuddyModel {
           reject(null);
         })});
       }).then((value) => {
-        this.locationToLat = value[1].lat;
-        this.locationToLng = value[1].lng;
-        console.log("startdate: " + this.startDate + "enddate: " +  this.endDate + "to lat: " + this.locationToLat + "to lng" + this.locationToLng);
-        if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
-          // REQUIRES OBJECT {startDate, endDate, lat, lng}
-          getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
-          .then(response => response.json())
-          .then(response => { // Response is query.json, response.result contains hotels.
-                  console.log(response);
-                  this.setAccommodationList(response.result);
-                  firebase.database().ref("model/accommodationList").set(this.accommodationList);
-                  this.notifyObservers();
-                  window.location.hash = "hotels";
-                  }
-            ).catch(err => console.error(err));
-        }
+        this.setLat(value[1].lat);
+        this.setLng(value[1].lng);
+        this.notifyObservers();
+        window.location.hash="activities"
+      
+        //console.log("startdate: " + this.startDate + "enddate: " +  this.endDate + "to lat: " + value[1].lat + "to lng" + value[1].lng);
+        //this.setPosition([this.locationToLat,this.locationToLng]);
+        // if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
+        //   // REQUIRES OBJECT {startDate, endDate, lat, lng}
+        //   getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
+        //   .then(response => response.json())
+        //   .then(response => { // Response is query.json, response.result contains hotels.
+        //           console.log(response);
+        //           this.setAccommodationList(response.result);
+        //           firebase.database().ref("model/accommodationList").set(this.accommodationList);
+        //           this.notifyObservers();
+        //           window.location.hash = "hotels";
+        //           }
+        //     ).catch(err => console.error(err));
+        // }
       });
 
-      const theModel = this;
-      function notifyACB(){
-        theModel.notifyObservers();
-      }
-      resolvePromise(promiseClusterFuck, this.searchResultsPromiseState, notifyACB);
+      // const theModel = this;
+      // function notifyACB(){
+      //   theModel.notifyObservers();
+      // }
+      // resolvePromise(promiseClusterFuck, this.searchResultsPromiseState, notifyACB);
 
     } catch(error) {
       console.log("Error in doSearch: " + error);
@@ -172,6 +183,22 @@ class TravelBuddyModel {
       toOkey = false;
       // FIX: Reroute back to search (or dont reroute until results are given from this function)
     }
+  }
+
+  setLat(lat){
+    this.locationToLat = lat;
+    console.log("Position latii:" +this.locationToLat);
+ 
+   
+    firebase.database().ref("model/locationToLat").set( this.locationToLat);
+   
+
+  }
+  setLng(lng){
+    this.locationToLng = lng;
+    console.log("Position longiii:" +  this.locationToLng);
+    firebase.database().ref("model/locationToLng").set(this.locationToLng);
+
   }
 
   setStartDate(date){
