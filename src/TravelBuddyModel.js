@@ -40,7 +40,6 @@ class TravelBuddyModel {
     this.accPhotos = [];
     this.currentAccommodationID = currentAccommodation;
     this.accomondations = accArray; 
-    this.flights = flightArray;
     this.activities = activityArray;
     this.currentAccPhoto = [];
     this.photoIndex = 0;
@@ -157,7 +156,7 @@ class TravelBuddyModel {
           getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
           .then(response => response.json())
           .then(response => { // Response is query.json, response.result contains hotels.
-                  console.log(response);
+                  //console.log("Results: " + JSON.stringify(response));
                   this.setAccommodationList(response.result);
                   firebase.database().ref("model/accommodationList").set(this.accommodationList);
                   this.notifyObservers();
@@ -166,12 +165,15 @@ class TravelBuddyModel {
             ).catch(err => console.error(err));
         }
         
-        console.log("get flights");
-        console.log("Before: startDate: " + JSON.stringify(this.startDate) + " endDate: " +  JSON.stringify(this.endDate) + " airport[0]: " + JSON.stringify(value[0].airport[0]) + " aiport[1]: "+ JSON.stringify(value[1].airport[0]));
+        //console.log("get flights");
+        //console.log("Before: startDate: " + JSON.stringify(this.startDate) + " endDate: " +  JSON.stringify(this.endDate) + " airport[0]: " + JSON.stringify(value[0].airport[0]) + " aiport[1]: "+ JSON.stringify(value[1].airport[0]));
         if(this.startDate && this.endDate && value[0].airport[0] && value[1].airport[0]){
           getFlights({fromIATA: value[0].airport[0], toIATA: value[1].airport[0], startDate: this.startDate, endDate: this.endDate})
-          .then(results => results.json()).then(results => {
-            console.log("Cluster fuck results: " + JSON.stringify(results));
+          .then(results => results.json())
+          .then(results => {
+            console.log(results);
+            this.setFlightList(results);
+
           })
         } else {console.log("startDate: " + JSON.stringify(this.startDate) + " endDate: " +  JSON.stringify(this.endDate) + " airport[0]: " + JSON.stringify(value[0].airport[0]) + " aiport[1]: "+ JSON.stringify(value[1].airport[0]))}
 
@@ -198,6 +200,11 @@ class TravelBuddyModel {
 
   setAccommodationList(l){
     this.accommodationList = l;
+  }
+  
+  setFlightList(l){
+    this.flightsDepart=l;
+    firebase.database().ref("model/flightsDepart").set(this.flightsDepart);
   }
 
   setEndDate(date){

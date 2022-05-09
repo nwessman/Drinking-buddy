@@ -30,6 +30,6 @@ const options1 = {
  *  REQUIRES OBJECT {fromIATA: "123", toIATA: "123", startDate: "2000-01-01", endData: "2000-01-02"}
  */
 function getFlights(params){
-    return fetch('https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/nearest-places-matrix?origin='+params.fromIATA+'&destination='+params.toIATA+'&flexibility=0&currency=SEK&depart_date='+params.startDate+'&return_date='+params.endDate+'&show_to_affiliates=true', options1)
+    return fetch('https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/nearest-places-matrix?origin='+params.fromIATA+'&destination='+params.toIATA+'&flexibility=0&currency=SEK&depart_date='+params.startDate+'&show_to_affiliates=true', options1)
 }
 export {getHotels, getHotelsReview, getFlights};

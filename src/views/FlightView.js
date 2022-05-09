@@ -1,11 +1,13 @@
 import React from "react";
 import "../App.css";
 import Navigation from "../reactjs/NavigationPresenter";
-import {exFlights} from "./flights";
 
 export default function renderFlights(props){
-    function renderFlights(){
-        console.log("Flights: " + props.flights);
+    const flightData = Object.keys(props.flights);
+    console.log("Hej: " + flightData)
+
+
+    function renderFlightsCB(item){
 
         function buttonClickACB(){
             window.location = "https://www.aviasales.com" + props.link;
@@ -14,11 +16,7 @@ export default function renderFlights(props){
         return(
             <div className="flightsContainer">
                 <div className="flight">
-                    <p >{props.origin}</p>
-                    <p >{props.depart_date}</p>
-                    <div className = "flightBar"></div>
-                    <p >{props.destination}</p>
-                    <p>{props.return_date}</p>
+                    <p >{item.origin}</p>
                 </div>
                 <button onClick = {buttonClickACB}>Book flight</button>
             </div>
@@ -29,8 +27,8 @@ export default function renderFlights(props){
     return (
         <div className = "background_image">
             <Navigation></Navigation>
-            <div>
-                {props.hotels.map(renderFlights)}
+            <div className="box">
+                {flightData.map(renderFlightsCB)}
             </div>
         </div>
         );

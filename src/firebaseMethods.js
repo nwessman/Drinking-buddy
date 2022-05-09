@@ -13,6 +13,8 @@ function updateModelFromFirebase(model){
     firebase.database().ref("model/photoIndex").on("value", (snapshot => {if(snapshot.exists()) model.setPhotoIndex(snapshot.val())}));
     firebase.database().ref("model/currentAccPhoto").on("value", (snapshot => {if(snapshot.exists()) model.setCurrentAccPhoto(snapshot.val())}));
 
+    firebase.database().ref("model/flightsDepart").on("value", (snapshot => {if(snapshot.exists()) model.setFlightList(snapshot.val())}));
+
 }
 
 export {updateModelFromFirebase}
