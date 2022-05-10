@@ -105,6 +105,7 @@
   overflow-y: auto;
 
 }
+
 .boxItems{
   display: inline-block;
   width: 180px;
@@ -208,10 +209,9 @@ padding-top: 10px;
 
 }
 .leafletMap{
-  margin-left:50vw;
   position: relative;
-  width: 50vw;
-  height: 82vh;
+  width: 100vw;
+  height: 88vh;
 
 
 
@@ -221,20 +221,28 @@ padding-top: 10px;
   position:absolute;
   left: 20px;
   height: 20px;
-  min-width: 100px;
   margin-left: 60px;
 
 }
 .searchAButton{
 
- margin-left: 190px;
+ margin-left: 450px;
 
 }
-.searchInputA{
-  border: 10px solid transparent;
-  width: 180px;
-  opacity: 0.8;
-  font-size: 18px;
+.box2 {
+  height: 350px;
+  top: 200px;
+  margin-left:60px;
+  position: absolute;
+  background-image: url("./images/opaque_backg.png");
+ 
+  width: 500px;
+
+}
+.dropdown{
+  
+  width: 500px;
+  font-size: 15px;
   padding-bottom: -80px;
 
 }

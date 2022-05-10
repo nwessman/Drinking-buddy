@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import TravelBuddyModel from './TravelBuddyModel.js';
 import firebaseConfig from './firebaseConfig.js';
 import firebase from 'firebase/app';
+import 'semantic-ui-css/semantic.min.css'
 
 firebase.initializeApp(firebaseConfig);
 

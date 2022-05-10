@@ -15,8 +15,12 @@ function getHotelsReview(params){
  
 }
 
-function getActivites(){
-    return fetch("https://api.geoapify.com/v2/places?categories=commercial.supermarket&filter=circle:18.0710935,59.3251172,5000&bias=proximity:18.0710935,59.3251172&limit=20&apiKey=fb2c7d7c2d3d4ef2b898bb7d0ae99881","GET")
+function getActivites(params){
+    console.log('https://api.geoapify.com/v2/places?categories='+params.activities.join()+'&filter=circle:'+params.long+','+params.lat+','+'5000&bias=proximity:'+params.long+','+params.lat+'&lang=en&limit=20&apiKey=fb2c7d7c2d3d4ef2b898bb7d0ae99881')
+  
+    const reqOption ={method:'GET',};
+    return fetch('https://api.geoapify.com/v2/places?categories='+params.activities.join()+'&filter=circle:'+params.long+','+params.lat+','+'5000&bias=proximity:'+params.long+','+params.lat+'&lang=en&limit=20&apiKey=fb2c7d7c2d3d4ef2b898bb7d0ae99881',reqOption)
+    //https://api.geoapify.com/v2/places?categories=commercial,commercial.bag,activity&filter=circle:18.0710935,59.3251172,50000&bias=proximity:18.0710935,59.3251172&lang=en&limit=30&apiKey=fb2c7d7c2d3d4ef2b898bb7d0ae99881
 }
 
 export {getHotels, getHotelsReview, getActivites};
