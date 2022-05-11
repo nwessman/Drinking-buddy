@@ -4,6 +4,8 @@ import { getHotels } from "../geoSource";
 
 
 export default function Search(props){
+
+  //const [, searchBar]
   
   function serachForHotelsCB(){
     //searchHotels({latitute:59.334591,longitute:18.063240})
@@ -19,6 +21,14 @@ export default function Search(props){
 
   function setSearchLongCB(val){
     props.model.setSearchLongQuery(val);
+  }
+
+  function updateSearchStringToInModel(val){
+    props.model.setSearchStringTo(val);
+  }
+
+  function updateSearchStringFromInModel(val){
+    props.model.setSearchStringFrom(val);
   }
 
   function doSearch(from, to, start, end){
@@ -45,5 +55,8 @@ export default function Search(props){
 
   }
 
-  return <StartSearchView onSearchClick={doSearch} searchEvent={serachForHotelsCB} setLat={setSearchLatCB} setLong={setSearchLongCB}/>;
+  return <StartSearchView updateSearchStringTo={updateSearchStringToInModel} 
+  updateSearchStringFrom={updateSearchStringFromInModel} 
+  onSearchClick={doSearch} searchEvent={serachForHotelsCB} 
+  setLat={setSearchLatCB} setLong={setSearchLongCB}/>;
 }

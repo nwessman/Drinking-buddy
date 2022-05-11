@@ -10,7 +10,7 @@ cities = json.loads(f.read())
 f.close()
 
 
-dict = {}
+cityList = []
 
 for cityInfo in cities:
   city = cityInfo["city"].replace('.', '').replace('/','').lower()
@@ -23,14 +23,21 @@ for cityInfo in cities:
       if(city.strip() == airportCity.strip().lower() and country.strip() == airportInfo["Country"].strip().lower()):
         airport.append(airportInfo["AITA"])
 
-  name = city + " ["+country+"]"
-  dict[name] = {
-    "lng" : long,
-    "lat" : lat,
-  }
+  obj = "{ city: \"" + city +"\", country: \""+country+"\", lat:"+str(lat)+" , lng:"+str(long)+" , AITA: ["
+  for aita in airport:
+    obj += "\""+aita + "\","
+  obj += "]},\n"
   if(len(airport) > 0):
-    dict[name]["airport"] = airport
+    cityList.append(obj)
+  #name = city + " ["+country+"]"
+  #dict[name] = {
+  #  "lng" : long,
+  #  "lat" : lat,
+  #}
+  #if(len(airport) > 0):
+  #  dict[name]["airport"] = airport
 
-f = open("citiesCountriesAitaOutput.json","w", encoding='utf-8')
-f.write(json.dumps(dict, indent = 3))
+cityList.sort()
+f = open("cityInfoDB.js","w", encoding='utf-8')
+f.write(''.join(cityList))
 f.close() 

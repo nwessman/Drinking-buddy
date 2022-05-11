@@ -21,6 +21,8 @@ class TravelBuddyModel {
   endDate;
   photoIndex;
   observers;
+  searchStringFrom;
+  searchStringTo;
 
   constructor(accArray = [], flightArray=[], activityArray = [], currentAccommodation){
     this.accommodationList = [];
@@ -38,6 +40,8 @@ class TravelBuddyModel {
     this.activities = activityArray;
     this.currentAccPhoto = [];
     this.photoIndex = 0;
+    this.searchStringFrom = "";
+    this.searchStringTo = "";
 
   }
   setSearchLongQuery(long){this.searchParams.query.longitute=long}
@@ -47,6 +51,13 @@ class TravelBuddyModel {
       this.observers = [...this.observers, callback];
   }
 
+  setSearchStringTo(val){
+    this.searchStringTo = val;
+  }
+
+  setSearchStringFrom(val){
+    this.searchStringFrom = val;
+  }
 
   removeObserver(callback) {
       function removeCallbackCB(element) {

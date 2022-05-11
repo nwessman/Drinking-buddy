@@ -2,8 +2,8 @@ import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars';
 import React from "react";
 import { IoIosSearch, IoMdSwap } from "react-icons/io";
 import "../App.css";
-
-
+import { Autocomplete, TextField } from "@mui/material"
+import citiesList from "../cityInfoDB.js"
 
 function StartSearchView(props){
     
@@ -53,6 +53,8 @@ function StartSearchView(props){
         window.location.hash = "startsearch";
     }
 
+    let options =[...new Set(citiesList.map(x => x.city + ", " + x.country))] 
+    
     return (
             <div className="background_image">
 
@@ -63,9 +65,27 @@ function StartSearchView(props){
                 <div className='searchWrapper'>
             
             <div className ="search">
-                <input type = "text" placeholder = "From" className="searchInputs" onChange = {onFromChange}/>
+                <Autocomplete
+                        onChange={(evt, val)=>{props.updateSearchStringFrom(val)}}
+                        style={{ color: "white" }}
+                        disablePortal
+                        id="combo-box-demo"
+                        options={options}
+                        sx={{ input: { color: "white" }, width: 300, m: 2 }}
+                        InputLabelProps={{style: {color: "white",}}}
+                        renderInput={(params) => (<TextField {...params} label="To" />)}
+                    />
                     <IoMdSwap style = {{ opacity: 0.6}} size = "30px"/>
-                <input type = "text" placeholder= "To" className="searchInputs" onChange = {onToChange}/>
+                    <Autocomplete
+                        onChange={(evt, val)=>{props.updateSearchStringTo(val)}}
+                        style={{ color: "white" }}
+                        disablePortal
+                        id="combo-box-demo"
+                        options={options}
+                        sx={{ input: { color: "white" }, width: 300, m: 2 }}
+                        InputLabelProps={{style: {color: "white",}}}
+                        renderInput={(params) => (<TextField {...params} label="From" />)}
+                    />
             </div>
             <div className="search">
                 <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
@@ -79,3 +99,11 @@ function StartSearchView(props){
         );
 }
 export default StartSearchView;
+
+/*
+
+                <input type = "text" placeholder = "From" className="searchInputs" onChange = {onFromChange}/>
+                    
+                <input type = "text" placeholder= "To" className="searchInputs" onChange = {onToChange}/>
+
+*/
