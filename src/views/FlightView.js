@@ -8,7 +8,7 @@ export default function renderFlights(props){
     function renderFlightsCB(item, index){
 
         function buttonClickACB(){
-            window.location = "https://www.aviasales.com" + item.link;
+            window.open("https://www.aviasales.com" + item.link);
         }
 
         function convert(time){
@@ -63,7 +63,9 @@ export default function renderFlights(props){
         <div className = "background_image">
         <Navigation></Navigation>
         <div className="box">
-                No flights available.
+          <div className= "flightHeader"> 
+            No flights available.
+                </div>
             </div>
     </div>
     );
