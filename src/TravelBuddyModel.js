@@ -163,6 +163,7 @@ class TravelBuddyModel {
           .then(response => { // Response is query.json, response.result contains hotels.
                   console.log(response);
                   this.setAccommodationList(response.result);
+                  firebase.database().ref("model/accommodationList").set(this.accommodationList);
                   this.notifyObservers();
                   window.location.hash = "hotels";
                 
@@ -236,7 +237,6 @@ class TravelBuddyModel {
     firebase.database().ref("model/accPhotos").set(this.accPhotos);
     
   }
-
  
 
   setCurrentAccPhoto(index){
@@ -246,6 +246,7 @@ class TravelBuddyModel {
        this.notifyObservers();
     }
     else console.log("fel foto index: "+this.photoIndex);
+
     
 
   }
@@ -263,6 +264,7 @@ class TravelBuddyModel {
             this.setAccomodationPhotos(arr);
             //this.setPhotoIndex(0)
             this.setCurrentAccPhoto(0);
+
           //   console.log(this.currentAccReviews);
           //  console.log("photos array:");
           //   console.log(this.accPhotos);
@@ -293,6 +295,7 @@ class TravelBuddyModel {
     .catch(err => console.error(err));
     
   }
+
 
 
   setActivityQuerySelections(val){

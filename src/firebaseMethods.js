@@ -1,3 +1,4 @@
+
 import firebase from 'firebase/app';
 /**
  * This will run every time the app loads and fetch values from firebase.
