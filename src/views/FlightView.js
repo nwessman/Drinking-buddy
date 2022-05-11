@@ -3,14 +3,12 @@ import "../App.css";
 import Navigation from "../reactjs/NavigationPresenter";
 
 export default function renderFlights(props){
-    const flightData = Object.keys(props.flights);
-    console.log("Hej: " + flightData)
-
+    console.log(props.flights);
 
     function renderFlightsCB(item){
 
         function buttonClickACB(){
-            window.location = "https://www.aviasales.com" + props.link;
+            window.location = "https://www.aviasales.com" + item.link;
         }
 
         return(
@@ -24,12 +22,20 @@ export default function renderFlights(props){
         )
     }
     
+    if(props.flights.prices !== undefined){
     return (
         <div className = "background_image">
             <Navigation></Navigation>
             <div className="box">
-                {flightData.map(renderFlightsCB)}
+                {props.flights.prices.map(renderFlightsCB)}
             </div>
         </div>
         );
+    } else {
+    return (
+        <div className = "background_image">
+        <Navigation></Navigation>
+    </div>
+    );
+}
 }

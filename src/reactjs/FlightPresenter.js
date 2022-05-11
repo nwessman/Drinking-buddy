@@ -3,7 +3,7 @@ import React from "react";
 
 
 export default function Flights(props){
-  const [departFlights, setDeparFlights] = React.useState(props.model.flightsDepart);
+  const [, setDeparFlights] = React.useState(props.model.flightsDepart);
 
   function ObserverACB(){
     setDeparFlights(props.model.flightsDepart)
