@@ -71,7 +71,7 @@ function StartSearchView(props){
                         disablePortal
                         id="combo-box-demo"
                         options={options}
-                        sx={{ input: { color: "white" }, width: 300, m: 2 }}
+                        sx={{ input: { color: "white" }, width: 300, m: 2, backgroundColor: "white"}}
                         InputLabelProps={{style: {color: "white",}}}
                         renderInput={(params) => (<TextField {...params} label="To" />)}
                     />
