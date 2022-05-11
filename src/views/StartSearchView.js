@@ -64,7 +64,7 @@ function StartSearchView(props){
             
             <div className ="search">
                 <input type = "text" placeholder = "From" className="searchInputs" onChange = {onFromChange}/>
-                    <IoMdSwap style = {{ opacity: 0.6}} size = "30px"/>
+                    <IoMdSwap style = {{ opacity: 0.6}} size = "50px"/>
                 <input type = "text" placeholder= "To" className="searchInputs" onChange = {onToChange}/>
             </div>
             <div className="search">
