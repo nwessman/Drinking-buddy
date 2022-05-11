@@ -5,7 +5,7 @@ airports = json.loads(f.read())
 f.close()
 
 
-f = open("cityoutput.txt", "r", encoding='utf-8')
+f = open("citiesAndCountries.txt", "r", encoding='utf-8')
 cities = json.loads(f.read())
 f.close()
 
@@ -16,19 +16,21 @@ for cityInfo in cities:
   city = cityInfo["city"].replace('.', '').replace('/','').lower()
   long = cityInfo["lng"]
   lat = cityInfo["lat"]
+  country = cityInfo["country"].replace('.', '').replace('/','').lower()
   airport = []
   for airportInfo in airports["Airports"]:
     for airportCity in airportInfo["Cities"]:
-      if(city.strip() == airportCity.strip().lower()):
+      if(city.strip() == airportCity.strip().lower() and country.strip() == airportInfo["Country"].strip().lower()):
         airport.append(airportInfo["AITA"])
 
-  dict[city] = {
+  name = city + " ["+country+"]"
+  dict[name] = {
     "lng" : long,
     "lat" : lat,
   }
   if(len(airport) > 0):
-    dict[city]["airport"] = airport
+    dict[name]["airport"] = airport
 
-f = open("combinedOutput.json","w", encoding='utf-8')
+f = open("citiesCountriesAitaOutput.json","w", encoding='utf-8')
 f.write(json.dumps(dict, indent = 3))
 f.close() 
