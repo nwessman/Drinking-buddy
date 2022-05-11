@@ -28,7 +28,7 @@ class TravelBuddyModel {
 
   constructor(accArray = [], flightArray=[], activityArray = [], currentAccommodation){
     this.accommodationList = [];
-    this.flightsDepart = {};
+    this.flightsDepart = [];
     this.flightsReturn = {};
     this.observers = [];
     this.startDate = {};

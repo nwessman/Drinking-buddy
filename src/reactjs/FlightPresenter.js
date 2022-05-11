@@ -4,6 +4,9 @@ import React from "react";
 
 export default function Flights(props){
   const [, setDeparFlights] = React.useState(props.model.flightsDepart);
+  let from = String(props.model.searchParams.from).toUpperCase();
+  let to = String(props.model.searchParams.to).toUpperCase();
+
 
   function ObserverACB(){
     setDeparFlights(props.model.flightsDepart)
@@ -21,5 +24,5 @@ export default function Flights(props){
   React.useEffect(wasCreatedACB, []);
 
   return <FlightView
-  flights={props.model.flightsDepart}/>;
+  flights={props.model.flightsDepart} from = {from} to = {to}/>;
 }

@@ -3,26 +3,48 @@ import "../App.css";
 import Navigation from "../reactjs/NavigationPresenter";
 
 export default function renderFlights(props){
-    console.log(props.flights);
 
-    function renderFlightsCB(item){
+
+    function renderFlightsCB(item, index){
 
         function buttonClickACB(){
             window.location = "https://www.aviasales.com" + item.link;
         }
 
         return(
-            <div className="flightsContainer">
-                <div className="flight">
-                    <p >{item.origin}</p>
+          <div>
+                <div class = "flightHeader"> 
+       Available flights from {props.from} to {props.to}
                 </div>
-                <button onClick = {buttonClickACB}>Book flight</button>
+           <div className ="flightsContainer">
+                <div className ="flight">
+                    <div class = "flightsItem"><div>
+                        {item.origin}
+                      </div>
+                    <div className="duration">
+                        {item.depart_date}
+                    </div>
+                    </div>
+                  <div class = "flightsItem">
+                    <div class = "duration">
+                      {item.duration} minutes
+                    </div>
+                    <div class="flightBar"></div>
+                  </div>
+                    <div class = "flightsItem" >{item.destination}</div>
+                </div>
+              <div class = "flightsItem">
+                <button onClick = {buttonClickACB} class = "bookFlight">Book flight</button>
+                Price: 
+                {item.price} SEK
+              </div>
+            </div>
             </div>
         
         )
     }
     
-    if(props.flights.prices !== undefined){
+    try{
     return (
         <div className = "background_image">
             <Navigation></Navigation>
@@ -31,10 +53,13 @@ export default function renderFlights(props){
             </div>
         </div>
         );
-    } else {
+    } catch(error) {
     return (
         <div className = "background_image">
         <Navigation></Navigation>
+        <div className="box">
+                No flights available.
+            </div>
     </div>
     );
 }

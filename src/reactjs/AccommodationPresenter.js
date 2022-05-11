@@ -3,7 +3,7 @@ import React from "react";
 
 
 export default function Accommodations(props){
-  const [HotelsList, setHotelsList] = React.useState(props.model.accommodationList);
+  const [, setHotelsList] = React.useState(props.model.accommodationList);
   const [AccPopUp, setAccPopUp] = React.useState(false);
   
   function ObserverACB(){
