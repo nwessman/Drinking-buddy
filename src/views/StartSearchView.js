@@ -71,20 +71,19 @@ function StartSearchView(props){
                         disablePortal
                         id="combo-box-demo"
                         options={options}
-                        sx={{ input: { color: "white" }, width: 300, m: 2, backgroundColor: "white"}}
+                        sx={{ input: { color: "black" }, width: 300, m: 2, backgroundColor: "white"}}
                         InputLabelProps={{style: {color: "white",}}}
-                        renderInput={(params) => (<TextField {...params} label="To" />)}
+                        renderInput={(params) => (<TextField {...params} label="From" />)}
                     />
-                    <IoMdSwap style = {{ opacity: 0.6}} size = "30px"/>
                     <Autocomplete
                         onChange={(evt, val)=>{props.updateSearchStringTo(val)}}
                         style={{ color: "white" }}
                         disablePortal
                         id="combo-box-demo"
                         options={options}
-                        sx={{ input: { color: "white" }, width: 300, m: 2 }}
+                        sx={{ input: { color: "black" }, width: 300, m: 2, backgroundColor: "white"}}
                         InputLabelProps={{style: {color: "white",}}}
-                        renderInput={(params) => (<TextField {...params} label="From" />)}
+                        renderInput={(params) => (<TextField {...params} label="To" />)}
                     />
             </div>
             <div className="search">
@@ -103,7 +102,7 @@ export default StartSearchView;
 /*
 
                 <input type = "text" placeholder = "From" className="searchInputs" onChange = {onFromChange}/>
-                    
+                     <IoMdSwap style = {{ opacity: 0.6}} size = "30px"/>
                 <input type = "text" placeholder= "To" className="searchInputs" onChange = {onToChange}/>
 
 */

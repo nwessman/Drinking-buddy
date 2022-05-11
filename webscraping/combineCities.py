@@ -28,7 +28,9 @@ for cityInfo in cities:
     obj += "\""+aita + "\","
   obj += "]},\n"
   if(len(airport) > 0):
-    cityList.append(obj)
+    #cityList.append(obj)
+    cityList.append([city, country, lat, long, airport])
+
   #name = city + " ["+country+"]"
   #dict[name] = {
   #  "lng" : long,
@@ -37,7 +39,25 @@ for cityInfo in cities:
   #if(len(airport) > 0):
   #  dict[name]["airport"] = airport
 
-cityList.sort()
-f = open("cityInfoDB.js","w", encoding='utf-8')
-f.write(''.join(cityList))
+
+print(cityList[0])
+
+newList = []
+for obj in cityList:
+  check = True
+  for obj2 in newList:
+    if(obj[0] == obj2[0] and obj[1] == obj2[1] and obj[2] != obj2[2]):
+      check = False
+  if(check == True):
+    s = "{ city: \"" + obj[0] +"\", country: \""+obj[1]+"\", lat:"+str(obj[2])+" , lng:"+str(obj[3])+" , AITA: ["
+    for aita in obj[4]:
+      s += "\""+aita + "\","
+    s += "]},\n" 
+    newList.append(s)
+
+
+#cityList.sort()
+
+f = open("cityInfoDB2.js","w", encoding='utf-8')
+f.write(''.join(newList))
 f.close() 
