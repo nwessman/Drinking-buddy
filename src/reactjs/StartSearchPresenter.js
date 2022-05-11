@@ -1,11 +1,10 @@
 import StartSearchView from "../views/StartSearchView";
 import React from "react";
-import { getHotels } from "../geoSource";
 
 
 export default function Search(props){
   
-  function serachForHotelsCB(){
+  function searchForHotelsCB(){
     //searchHotels({latitute:59.334591,longitute:18.063240})
     //searchHotels({query:"burger", type: "main course"})
     //props.model.doSearch(props.model.searchParams);
@@ -45,5 +44,5 @@ export default function Search(props){
 
   }
 
-  return <StartSearchView onSearchClick={doSearch} searchEvent={serachForHotelsCB} setLat={setSearchLatCB} setLong={setSearchLongCB}/>;
+  return <StartSearchView onSearchClick={doSearch} searchEvent={searchForHotelsCB} setLat={setSearchLatCB} setLong={setSearchLongCB}/>;
 }

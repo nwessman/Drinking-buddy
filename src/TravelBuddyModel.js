@@ -1,12 +1,18 @@
 import resolvePromise from "./resolvePromise.js";
 import firebase from 'firebase/app';
 import "firebase/database";
-import { getHotels, getHotelsReview,getActivites } from "./geoSource.js";
+
+import { getFlights, getHotels, getHotelsReview, getActivites } from "./geoSource.js";
+
 
 class TravelBuddyModel {
 
+  flightsDepart;
+  flightsReturn;
   accommodationList;
   currentAccommodationID;
+  locationFromIATA;
+  locationToIATA;
   locationToLng;
   locationToLat;
   LocationTo;
@@ -28,6 +34,8 @@ class TravelBuddyModel {
 
   constructor(accArray = [], flightArray=[], currentAccommodation){
     this.accommodationList = [];
+    this.flightsDepart = [];
+    this.flightsReturn = {};
     this.observers = [];
     this.startDate = {};
     this.endDate = {};
@@ -38,7 +46,11 @@ class TravelBuddyModel {
     this.accPhotos = [];
     this.currentAccommodationID = currentAccommodation;
     this.accomondations = accArray; 
+
+    this.activities = activityArray;
+
     this.flights = flightArray;
+
     this.currentAccPhoto = [];
     this.photoIndex = 0;
     this.locationToLat = 59.334591; //default coordinates for map
@@ -97,21 +109,22 @@ class TravelBuddyModel {
 
 
   doSearch(){
-    
+
     let fromOkey = true;
     let toOkey = true;
 
     // try because empty or wrong params in search input will crash this function 
     try {
-      console.log("from: " + this.searchParams.from);
-      console.log("to: " + this.searchParams.to);
-
       let from = this.searchParams.from.toLowerCase();
       let to = this.searchParams.to.toLowerCase();
 
       let fromSnapshot;
       let toSnapshot;
       let arr = [];
+
+
+  
+
 
       // Get info about From location
       const promiseClusterFuck = new Promise((resolve, reject) => {
@@ -161,7 +174,7 @@ class TravelBuddyModel {
           getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
           .then(response => response.json())
           .then(response => { // Response is query.json, response.result contains hotels.
-                  console.log(response);
+                  //console.log("Results: " + JSON.stringify(response));
                   this.setAccommodationList(response.result);
                   firebase.database().ref("model/accommodationList").set(this.accommodationList);
                   this.notifyObservers();
@@ -171,7 +184,21 @@ class TravelBuddyModel {
             ).catch(err => console.error(err));
         
         }
+        
+        //console.log("get flights");
+        //console.log("Before: startDate: " + JSON.stringify(this.startDate) + " endDate: " +  JSON.stringify(this.endDate) + " airport[0]: " + JSON.stringify(value[0].airport[0]) + " aiport[1]: "+ JSON.stringify(value[1].airport[0]));
+        if(this.startDate && this.endDate && value[0].airport[0] && value[1].airport[0]){
+          getFlights({fromIATA: value[0].airport[0], toIATA: value[1].airport[0], startDate: this.startDate, endDate: this.endDate})
+          .then(results => results.json())
+          .then(results => {
+            console.log(results);
+            this.setFlightList(results);
+
+          })
+        } else {console.log("startDate: " + JSON.stringify(this.startDate) + " endDate: " +  JSON.stringify(this.endDate) + " airport[0]: " + JSON.stringify(value[0].airport[0]) + " aiport[1]: "+ JSON.stringify(value[1].airport[0]))}
+
       });
+
 
       const theModel = this;
       function notifyACB(){
@@ -209,12 +236,21 @@ class TravelBuddyModel {
     this.accommodationList = l;
     firebase.database().ref("model/accommodationList").set(this.accommodationList);
   }
+
+  
+  setFlightList(l){
+    this.flightsDepart=l;
+    firebase.database().ref("model/flightsDepart").set(this.flightsDepart);
+  }
+
+
   setActivityList(l){
     this.activityList = l;
     if(this.activityList !== undefined)
     firebase.database().ref("model/activityList").set(this.activityList);
   }
  
+
   setEndDate(date){
     this.endDate = date; 
   }

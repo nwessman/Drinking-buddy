@@ -11,6 +11,9 @@ export default function AccommodationView(props){
                 <Navigation></Navigation>   
                 
                 <div className="box">
+                    <div className= "flightHeader"> 
+                        Available hotels at your chosen destination
+                    </div>
                 {
                 props.hotels.map(e => {
                     return (

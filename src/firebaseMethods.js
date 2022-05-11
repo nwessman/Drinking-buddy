@@ -1,4 +1,5 @@
 
+
 import firebase from 'firebase/app';
 /**
  * This will run every time the app loads and fetch values from firebase.
@@ -17,5 +18,7 @@ function updateModelFromFirebase(model){
     firebase.database().ref("model/locationToLng").on("value", (snapshot => {if(snapshot.exists()) model.setLng(snapshot.val())}));
     firebase.database().ref("model/activityList").on("value", (snapshot => {if(snapshot.exists()) model.setActivityList(snapshot.val())}));
     firebase.database().ref("model/activityQuerySelections").on("value", (snapshot => {if(snapshot.exists()) model.setActivityQuerySelections(snapshot.val())}));
+    firebase.database().ref("model/flightsDepart").on("value", (snapshot => {if(snapshot.exists()) model.setFlightList(snapshot.val())}));
 }
 export {updateModelFromFirebase};
+
