@@ -11,32 +11,37 @@ export default function renderFlights(props){
             window.location = "https://www.aviasales.com" + item.link;
         }
 
+        function convert(time){
+          let hour = Math.round(time/60);
+          return hour;
+        }
+
         return(
-          <div>
-                <div class = "flightHeader"> 
+          <div key = {index}>
+                <div className= "flightHeader"> 
        Available flights from {props.from} to {props.to}
                 </div>
            <div className ="flightsContainer">
                 <div className ="flight">
-                    <div class = "flightsItem"><div>
+                    <div className= "flightsItem"><div>
                         {item.origin}
                       </div>
                     <div className="duration">
-                        {item.depart_date}
+                        {item.depart_date.split('T')[0]}
                     </div>
                     </div>
-                  <div class = "flightsItem">
-                    <div class = "duration">
-                      {item.duration} minutes
+                  <div className= "flightsItem">
+                    <div className= "duration">
+                      {convert(item.duration)} hours
                     </div>
-                    <div class="flightBar"></div>
+                    <div className="flightBar"></div>
+                    <div className= "duration"> Transfers: {item.transfers}</div>
                   </div>
-                    <div class = "flightsItem" >{item.destination}</div>
+                    <div className= "flightsItem" >{item.destination}</div>
                 </div>
-              <div class = "flightsItem">
-                <button onClick = {buttonClickACB} class = "bookFlight">Book flight</button>
-                Price: 
-                {item.price} SEK
+              <div className= "flightsItem">
+                <button onClick = {buttonClickACB} className= "bookFlight">Book flight</button>
+                Price: {item.price} SEK
               </div>
             </div>
             </div>
