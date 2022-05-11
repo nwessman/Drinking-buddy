@@ -1,6 +1,6 @@
 import ActivityView from "../views/ActivityView";
 import React from "react";
-
+import { useMap } from "react-leaflet";
 
 
 
@@ -9,6 +9,7 @@ export default function Activity(props){
   const [, setLong] = React.useState(props.model.locationToLng);
   const [, setActivityList] = React.useState(props.model.activityList);
   const [, setCurrentActiivty] = React.useState(props.model.currentActivity);
+ 
 
  
    
@@ -43,7 +44,7 @@ export default function Activity(props){
       function saveCurrentActivityToModel(a){
         props.model.setCurrentActivity(a);
       }
-     
+      
   return (<><ActivityView searchActivites={searchActivites}
     setQueryOptions = {saveQueryOptionsToModel}
     dropDownOptions = {[

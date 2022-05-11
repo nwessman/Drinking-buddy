@@ -7,6 +7,7 @@
 @import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-react-calendars/styles/material.css";
 
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -97,7 +98,7 @@
 
 }
 .box {
-  height: 81vh;
+  height: 76vh;
   background-image: url("./images/opaque_backg.png");
   margin: 1vh 10vh 0vh 10vh;
   border-radius: 4px;
@@ -149,11 +150,11 @@
 .button{
   margin: 10px 10px;
   display: inline-block;
-  font-size: 18px;
+  font-size: 16px;
+  margin-left: 55px;
+ 
+  background-color:#abb8c2;
   opacity: 0.8;
-  border-radius: 5px;
-  font-style: bold;
-  background-color:#cfd2d4;
   cursor: pointer;
   min-width: 100px;
   margin-bottom: -50%;
@@ -217,16 +218,17 @@ padding-top: 10px;
 
 }
 .searchActivity{
-  top: 80px;
   position:absolute;
-  left: 20px;
+
   height: 20px;
-  margin-left: 60px;
+  margin-left: 350px;
+  z-index: 9999;
+
+  margin-bottom: -40%;
 
 }
 .searchAButton{
-
- margin-left: 450px;
+ margin-left: 570px;
 
 }
 .box2 {
@@ -235,16 +237,23 @@ padding-top: 10px;
   margin-left:60px;
   position: absolute;
   background-image: url("./images/opaque_backg.png");
- 
   width: 500px;
 
 }
 .dropdown{
-  
-  width: 500px;
   font-size: 15px;
   padding-bottom: -80px;
 
+}
+.popup{
+  text-align: center;
+  justify-content: center;
+  margin-top: 20px;
+  
+}
+.popupText{
+  font-size: px;
+  margin-bottom: 20px
 }
 
 @media(max-width: 800px)

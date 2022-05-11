@@ -237,20 +237,15 @@ class TravelBuddyModel {
     
   }
 
-  setPhotoIndex(index){
-    this.photoIndex = index;
-      firebase.database().ref("model/photoIndex").set(this.photoIndex);
-  }
+ 
 
-  setCurrentAccPhoto(){
-    //if(this.photoIndex !== index || index === 0){
-      this.currentAccPhoto = this.accPhotos[0];
-      firebase.database().ref("model/currentAccPhoto").set(this.currentAccPhoto);
-      this.notifyObservers();
-      // console.log("index:" + this.photoIndex);
-      // console.log(this.currentAccPhoto);
-    //}
-    //else console.log("fel foto index: "+this.photoIndex);
+  setCurrentAccPhoto(index){
+    if(this.photoIndex !== index || index === 0){
+      this.photoIndex = index;
+      this.currentAccPhoto = this.accPhotos[index];
+       this.notifyObservers();
+    }
+    else console.log("fel foto index: "+this.photoIndex);
     
 
   }
@@ -266,8 +261,8 @@ class TravelBuddyModel {
             this.setAccomodationReviews(responses[0].result);
             arr = responses[1].map(({url_max}) => url_max); 
             this.setAccomodationPhotos(arr);
-            this.setPhotoIndex(0)
-            this.setCurrentAccPhoto();
+            //this.setPhotoIndex(0)
+            this.setCurrentAccPhoto(0);
           //   console.log(this.currentAccReviews);
           //  console.log("photos array:");
           //   console.log(this.accPhotos);
