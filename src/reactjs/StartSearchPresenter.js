@@ -56,6 +56,6 @@ export default function Search(props){
 
   return <StartSearchView updateSearchStringTo={updateSearchStringToInModel} 
   updateSearchStringFrom={updateSearchStringFromInModel} 
-  onSearchClick={doSearch} searchEvent={serachForHotelsCB} 
+  onSearchClick={doSearch} searchEvent={searchForHotelsCB} 
   setLat={setSearchLatCB} setLong={setSearchLongCB}/>;
 }
