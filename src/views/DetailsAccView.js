@@ -54,7 +54,7 @@ export default function DetailsAccView(props){
             <div className="imageWrapper">
                 
                 <FaIcons.FaAngleLeft size="50px" onClick={onClickPrevCB} className="leftArrow" />  
-                <img className="images" src={props.accomodationPhoto} alt="hotel" height="300"/>
+                <img className="images" src={props.accomodationPhoto} alt="hotel" height="200"/>
                 <FaIcons.FaAngleRight size="50px" onClick={onClickNextCB} className="rightArrow"/>  
             </div>
             <h2 className="accomodationTitle">Reviews</h2>

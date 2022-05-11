@@ -1,7 +1,9 @@
 import resolvePromise from "./resolvePromise.js";
 import firebase from 'firebase/app';
 import "firebase/database";
-import { getFlights, getHotels, getHotelsReview } from "./geoSource.js";
+
+import { getFlights, getHotels, getHotelsReview, getActivites } from "./geoSource.js";
+
 
 class TravelBuddyModel {
 
@@ -25,8 +27,12 @@ class TravelBuddyModel {
   endDate;
   photoIndex;
   observers;
+  activityList;
+  activityQuerySelections;
+  currentActivity;
+ 
 
-  constructor(accArray = [], flightArray=[], activityArray = [], currentAccommodation){
+  constructor(accArray = [], flightArray=[], currentAccommodation){
     this.accommodationList = [];
     this.flightsDepart = [];
     this.flightsReturn = {};
@@ -40,9 +46,17 @@ class TravelBuddyModel {
     this.accPhotos = [];
     this.currentAccommodationID = currentAccommodation;
     this.accomondations = accArray; 
+
     this.activities = activityArray;
+
+    this.flights = flightArray;
+
     this.currentAccPhoto = [];
     this.photoIndex = 0;
+    this.locationToLat = 59.334591; //default coordinates for map
+    this.locationToLng = 18.063240; // default coordinates for map
+    this.activityList = [];
+
 
   }
   setSearchLongQuery(long){this.searchParams.query.longitute=long}
@@ -91,6 +105,9 @@ class TravelBuddyModel {
     this.searchParams.to = to;
   }
 
+
+
+
   doSearch(){
 
     let fromOkey = true;
@@ -103,6 +120,7 @@ class TravelBuddyModel {
 
       let fromSnapshot;
       let toSnapshot;
+      let arr = [];
 
 
   
@@ -148,9 +166,9 @@ class TravelBuddyModel {
           reject(null);
         })});
       }).then((value) => {
-        this.locationToLat = value[1].lat;
-        this.locationToLng = value[1].lng;
-        console.log("startdate: " + this.startDate + "enddate: " +  this.endDate + "to lat: " + this.locationToLat + "to lng" + this.locationToLng);
+        this.setLat(value[1].lat);
+        this.setLng(value[1].lng);
+        console.log("startdate: " + this.startDate + "enddate: " +  this.endDate + "to lat: " + value[1].lat + "to lng" + value[1].lng);
         if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
           // REQUIRES OBJECT {startDate, endDate, lat, lng}
           getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
@@ -161,8 +179,10 @@ class TravelBuddyModel {
                   firebase.database().ref("model/accommodationList").set(this.accommodationList);
                   this.notifyObservers();
                   window.location.hash = "hotels";
+                
                   }
             ).catch(err => console.error(err));
+        
         }
         
         //console.log("get flights");
@@ -194,18 +214,42 @@ class TravelBuddyModel {
     }
   }
 
+  setLat(lat){
+    this.locationToLat = lat;
+    console.log("Position lat:" +this.locationToLat);
+    firebase.database().ref("model/locationToLat").set( this.locationToLat);
+   
+
+  }
+  setLng(lng){
+    this.locationToLng = lng;
+    console.log("Position long" +  this.locationToLng);
+    firebase.database().ref("model/locationToLng").set(this.locationToLng);
+
+  }
+
   setStartDate(date){
     this.startDate = date;
   }
 
   setAccommodationList(l){
     this.accommodationList = l;
+    firebase.database().ref("model/accommodationList").set(this.accommodationList);
   }
+
   
   setFlightList(l){
     this.flightsDepart=l;
     firebase.database().ref("model/flightsDepart").set(this.flightsDepart);
   }
+
+
+  setActivityList(l){
+    this.activityList = l;
+    if(this.activityList !== undefined)
+    firebase.database().ref("model/activityList").set(this.activityList);
+  }
+ 
 
   setEndDate(date){
     this.endDate = date; 
@@ -229,21 +273,16 @@ class TravelBuddyModel {
     firebase.database().ref("model/accPhotos").set(this.accPhotos);
     
   }
+ 
 
-  setPhotoIndex(index){
-    this.photoIndex = index;
-      firebase.database().ref("model/photoIndex").set(this.photoIndex);
-  }
+  setCurrentAccPhoto(index){
+    if(this.photoIndex !== index || index === 0){
+      this.photoIndex = index;
+      this.currentAccPhoto = this.accPhotos[index];
+       this.notifyObservers();
+    }
+    else console.log("fel foto index: "+this.photoIndex);
 
-  setCurrentAccPhoto(){
-    //if(this.photoIndex !== index || index === 0){
-      this.currentAccPhoto = this.accPhotos[0];
-      firebase.database().ref("model/currentAccPhoto").set(this.currentAccPhoto);
-      this.notifyObservers();
-      // console.log("index:" + this.photoIndex);
-      // console.log(this.currentAccPhoto);
-    //}
-    //else console.log("fel foto index: "+this.photoIndex);
     
 
   }
@@ -259,8 +298,9 @@ class TravelBuddyModel {
             this.setAccomodationReviews(responses[0].result);
             arr = responses[1].map(({url_max}) => url_max); 
             this.setAccomodationPhotos(arr);
-            this.setPhotoIndex(0)
-            this.setCurrentAccPhoto();
+            //this.setPhotoIndex(0)
+            this.setCurrentAccPhoto(0);
+
           //   console.log(this.currentAccReviews);
           //  console.log("photos array:");
           //   console.log(this.accPhotos);
@@ -275,6 +315,29 @@ class TravelBuddyModel {
     } else { window.location.hash="#details_acc"; }
   }
 
+  viewActivities(){
+    console.log("searching activies");
+    console.log(this.activityQuerySelections)
+
+    if(this.locationToLat !== undefined && this.locationToLng !== undefined && this.activityList !== undefined)
+    getActivites({activities: this.activityQuerySelections, lat: this.locationToLat, long: this.locationToLng})
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      this.setActivityList(response.features);
+      this.notifyObservers();
+     }
+    )
+    .catch(err => console.error(err));
+    
+  }
+
+
+
+  setActivityQuerySelections(val){
+    this.activityQuerySelections = val;
+    firebase.database().ref("model/activityQuerySelections").set(this.activityQuerySelections);
+  }
 
 
   /**
@@ -294,15 +357,16 @@ class TravelBuddyModel {
   /**
    * Acitivity currently checked by user.
    */
-  setCurrentActivity(){
-    //TODO
+  setCurrentActivity(a){
+    this.currentActivity = a;
+    this.notifyObservers();
   }
 
   /**
-   * Add activity to list.
+   * Saves the current selection of desired activites to search for in the target location.
    */
   addToActivities(){
-  //TODO
+    
   }
 
   /**
