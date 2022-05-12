@@ -3,14 +3,13 @@ import "../App.css";
 import { IoIosSearch} from "react-icons/io";
 import Navigation from "../reactjs/NavigationPresenter";
 import { Dropdown } from 'semantic-ui-react'
-
-
 import {
     useMap,
     MapContainer,
     TileLayer,
     Popup,
     Marker,
+   
   } from 'react-leaflet'
 
 
@@ -72,17 +71,26 @@ function ActivityView(props){
         }
     }
     const position = [props.latitude,props.longitude];
+
+
+    const [map, setMap] = React.useState(null);
+    // We know that it wasn't acceptable to have hooks in the view for this project but
+    //This hook was added because a very common react-leaflet bug when the map is renderd at first time
+    React.useEffect(() => {
+       if (map) {
+          setInterval(function () {
+             map.invalidateSize();
+          }, 400);
+       }
+    }, [map]);
    
     function UpdatePosition(){
         const map = useMap();
-        map.setView(position,map.getZoom());
+        map.setView(position,map.getZoom());  
+        
         return null;
       }
 
-   
-
-      console.log("List of activities:");
-      console.log(props.activities);
     
     function getPoints(features){
         function saveCurrentActivity(){
@@ -111,29 +119,37 @@ function ActivityView(props){
     function onClickActivity(){
         return props.searchActivites();
     }
+
+  
+    
+
+
+  
    
 
     try
     {
+        
         return (
             <div className="background_image">
                 <Navigation></Navigation> 
+               {window.resizeBy(200,200)}
                 <div className="searchActivity">
                     <Dropdown placeholder='Choose Activity' fluid multiple selection options={props.dropDownOptions} className="dropdown" style={{ width: "40rem"}} onChange={onActivitesChange} />
                 </div>
                 <div className="searchActivity">
                     <button className="searchAButton" onClick={onClickActivity}><IoIosSearch size="35px"/></button>
                 </div>
-             
-                    <MapContainer id="map" className="leafletMap" center={position} zoom={14} scrollWheelZoom={true} style={{ position: "relative"}}>
-                        <TileLayer
-                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+               
+                <MapContainer id="map" className="leafletMap" center={position} zoom={14} scrollWheelZoom={true} whenCreated={setMap}>
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-                        {props.activities.map(getPoints)}
-                        <UpdatePosition/>
-                    </MapContainer>
-                </div>
+                    {props.activities.map(getPoints)}
+                    <UpdatePosition/> 
+                </MapContainer>
+            </div>
                 
            
             );
@@ -152,4 +168,5 @@ function ActivityView(props){
     }
     
 }
+
 export default ActivityView;

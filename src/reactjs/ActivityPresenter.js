@@ -1,6 +1,5 @@
 import ActivityView from "../views/ActivityView";
 import React from "react";
-import { useMap } from "react-leaflet";
 
 
 
@@ -9,16 +8,18 @@ export default function Activity(props){
   const [, setLong] = React.useState(props.model.locationToLng);
   const [, setActivityList] = React.useState(props.model.activityList);
   const [, setCurrentActiivty] = React.useState(props.model.currentActivity);
+ const [windowSize, setSize] = React.useState(true);
+ 
  
 
  
-   
     function activityObserverACB(){
         setLat(props.model.locationToLat);  
         setLong(props.model.locationToLng);
         setActivityList(props.model.activityList);
         setCurrentActiivty(props.model.currentActivity);
         
+
       }
       function isTakenDownACB(){
         props.model.removeObserver(activityObserverACB);
@@ -30,6 +31,17 @@ export default function Activity(props){
       }
      
       React.useEffect(wasCreatedACB,[]);
+      function sizeOfWindow(){
+        if(window.innerWidth > 800){
+          setSize(false);
+        }
+        else{
+          setSize(true);
+        }
+      }
+      React.useEffect(() => {window.addEventListener('resize',sizeOfWindow) 
+      sizeOfWindow();
+    },[])
 
       function searchActivites(){
         
@@ -44,8 +56,15 @@ export default function Activity(props){
       function saveCurrentActivityToModel(a){
         props.model.setCurrentActivity(a);
       }
-      
-  return (<><ActivityView searchActivites={searchActivites}
+
+   
+        
+        
+  
+    
+  return (<ActivityView
+    setSize = {sizeOfWindow}
+    searchActivites={searchActivites}
     setQueryOptions = {saveQueryOptionsToModel}
     dropDownOptions = {[
     { key: 'supermarket', text: 'Supermarkets', value: 'commercial.supermarket' },
@@ -59,5 +78,5 @@ export default function Activity(props){
     { key: 'hospital', text: 'Hospitals', value: 'healthcare.hospital' }
 
   ]} activities={props.model.activityList} latitude={props.model.locationToLat} longitude={props.model.locationToLng} saveCurrentActivity={saveCurrentActivityToModel}
-  currentActivity={props.model.currentActivity}/></>);
+  currentActivity={props.model.currentActivity}/>);
 }
