@@ -9,24 +9,19 @@ function StartSearchView(props){
             
     function onSearchClick(){
         props.onSearchClick();
-       // window.location.hash = "hotels";
     }
 
     function onFromChange(evt, val){
-        //from = val;
         console.log("onFromChange: " + JSON.stringify(val));
         props.setCurrentLocation(val);
     }
 
     function onToChange(evt, val){
-        //to = val;
         props.setSearchDestination(val);
     }
 
     function onCalenderChange(evt) {
         try{
-            //start = evt.value[0];
-            //end = evt.value[1];
             props.setStartDate(evt.value[0]);
             props.setEndDate(evt.value[1]);
         }
