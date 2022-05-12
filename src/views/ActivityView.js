@@ -31,43 +31,33 @@ function ActivityView(props){
         switch (category) {
             case 'commercial.supermarket':
                     return ["https://thumbs.dreamstime.com/b/shoppingvagn-i-en-supermarket-40320116.jpg", "Supermarket"] 
-                break;
     
             case 'catering.bar':
                     return ["https://static.thatsup.co/content/img/place/b/a/bar-nombre-0.jpg", "Bar"]
-                break;
         
             case 'entertainment.museum':
                     return ["https://cdn.britannica.com/51/194651-050-747F0C18/Interior-National-Gallery-of-Art-Washington-DC.jpg","Museum"]
-                break;
     
             case 'adult.nightclub':
                     return ["https://media.timeout.com/images/105520557/750/562/image.jpg", "Night Club"]
-                break;
     
             case 'commercial.shopping_mall':
                     return ["https://visitskane.com/sites/default/files/images/list-items/2016-11/Melodifestival_Malmo_2013_foto_Fredrik_Johansson.jpg", "Shopping Mall"] 
-                break;
     
             case 'catering.restaurant':
                     return ["https://static.thatsup.co/content/img/article/15/jul/b%C3%A4sta-restaurangerna-i-city.jpg", "Restaurant" ]
-                break;
     
             case 'entertainment.cinema':
                     return ["https://www.europa-cinemas.org/storage/1416/prix-europa-cinemas-2018.jpeg", "Cinema"]
-                break;
     
             case 'entertainment.theme_park':
                     return ["https://www.snl.com/articles/409719194.jpg", "Theme Park"]
-                break;
     
             case 'healthcare.hospital':
                     return ["https://cdn.systematic.com/media/g0sj1tbg/hospital-building-001-global.jpg?cropAlias=hero_large&width=992&height=483&quality=80&mode=crop&null", "Hospital"] 
-                break;
             
             default:
                 return ["https://pngset.com/images/maps-icon-point-of-interest-heart-plectrum-paper-sweets-transparent-png-1545765.png", ""]
-                break;
         }
     }
     const position = [props.latitude,props.longitude];
@@ -117,12 +107,6 @@ function ActivityView(props){
     function onClickActivity(){
         return props.searchActivites();
     }
-
-  
-    
-
-
-  
    
 
     try

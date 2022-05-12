@@ -53,7 +53,7 @@ function StartSearchView(props){
                                 id="combo-box-demo"
                                 options={options}
                                 sx={{ input: { color: "black" }, width: 300, m: 2, backgroundColor: "white"}}
-                                InputLabelProps={{style: {color: "white",}}}
+                                inputlabelprops={{style: {color: "white",}}}
                                 renderInput={(params) => (<TextField {...params} label="From" />)}
                             />
                             <Autocomplete
@@ -63,7 +63,7 @@ function StartSearchView(props){
                                 id="combo-box-demo"
                                 options={options}
                                 sx={{ input: { color: "black" }, width: 300, m: 2, backgroundColor: "white"}}
-                                InputLabelProps={{style: {color: "white",}}}
+                                inputlabelprops={{style: {color: "white",}}}
                                 renderInput={(params) => (<TextField {...params} label="To" />)}
                             />
                     </div>
