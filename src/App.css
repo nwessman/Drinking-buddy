@@ -97,21 +97,54 @@
  cursor: pointer;
 
 }
+
+.accDescription {
+  display: block;
+  margin: 20px;
+  margin-right: 0;
+}
+
+.boxContainer {
+  display: inline-block;
+  width: auto;
+  width:auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.bookHotel {
+  display: block;
+}
+
+.bookHotelButton {
+  padding: 20px;
+  border-radius: 6px;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  background-color:#08243f;
+  color: white;
+
+}
+
 .box {
   height: 76vh;
   background-image: url("./images/opaque_backg.png");
   margin: 1vh 10vh 0vh 10vh;
   border-radius: 4px;
-  overflow-x: visible;
   overflow-y: auto;
+  justify-content: center;
+  text-align: center;
 
 }
 
 .boxItems{
+  width: 1200x;
+  height: auto;
+  padding: 30px 30px;
   display: inline-block;
-  width: 180px;
-  height: 180px;
-  padding: 20px 30px;
+  justify-content: center;
   text-align: center;
   
 
@@ -133,11 +166,12 @@
   border-radius: 10px;
 }
 .reviews{
-  background-color: #a8aeb7b1;
+  background-color: rgba(255, 255, 255, 0.701);
   margin:10px 45px 10px 20px;
   border-radius: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  padding:10px
 
 }
 .reviewer{
@@ -177,7 +211,9 @@ width: 100%;
 }
 .imageWrapper{
   display: flex;
+  justify-content: center;
 }
+
 .images{
   margin: 0 80px 0px 20px;
   height: 600px;
@@ -261,7 +297,12 @@ padding-top: 10px;
   margin-right: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 20px
+  padding: 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color:#08243f;
+  color: white;
 }
 
 .duration{
@@ -277,6 +318,17 @@ padding-top: 10px;
   text-align:center;
   font-size: 20px;
   padding: 20px
+}
+
+.text {
+  font-size: 13px;
+  display: block;
+  margin-top: 10px;
+}
+
+.text.bold {
+  font-size: 15px;
+  display: block;
 }
 
 
