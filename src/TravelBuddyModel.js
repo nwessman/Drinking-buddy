@@ -249,20 +249,13 @@ class TravelBuddyModel {
             this.setAccomodationReviews(responses[0].result);
             arr = responses[1].map(({url_max}) => url_max); 
             this.setAccomodationPhotos(arr);
-            //this.setPhotoIndex(0)
             this.setCurrentAccPhoto(0);
 
-          //   console.log(this.currentAccReviews);
-          //  console.log("photos array:");
-          //   console.log(this.accPhotos);
-          //  console.log("current photo:");
-          // console.log(this.currentAccPhoto);
             this.notifyObservers();
             window.location.hash="#details_acc";
         }
       ).catch(error => console.log(error));
      
-     // resolvePromise(getHotelsReview(id), this.currentAccPromiseState, notifyACB);
     } else { window.location.hash="#details_acc"; }
   }
 

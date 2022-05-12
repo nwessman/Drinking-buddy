@@ -8,13 +8,7 @@ import citiesList from "../cityInfoDB.js"
 function StartSearchView(props){
     
     let from, to, start, end;
-    
-/*     const [location, setLocation ] = React.useState("");
-    const [destination, setDestination] = React.useState("");
-    const [startDate, setStart] = React.useState("");
-    const [endDate, setEnd] = React.useState(""); */
-
-    
+        
     function onSearchClick(){
         props.onSearchClick(from,to,start,end);
         window.location.hash = "hotels";
@@ -22,33 +16,19 @@ function StartSearchView(props){
 
     function onFromChange(evt, val){
         from = val;
-        //console.log("from change:" + from + " " + val);
-//        setLocation(from);
-        //return props.setSearchLatEv(evt.target.value);
-        //return props.setLat(evt.target.value);
     }
 
     function onToChange(evt, val){
         to = val;
-        //console.log("to change: " + to + " " + val);
- //       setDestination(to);
-        //return props.setSearchEvent(evt.target.value);
-        //return props.setSearchLongEv(evt.target.value);
-        //return props.setLong(evt.target.value);
     }
 
     function onCalenderChange(evt) {
         try{
             start = evt.value[0];
             end = evt.value[1];
- //           setStart(start);
-  //          setEnd(end);
         }
         catch(error){
- //           setStart("");
-//            setEnd("");
-    }
-
+        }
     }
 
     function navigateStartSearchACB() {
@@ -100,11 +80,3 @@ function StartSearchView(props){
         );
 }
 export default StartSearchView;
-
-/*
-
-                <input type = "text" placeholder = "From" className="searchInputs" onChange = {onFromChange}/>
-                     <IoMdSwap style = {{ opacity: 0.6}} size = "30px"/>
-                <input type = "text" placeholder= "To" className="searchInputs" onChange = {onToChange}/>
-
-*/
