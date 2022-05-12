@@ -42,38 +42,42 @@ function StartSearchView(props){
                     <h1 className='name_logo' onClick={navigateStartSearchACB}>TravelBuddy</h1>
                 </div>
 
-                <div className='searchWrapper'>
             
-            <div className ="search">
-                <Autocomplete
-                        onChange={onFromChange}
-                        style={{ color: "white" }}
-                        disablePortal
-                        id="combo-box-demo"
-                        options={options}
-                        sx={{ input: { color: "black" }, width: 300, m: 2, backgroundColor: "white"}}
-                        InputLabelProps={{style: {color: "white",}}}
-                        renderInput={(params) => (<TextField {...params} label="From" />)}
-                    />
-                    <Autocomplete
-                        onChange={onToChange}
-                        style={{ color: "white" }}
-                        disablePortal
-                        id="combo-box-demo"
-                        options={options}
-                        sx={{ input: { color: "black" }, width: 300, m: 2, backgroundColor: "white"}}
-                        InputLabelProps={{style: {color: "white",}}}
-                        renderInput={(params) => (<TextField {...params} label="To" />)}
-                    />
-            </div>
-            <div className="search">
-                <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
-            </div>
-            <div className="search">
-                <button onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch size="50px"/></button>
-            </div>
+                <div className='searchWrapper'>
+                <div className='box3'>
+                    <h2 className='flightHeader'> Explore a new destination!</h2>
+                    <div className ="search">
+                        <Autocomplete
+                                onChange={onFromChange}
+                                style={{ color: "white" }}
+                                disablePortal
+                                id="combo-box-demo"
+                                options={options}
+                                sx={{ input: { color: "black" }, width: 300, m: 2, backgroundColor: "white"}}
+                                InputLabelProps={{style: {color: "white",}}}
+                                renderInput={(params) => (<TextField {...params} label="From" />)}
+                            />
+                            <Autocomplete
+                                onChange={onToChange}
+                                style={{ color: "white" }}
+                                disablePortal
+                                id="combo-box-demo"
+                                options={options}
+                                sx={{ input: { color: "black" }, width: 300, m: 2, backgroundColor: "white"}}
+                                InputLabelProps={{style: {color: "white",}}}
+                                renderInput={(params) => (<TextField {...params} label="To" />)}
+                            />
+                    </div>
+                    <div className="search">
+                        <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
+                    </div>
+                    <div className="search">
+                        <button onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch size="50px"/></button>
+                    </div>    
+                </div>
 
-            </div>
+                <button className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}> Check previous search </button>
+                </div>
             </div>
         );
 }
