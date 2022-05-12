@@ -16,7 +16,7 @@ function App(props) {
     <>
       <div >
          <div className=''><Show hash = "#startsearch"><Search model={props.model}/></Show></div>
-         <div className=''><Show hash = "#activities"><Activities model={props.model}/></Show></div>
+         <div className='zoom'><Show hash = "#activities"><Activities model={props.model}/></Show></div>
          <div className=''><Show hash = "#hotels"><Accommodations model={props.model}/></Show></div>
          <div className=''><Show hash="#details_acc"><Details model={props.model} /></Show></div>
          <div className=''><Show hash = "#flights"><Flights model={props.model}/></Show></div>
