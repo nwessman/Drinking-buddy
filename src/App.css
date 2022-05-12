@@ -261,7 +261,7 @@ padding-top: 10px;
   z-index: 9999;
 
   margin-bottom: -40%;
-
+}
 
 .flightsContainer {
   display:flex;
@@ -331,8 +331,6 @@ padding-top: 10px;
   display: block;
 }
 
-
-}
 .searchAButton{
  margin-left: 570px;
 
