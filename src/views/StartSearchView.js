@@ -6,26 +6,29 @@ import { Autocomplete, TextField } from "@mui/material"
 import citiesList from "../cityInfoDB.js"
 
 function StartSearchView(props){
-    
-    let from, to, start, end;
-        
+            
     function onSearchClick(){
-        props.onSearchClick(from,to,start,end);
-        window.location.hash = "hotels";
+        props.onSearchClick();
+       // window.location.hash = "hotels";
     }
 
     function onFromChange(evt, val){
-        from = val;
+        //from = val;
+        console.log("onFromChange: " + JSON.stringify(val));
+        props.setCurrentLocation(val);
     }
 
     function onToChange(evt, val){
-        to = val;
+        //to = val;
+        props.setSearchDestination(val);
     }
 
     function onCalenderChange(evt) {
         try{
-            start = evt.value[0];
-            end = evt.value[1];
+            //start = evt.value[0];
+            //end = evt.value[1];
+            props.setStartDate(evt.value[0]);
+            props.setEndDate(evt.value[1]);
         }
         catch(error){
         }
@@ -72,7 +75,7 @@ function StartSearchView(props){
                 <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
             </div>
             <div className="search">
-                <button  onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch size="50px"/></button>
+                <button onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch size="50px"/></button>
             </div>
 
             </div>
