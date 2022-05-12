@@ -213,10 +213,11 @@ padding-top: 10px;
   position: relative;
   width: 100vw;
   height: 88vh;
+  
 
-
-
+ 
 }
+
 .searchActivity{
   position:absolute;
 
@@ -226,7 +227,7 @@ padding-top: 10px;
 
   margin-bottom: -40%;
 
-
+}
 .flightsContainer {
   display:flex;
   background-color: white;
@@ -280,7 +281,6 @@ padding-top: 10px;
 }
 
 
-}
 .searchAButton{
  margin-left: 570px;
 

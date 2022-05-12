@@ -47,8 +47,6 @@ class TravelBuddyModel {
     this.currentAccommodationID = currentAccommodation;
     this.accomondations = accArray; 
 
-    this.activities = activityArray;
-
     this.flights = flightArray;
 
     this.currentAccPhoto = [];
