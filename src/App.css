@@ -164,11 +164,12 @@
   border-radius: 10px;
 }
 .reviews{
-  background-color: #a8aeb7b1;
+  background-color: rgba(255, 255, 255, 0.701);
   margin:10px 45px 10px 20px;
   border-radius: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  padding:10px
 
 }
 .reviewer{
@@ -208,7 +209,9 @@ width: 100%;
 }
 .imageWrapper{
   display: flex;
+  justify-content: center;
 }
+
 .images{
   margin: 0 80px 0px 20px;
   height: 600px;
@@ -276,7 +279,12 @@ padding-top: 10px;
   margin-right: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 20px
+  padding: 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color:#08243f;
+  color: white;
 }
 
 .duration{
