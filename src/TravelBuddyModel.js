@@ -87,7 +87,6 @@ class TravelBuddyModel {
   }
 
   notifyObservers(payload) {
-    //console.log(this.observers);
       this.observers.forEach(
           function invokeObserverCB(obs) { 
               try {
@@ -105,6 +104,8 @@ class TravelBuddyModel {
    */
   setCurrentLocation(from){
     this.searchParams.from = from;
+    //this.notifyObservers();
+
   }
 
   /**
@@ -113,6 +114,9 @@ class TravelBuddyModel {
    */
   setSearchDestination(to){
     this.searchParams.to = to;
+    //console.log("searchParams.to: " + this.searchParams.to);
+    //this.notifyObservers({setSearchDestination : to});
+
   }
 
 
@@ -120,8 +124,17 @@ class TravelBuddyModel {
 
   doSearch(){
 
+    if(!this.searchParams.from || !this.searchParams.to  || !this.startDate  || !this.endDate ){
+        //window.location.hash = "startSearch";
+        return;
+      }
     // try because empty or wrong params in search input will crash this function 
     try {
+      console.log("this.searchParams.from: " + this.searchParams.from);
+      console.log("this.searchParams.to: " + this.searchParams.to);
+      console.log("startDate: " + this.startDate);
+      console.log("endDate: " + this.endDate);
+
       let cityFrom = this.searchParams.from.split(",")[0];
       let countryFrom = this.searchParams.from.split(",")[1];
       let cityTo = this.searchParams.to.split(",")[0];
@@ -159,6 +172,8 @@ class TravelBuddyModel {
 
         })
       } else {console.log("Error in flight search")}
+
+      window.location.hash = "hotels";
     } catch(e) {
       console.log("error: " + e);
     }
