@@ -3,6 +3,8 @@ import React from "react";
 
 
 export default function Search(props){
+
+  //const [, searchBar]
   
   function searchForHotelsCB(){
     //searchHotels({latitute:59.334591,longitute:18.063240})
@@ -20,29 +22,50 @@ export default function Search(props){
     props.model.setSearchLongQuery(val);
   }
 
-  function doSearch(from, to, start, end){
-    function formatDateCB(date) {
-      try{
-        var newDate = new Date(date); 
-        newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset()); 
-        return newDate.toISOString().split('T')[0];
-      } catch(error) {
-        console.log("Empty dates in search");
-        // Todo: better error handling
-        props.model.setStartDate(null);
-        props.model.setEndDate(null);
-      }
-    }
-    
-    props.model.setCurrentLocation(from);
-    props.model.setSearchDestination(to);
-    props.model.setStartDate(formatDateCB(start));
-    props.model.setEndDate(formatDateCB(end));
-
-    props.model.doSearch();
-
-
+  function updateSearchStringToInModel(val){
+    props.model.setSearchDestination(val);
   }
 
-  return <StartSearchView onSearchClick={doSearch} searchEvent={searchForHotelsCB} setLat={setSearchLatCB} setLong={setSearchLongCB}/>;
+  function updateSearchStringFromInModel(val){
+    props.model.setCurrentLocation(val);
+  }
+
+  function setStartDate(val){
+    console.log("setStartDate val: " + val);
+    console.log("setStartDate format: " + formatDateCB(val));
+    props.model.setStartDate(formatDateCB(val));
+  }
+
+  function setEndDate(val){
+    props.model.setEndDate(formatDateCB(val));
+  }
+
+  function formatDateCB(date) {
+    try{
+      var newDate = new Date(date); 
+      newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset()); 
+      return newDate.toISOString().split('T')[0];
+    } catch(error) {
+      console.log("Empty dates in search");
+      // Todo: better error handling
+      props.model.setStartDate(null);
+      props.model.setEndDate(null);
+    }
+  }
+
+  function doSearch(){
+    props.model.doSearch();
+  }
+
+  return <StartSearchView updateSearchStringTo={updateSearchStringToInModel} 
+  updateSearchStringFrom={updateSearchStringFromInModel} 
+  onSearchClick={doSearch} searchEvent={searchForHotelsCB} 
+  setLat={setSearchLatCB} setLong={setSearchLongCB}
+  setCurrentLocation={updateSearchStringFromInModel}
+  setSearchDestination={updateSearchStringToInModel}
+  setStartDate={setStartDate}
+  setEndDate={setEndDate}
+  startDate={props.model.startDate}
+  endDate={props.model.endDate}
+  searchParams={props.model.searchParams}/>;
 }

@@ -49,25 +49,25 @@ export default function renderFlights(props){
         )
     }
     
-    try{
-    return (
-        <div className = "background_image">
-            <Navigation></Navigation>
-            <div className="box">
-                {props.flights.prices.map(renderFlightsCB)}
-            </div>
-        </div>
-        );
-    } catch(error) {
-    return (
-        <div className = "background_image">
-        <Navigation></Navigation>
-        <div className="box">
-          <div className= "flightHeader"> 
-            No flights available.
-                </div>
-            </div>
-    </div>
-    );
-}
+    if(props.flights.prices !== undefined && props.flights.prices.length > 0){
+      return (
+          <div className = "background_image">
+              <Navigation></Navigation>
+              <div className="box">
+                  {props.flights.prices.map(renderFlightsCB)}
+              </div>
+          </div>
+          );
+    } else {
+      return (
+          <div className = "background_image">
+          <Navigation></Navigation>
+          <div className="box">
+            <div className= "flightHeader"> 
+              <h2>No flights available at this date. Try searching for an earlier date.</h2>
+                  </div>
+              </div>
+      </div>
+      );
+  }
 }
