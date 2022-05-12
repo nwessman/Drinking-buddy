@@ -20,15 +20,17 @@ function StartSearchView(props){
         window.location.hash = "hotels";
     }
 
-    function onFromChange(evt){
-        from = evt.target.value;
+    function onFromChange(evt, val){
+        from = val;
+        //console.log("from change:" + from + " " + val);
 //        setLocation(from);
         //return props.setSearchLatEv(evt.target.value);
         //return props.setLat(evt.target.value);
     }
 
-    function onToChange(evt){
-        to = evt.target.value;
+    function onToChange(evt, val){
+        to = val;
+        //console.log("to change: " + to + " " + val);
  //       setDestination(to);
         //return props.setSearchEvent(evt.target.value);
         //return props.setSearchLongEv(evt.target.value);
@@ -66,7 +68,7 @@ function StartSearchView(props){
             
             <div className ="search">
                 <Autocomplete
-                        onChange={(evt, val)=>{props.updateSearchStringFrom(val)}}
+                        onChange={onFromChange}
                         style={{ color: "white" }}
                         disablePortal
                         id="combo-box-demo"
@@ -76,7 +78,7 @@ function StartSearchView(props){
                         renderInput={(params) => (<TextField {...params} label="From" />)}
                     />
                     <Autocomplete
-                        onChange={(evt, val)=>{props.updateSearchStringTo(val)}}
+                        onChange={onToChange}
                         style={{ color: "white" }}
                         disablePortal
                         id="combo-box-demo"

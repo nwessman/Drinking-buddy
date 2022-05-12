@@ -1,6 +1,7 @@
 import resolvePromise from "./resolvePromise.js";
 import firebase from 'firebase/app';
 import "firebase/database";
+import citiesList from "./cityInfoDB.js"
 
 import { getFlights, getHotels, getHotelsReview, getActivites } from "./geoSource.js";
 
@@ -119,108 +120,49 @@ class TravelBuddyModel {
 
   doSearch(){
 
-    let fromOkey = true;
-    let toOkey = true;
-
     // try because empty or wrong params in search input will crash this function 
     try {
-      let from = this.searchParams.from.toLowerCase();
-      let to = this.searchParams.to.toLowerCase();
+      let cityFrom = this.searchParams.from.split(",")[0];
+      let countryFrom = this.searchParams.from.split(",")[1];
+      let cityTo = this.searchParams.to.split(",")[0];
+      let countryTo = this.searchParams.to.split(",")[1];
 
-      let fromSnapshot;
-      let toSnapshot;
-      let arr = [];
+      let fromObj = citiesList.find(o => o.city === cityFrom.trim() && o.country === countryFrom.trim());
+      let toObj = citiesList.find(o => o.city === cityTo.trim() && o.country === countryTo.trim());
+      
+      this.setLat(toObj.lat);
+      this.setLng(toObj.lng);
 
-
-  
-
-
-      // Get info about From location
-      const promiseClusterFuck = new Promise((resolve, reject) => {
-        firebase.database().ref("Cities").child(from).get().then((snapshot) => {
-          if(snapshot.exists()) {
-            console.log("snap 1" + snapshot.val());
-            fromSnapshot = snapshot.val();
-            resolve(fromSnapshot);
-          } else {
-            console.log("No data available");
-            fromOkey = false;
-            reject(null);
-          }
-        }).catch((error) => {
-          console.error(error);
-          fromOkey = false;
-          reject(null);
-        })
-      }).then((value) => {
-        // Get info about To location 
-        console.log("getFrom value "+value);
-        const result = []
-        result[0] = value;
-        return new Promise((resolve, reject) => {
-        firebase.database().ref("Cities").child(to).get().then((snapshot) => {
-          if(snapshot.exists()) {
-            console.log("snap 2: " + snapshot.val());
-            toSnapshot = snapshot.val();
-            result[1] = toSnapshot;
-            resolve(result);
-          } else {
-            console.log("No data available");
-            toOkey = false;
-            reject(null);
-          }
-        }).catch((error) => {
-          console.error(error);
-          toOkey = false;
-          reject(null);
-        })});
-      }).then((value) => {
-        this.setLat(value[1].lat);
-        this.setLng(value[1].lng);
-        console.log("startdate: " + this.startDate + "enddate: " +  this.endDate + "to lat: " + value[1].lat + "to lng" + value[1].lng);
-        if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
-          // REQUIRES OBJECT {startDate, endDate, lat, lng}
-          getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
-          .then(response => response.json())
-          .then(response => { // Response is query.json, response.result contains hotels.
-                  //console.log("Results: " + JSON.stringify(response));
-                  this.setAccommodationList(response.result);
-                  firebase.database().ref("model/accommodationList").set(this.accommodationList);
-                  this.notifyObservers();
-                  window.location.hash = "hotels";
-                
-                  }
-            ).catch(err => console.error(err));
-        
-        }
-        
-        //console.log("get flights");
-        //console.log("Before: startDate: " + JSON.stringify(this.startDate) + " endDate: " +  JSON.stringify(this.endDate) + " airport[0]: " + JSON.stringify(value[0].airport[0]) + " aiport[1]: "+ JSON.stringify(value[1].airport[0]));
-        if(this.startDate && this.endDate && value[0].airport[0] && value[1].airport[0]){
-          getFlights({fromIATA: value[0].airport[0], toIATA: value[1].airport[0], startDate: this.startDate, endDate: this.endDate})
-          .then(results => results.json())
-          .then(results => {
-            console.log(results);
-            this.setFlightList(results);
-
-          })
-        } else {console.log("startDate: " + JSON.stringify(this.startDate) + " endDate: " +  JSON.stringify(this.endDate) + " airport[0]: " + JSON.stringify(value[0].airport[0]) + " aiport[1]: "+ JSON.stringify(value[1].airport[0]))}
-
-      });
-
-
-      const theModel = this;
-      function notifyACB(){
-        theModel.notifyObservers();
+        // Accomodation
+      if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
+        // REQUIRES OBJECT {startDate, endDate, lat, lng}
+        getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
+        .then(response => response.json())
+        .then(response => { 
+                this.setAccommodationList(response.result);
+                firebase.database().ref("model/accommodationList").set(this.accommodationList);
+                this.notifyObservers();
+                window.location.hash = "hotels";
+              
+                }
+          ).catch(err => console.error(err));
+      
       }
-      resolvePromise(promiseClusterFuck, this.searchResultsPromiseState, notifyACB);
+        
+      // Flights
+      if(this.startDate && this.endDate && fromObj.AITA[0] && toObj.AITA[0]){
+        getFlights({fromIATA: fromObj.AITA[0], toIATA: toObj.AITA[0], startDate: this.startDate, endDate: this.endDate})
+        .then(results => results.json())
+        .then(results => {
+          this.setFlightList(results);
 
-    } catch(error) {
-      console.log("Error in doSearch: " + error);
-      fromOkey = false;
-      toOkey = false;
-      // FIX: Reroute back to search (or dont reroute until results are given from this function)
+        })
+      } else {console.log("Error in flight search")}
+    } catch(e) {
+      console.log("error: " + e);
     }
+
+   
   }
 
   setLat(lat){
