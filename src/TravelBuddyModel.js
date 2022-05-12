@@ -1,4 +1,3 @@
-import resolvePromise from "./resolvePromise.js";
 import firebase from 'firebase/app';
 import "firebase/database";
 import citiesList from "./cityInfoDB.js"
@@ -104,8 +103,6 @@ class TravelBuddyModel {
    */
   setCurrentLocation(from){
     this.searchParams.from = from;
-    //this.notifyObservers();
-
   }
 
   /**
@@ -114,9 +111,6 @@ class TravelBuddyModel {
    */
   setSearchDestination(to){
     this.searchParams.to = to;
-    //console.log("searchParams.to: " + this.searchParams.to);
-    //this.notifyObservers({setSearchDestination : to});
-
   }
 
 
@@ -125,16 +119,10 @@ class TravelBuddyModel {
   doSearch(){
 
     if(!this.searchParams.from || !this.searchParams.to  || !this.startDate  || !this.endDate ){
-        //window.location.hash = "startSearch";
         return;
       }
     // try because empty or wrong params in search input will crash this function 
     try {
-      console.log("this.searchParams.from: " + this.searchParams.from);
-      console.log("this.searchParams.to: " + this.searchParams.to);
-      console.log("startDate: " + this.startDate);
-      console.log("endDate: " + this.endDate);
-
       let cityFrom = this.searchParams.from.split(",")[0];
       let countryFrom = this.searchParams.from.split(",")[1];
       let cityTo = this.searchParams.to.split(",")[0];
@@ -171,11 +159,10 @@ class TravelBuddyModel {
           this.setFlightList(results);
 
         })
-      } else {console.log("Error in flight search")}
+      }
 
       window.location.hash = "hotels";
     } catch(e) {
-      console.log("error: " + e);
     }
 
    
@@ -183,16 +170,13 @@ class TravelBuddyModel {
 
   setLat(lat){
     this.locationToLat = lat;
-    console.log("Position lat:" +this.locationToLat);
     firebase.database().ref("model/locationToLat").set( this.locationToLat);
    
 
   }
   setLng(lng){
     this.locationToLng = lng;
-    console.log("Position long" +  this.locationToLng);
     firebase.database().ref("model/locationToLng").set(this.locationToLng);
-
   }
 
   setStartDate(date){
@@ -252,10 +236,6 @@ class TravelBuddyModel {
       this.currentAccPhoto = this.accPhotos[index];
        this.notifyObservers();
     }
-    else console.log("fel foto index: "+this.photoIndex);
-
-    
-
   }
   viewDetailsOfAccomodation(id){
     if(id !== this.currentAccommodationID){
@@ -274,25 +254,21 @@ class TravelBuddyModel {
             this.notifyObservers();
             window.location.hash="#details_acc";
         }
-      ).catch(error => console.log(error));
+      );
      
     } else { window.location.hash="#details_acc"; }
   }
 
   viewActivities(){
-    console.log("searching activies");
-    console.log(this.activityQuerySelections)
 
     if(this.locationToLat !== undefined && this.locationToLng !== undefined && this.activityList !== undefined)
     getActivites({activities: this.activityQuerySelections, lat: this.locationToLat, long: this.locationToLng})
     .then(response => response.json())
     .then(response => {
-      console.log(response);
       this.setActivityList(response.features);
       this.notifyObservers();
      }
-    )
-    .catch(err => console.error(err));
+    );
     
   }
 
@@ -303,21 +279,6 @@ class TravelBuddyModel {
     firebase.database().ref("model/activityQuerySelections").set(this.activityQuerySelections);
   }
 
-
-  /**
-   * Add accomondation to list.
-   */
-  addToAccommodation(){
-    //TODO 
-  }
-
-  /**
-   * Remove accommodation from list.
-   */
-  removeFromAccommodation(){
-    //TODO
-  }
-
   /**
    * Acitivity currently checked by user.
    */
@@ -326,26 +287,6 @@ class TravelBuddyModel {
     this.notifyObservers();
   }
 
-  /**
-   * Saves the current selection of desired activites to search for in the target location.
-   */
-  addToActivities(){
-    
-  }
-
-  /**
-   * Remove activity from list.
-   */
-  removeFromActivities(){
-    //TODO
-  }
-
-  /**
-   * Flight currently checked by user.
-   */
-  setCurrentFlight(){
-    //TODO
-  }
 
 }
 

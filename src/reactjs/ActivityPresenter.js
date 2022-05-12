@@ -44,9 +44,7 @@ export default function Activity(props){
     },[])
 
       function searchActivites(){
-        
-      props.model.viewActivities();
-        //props.model.savedActivityQueries = evt.target.value()
+        props.model.viewActivities();
       }
 
       function saveQueryOptionsToModel(list){

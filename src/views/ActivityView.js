@@ -94,7 +94,6 @@ function ActivityView(props){
     
     function getPoints(features){
         function saveCurrentActivity(){
-            console.log(features)
             props.saveCurrentActivity(features);
         }
         
@@ -113,7 +112,6 @@ function ActivityView(props){
     }
     
     function onActivitesChange(err, data){
-        console.log(data.value);
         return props.setQueryOptions(data.value);
     }
     function onClickActivity(){
@@ -156,7 +154,6 @@ function ActivityView(props){
 
     }
    catch(error){
-       console.log(error)
         return (
 
             <div className = "background_image">

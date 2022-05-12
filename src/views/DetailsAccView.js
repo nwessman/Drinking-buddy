@@ -24,24 +24,15 @@ export default function DetailsAccView(props){
     }
 
     function onClickNextCB(){
-        console.log("next photo is clicked")
         let nextIndex = (props.photoIndex + 1) % props.allAccPhotos.length;
         props.onClickChange(nextIndex);
     }
     function onClickPrevCB(){
-        console.log("prev photo is clicked")
         let currIndex = props.photoIndex - 1;
         if(currIndex < 0 ){props.onClickChange(props.allAccPhotos.length - 1);}
         else   props.onClickChange(currIndex);
     }
-    /*function avgScore(){
-        let score = 0;
-        props.accomodationReviews.map((r) => score =+r.average_score)
-        console.log(score/props.accomodationReviews.length);
-        
-        return (score/props.accomodationReviews.length);
-        }
-        const acc= (arr) => arr.map(sum => value =>(sum +=value))(0);*/
+ 
    try{
        return(
         <div className = "background_image">
@@ -64,7 +55,7 @@ export default function DetailsAccView(props){
     </div>
        );
     }catch(error){
-           return <div>NO hotels reviews {console.log(error)}</div>
+           return <div>NO hotels reviews </div>
        }
 
 }
