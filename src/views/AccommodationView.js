@@ -22,8 +22,8 @@ export default function AccommodationView(props){
                         }}>   
                             
                             <img src={e.main_photo_url} alt="Error 404" height="80"/>
-                            <div>{e.address}</div>
-                            <div>{e.min_total_price} kr</div>
+                            <div className="hotelDisplayTest">{e.address}</div>
+                            <div className="hotelDisplayTest">{e.min_total_price} kr</div>
                             </div>
                         );
                     })

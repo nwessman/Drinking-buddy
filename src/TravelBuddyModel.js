@@ -87,7 +87,7 @@ class TravelBuddyModel {
   }
 
   notifyObservers(payload) {
-    console.log(this.observers);
+    //console.log(this.observers);
       this.observers.forEach(
           function invokeObserverCB(obs) { 
               try {
@@ -140,8 +140,9 @@ class TravelBuddyModel {
         .then(response => response.json())
         .then(response => { 
                 this.setAccommodationList(response.result);
-                firebase.database().ref("model/accommodationList").set(this.accommodationList);
-                this.notifyObservers();
+                
+                
+                
                 window.location.hash = "hotels";
               
                 }
@@ -185,18 +186,21 @@ class TravelBuddyModel {
 
   setAccommodationList(l){
     this.accommodationList = l;
+    this.notifyObservers();
     firebase.database().ref("model/accommodationList").set(this.accommodationList);
   }
 
   
   setFlightList(l){
     this.flightsDepart=l;
+    this.notifyObservers();
     firebase.database().ref("model/flightsDepart").set(this.flightsDepart);
   }
 
 
   setActivityList(l){
     this.activityList = l;
+    this.notifyObservers();
     if(this.activityList !== undefined)
     firebase.database().ref("model/activityList").set(this.activityList);
   }
@@ -211,6 +215,7 @@ class TravelBuddyModel {
    */
   setCurrentAccomodationID(id){
     this.currentAccommodationID=id;
+    this.notifyObservers();
     firebase.database().ref("model/currentAccommodationID").set(this.currentAccommodationID);
     
   }

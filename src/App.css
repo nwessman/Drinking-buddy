@@ -97,6 +97,13 @@
  cursor: pointer;
 
 }
+
+.hotelDisplayTest {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .box {
   height: 76vh;
   background-image: url("./images/opaque_backg.png");
@@ -225,7 +232,7 @@ padding-top: 10px;
   z-index: 9999;
 
   margin-bottom: -40%;
-
+}
 
 .flightsContainer {
   display:flex;
@@ -279,8 +286,6 @@ padding-top: 10px;
   padding: 20px
 }
 
-
-}
 .searchAButton{
  margin-left: 570px;
 
