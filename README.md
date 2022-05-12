@@ -35,7 +35,7 @@ The map is rendered through a react-leaflet library which seemed to work quite n
 The user can view the flights that are gathered from the flights API with an approximate time, place of departure and destination. The user can also click to "book" a certain flight which will redirect it to the actual flight website. 
 
 
-### The Hotels view 
+#### The Hotels view 
 The view shows all the hotels of the location the user has chosen to visit. All hotels are fixed to one person, therefore the price. The user can view a picture, address and price of the hotel. All hotels are gathered from Booking API(https://rapidapi.com/tipsters/api/booking-com/). When a user clicks on a hotel it will be redirected to a details view where the user can see reviews of other visitors aswell as more pictures of the hotel. This view is also created through the Booking API. However, it uses two different GET methods.
 
 
