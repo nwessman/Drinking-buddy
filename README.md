@@ -26,6 +26,12 @@ The solution to this was that instead of having the city information in a fireba
 
 We have created the layout for the app which currently has the ability to search for cities and will provide acommodations for the search. The api we used to find acommodations uses latitutes and longitudes to decide which acommodations to display. This created the need for us to translate user input (cities) to coordinates. We did this by webscrape a list of cities, their corresponding coordinates and which airports belong to that city. We then filled a Firebase Database with this information so we can do coordinate and airport look ups on only city name searches.
 
+#### The activity view
+The user is directed to the location, on the map that the user has chosen to visit. Therefrom the user can pic different activites to view their location on the map with popup markers that shows the activitys name,address,type of activity and a default picture for every activity. The user can also drag the map to view it differently and zoom in and out. 
+All locations are deployed from their coordinates which we get from places, geoApi (https://www.geoapify.com/).
+The map is rendered through a react-leaflet library which seemed to work quite nicely except for some known bugs. The Map container did not render the view correctly in the beginning and the user had to zoom in/out their window to get a full size map. This problem was solved with a hook in the activity view which was necessary for this to work. 
+
+
 
 ### Your project file structure (short description/purpose of each file)
 ```bash
