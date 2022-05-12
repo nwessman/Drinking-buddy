@@ -26,6 +26,10 @@ export default function Search(props){
     props.model.setSearchDestination(val);
   }
 
+  function navToHotels(){
+    window.location.hash = "hotels"
+  }
+
   function updateSearchStringFromInModel(val){
     props.model.setCurrentLocation(val);
   }
@@ -67,5 +71,6 @@ export default function Search(props){
   setEndDate={setEndDate}
   startDate={props.model.startDate}
   endDate={props.model.endDate}
-  searchParams={props.model.searchParams}/>;
+  searchParams={props.model.searchParams}
+  checkPreviousSearch={navToHotels}/>;
 }

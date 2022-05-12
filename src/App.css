@@ -46,6 +46,16 @@
   text-align: center;
 }
 
+.box3 {
+  height: 35vh;
+  background-image: url("./images/opaque_backg.png");
+  margin: 20vh 10vh 10vh 10vh;
+  border-radius: 4px;
+  overflow-x: visible;
+  overflow-y: auto;
+
+}
+
 
 .background_image{
   background-image: radial-gradient(at center center, #2d7e9270 0%, #1c40617c 100%), url("./images/view.jpg");
@@ -125,6 +135,20 @@
   cursor: pointer;
   background-color:#08243f;
   color: white;
+
+}
+
+.checkPreviousSearchButton {
+  padding: 20px;
+  border-radius: 6px;
+  margin-top: 10px;
+  margin-bottom: -40%;
+  margin-left: 45%;
+  border: none;
+  cursor: pointer;
+  background-color:#08243f;
+  color: white;
+  align-self:center;
 
 }
 
