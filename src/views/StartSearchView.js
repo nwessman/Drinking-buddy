@@ -76,8 +76,8 @@ function StartSearchView(props){
                     </div>    
                 </div>
 
-                <button className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}> Check previous search </button>
                 </div>
+                <button className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}> Check previous search </button>
             </div>
         );
 }
