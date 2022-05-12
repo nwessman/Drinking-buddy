@@ -99,7 +99,7 @@
 
 .accDescription {
   display: block;
-  margin-left: 30px;
+  margin: 20px;
   margin-right: 0;
 }
 
@@ -107,12 +107,13 @@
   display: inline-block;
   width: auto;
   width:auto;
-  
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .bookHotel {
   display: block;
-  float:left;
 }
 
 .bookHotelButton {
@@ -133,13 +134,16 @@
   border-radius: 4px;
   overflow-y: auto;
   justify-content: center;
+  text-align: center;
 
 }
 .boxItems{
-  width: 1200px;
+  width: 1200x;
   height: auto;
   padding: 30px 30px;
-  display: flex;
+  display: inline-block;
+  justify-content: center;
+  text-align: center;
   
 
 }
