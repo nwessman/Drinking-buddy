@@ -138,6 +138,18 @@
 
 }
 
+.loginButton {
+  padding: 30px;
+  border-radius: 6px;
+  margin-top: 50%;
+  border: none;
+  cursor: pointer;
+  background-color:#08243f;
+  color: white;
+  font-size: 15px;
+
+}
+
 .checkPreviousSearchButton {
   padding: 20px;
   border-radius: 6px;
@@ -367,6 +379,9 @@ padding-top: 10px;
   position: absolute;
   background-image: url("./images/opaque_backg.png");
   width: 500px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 
 }
 .dropdown{

@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import "firebase/database";
 import citiesList from "./cityInfoDB.js"
+import {updateModelFromFirebase} from "./firebaseMethods.js"
 
 import { getFlights, getHotels, getHotelsReview, getActivites } from "./geoSource.js";
 
@@ -32,7 +33,14 @@ class TravelBuddyModel {
   activityList;
   activityQuerySelections;
   currentActivity;
- 
+  // Login user data
+  credential;
+  token;
+  user;
+  /**
+   * userSavedTrips är en lista av sparade resor. En resa skapas när en användare sparar
+   */
+  userSavedTrips;
 
   constructor(accArray = [], flightArray=[], currentAccommodation){
     this.accommodationList = [];
@@ -58,11 +66,17 @@ class TravelBuddyModel {
     this.locationToLat = 59.334591; //default coordinates for map
     this.locationToLng = 18.063240; // default coordinates for map
     this.activityList = [];
+    this.userName = "";
 
 
   }
   setSearchLongQuery(long){this.searchParams.query.longitute=long}
   setSearchLatQuery(lat){this.searchParams.query.latitute=lat}
+
+
+  setCredential(c){this.credential = c;}
+  setToken(t){this.token = t;}
+  setUser(u){this.user = u;}
 
   addObserver(callback) {
       this.observers = [...this.observers, callback];
@@ -114,6 +128,13 @@ class TravelBuddyModel {
   }
 
 
+  loadUserModel(uid){
+    updateModelFromFirebase(uid);
+
+   
+    
+    window.location.hash="startsearch"
+  }
 
 
   doSearch(){
@@ -170,13 +191,13 @@ class TravelBuddyModel {
 
   setLat(lat){
     this.locationToLat = lat;
-    firebase.database().ref("model/locationToLat").set( this.locationToLat);
+    //firebase.database().ref(this.user.uid + "/model/locationToLat").set( this.locationToLat);
    
 
   }
   setLng(lng){
     this.locationToLng = lng;
-    firebase.database().ref("model/locationToLng").set(this.locationToLng);
+    //firebase.database().ref("model/locationToLng").set(this.locationToLng);
   }
 
   setStartDate(date){
@@ -186,22 +207,22 @@ class TravelBuddyModel {
   setAccommodationList(l){
     this.accommodationList = l;
     this.notifyObservers();
-    firebase.database().ref("model/accommodationList").set(this.accommodationList);
+    //firebase.database().ref("model/accommodationList").set(this.accommodationList);
   }
 
   
   setFlightList(l){
     this.flightsDepart=l;
     this.notifyObservers();
-    firebase.database().ref("model/flightsDepart").set(this.flightsDepart);
+    //firebase.database().ref("model/flightsDepart").set(this.flightsDepart);
   }
 
 
   setActivityList(l){
     this.activityList = l;
     this.notifyObservers();
-    if(this.activityList !== undefined)
-    firebase.database().ref("model/activityList").set(this.activityList);
+    //if(this.activityList !== undefined)
+    //firebase.database().ref("model/activityList").set(this.activityList);
   }
  
 
@@ -215,17 +236,17 @@ class TravelBuddyModel {
   setCurrentAccomodationID(id){
     this.currentAccommodationID=id;
     this.notifyObservers();
-    firebase.database().ref("model/currentAccommodationID").set(this.currentAccommodationID);
+    //firebase.database().ref("model/currentAccommodationID").set(this.currentAccommodationID);
     
   }
   setAccomodationReviews(list){
     this.currentAccReviews=list;
-    firebase.database().ref("model/currentAccReviews").set(this.currentAccReviews);
+    //firebase.database().ref("model/currentAccReviews").set(this.currentAccReviews);
     
   }
   setAccomodationPhotos(list){
     this.accPhotos=list;
-    firebase.database().ref("model/accPhotos").set(this.accPhotos);
+    //firebase.database().ref("model/accPhotos").set(this.accPhotos);
     
   }
  
@@ -276,7 +297,7 @@ class TravelBuddyModel {
 
   setActivityQuerySelections(val){
     this.activityQuerySelections = val;
-    firebase.database().ref("model/activityQuerySelections").set(this.activityQuerySelections);
+    //firebase.database().ref("model/activityQuerySelections").set(this.activityQuerySelections);
   }
 
   /**
@@ -285,6 +306,12 @@ class TravelBuddyModel {
   setCurrentActivity(a){
     this.currentActivity = a;
     this.notifyObservers();
+  }
+  
+  
+  loadUserModel(user){
+    
+    window.location.hash="startsearch"
   }
 
 

@@ -12,9 +12,9 @@ firebase.initializeApp(firebaseConfig);
 
 let model = new TravelBuddyModel();
 
-let firebaseMethods=require("./firebaseMethods.js")
+//let firebaseMethods=require("./firebaseMethods.js")
 
-firebaseMethods.updateModelFromFirebase(model);
+//firebaseMethods.updateModelFromFirebase(model);
 
 ReactDOM.render(
     <App model={model} />,

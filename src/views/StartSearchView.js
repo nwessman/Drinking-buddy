@@ -72,7 +72,8 @@ function StartSearchView(props){
                     </div>
                     <div className="search">
                         <button onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch size="50px"/></button>
-                    </div>    
+                    </div>
+                        
                 </div>
 
                 </div>
