@@ -38,7 +38,8 @@ class TravelBuddyModel {
   token;
   user;
   /**
-   * userSavedTrips är en lista av sparade resor. En resa skapas när en användare sparar
+   * userSavedTrips är en lista av sparade resor. En resa skapas när en användare sparar ett hotel, activity, eller flight.
+   * [{flights: [lista av sparade  flights]}]
    */
   userSavedTrips;
 
@@ -162,11 +163,7 @@ class TravelBuddyModel {
         .then(response => response.json())
         .then(response => { 
                 this.setAccommodationList(response.result);
-                
-                
-                
                 window.location.hash = "hotels";
-              
                 }
           ).catch(err => console.error(err));
       
