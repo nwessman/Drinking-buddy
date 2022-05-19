@@ -1,6 +1,6 @@
 import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars';
 import React from "react";
-import { IoIosSearch, IoMdSwap } from "react-icons/io";
+import { IoIosSearch } from "react-icons/io";
 import "../App.css";
 import { Autocomplete, TextField } from "@mui/material"
 import citiesList from "../cityInfoDB.js"
@@ -12,7 +12,6 @@ function StartSearchView(props){
     }
 
     function onFromChange(evt, val){
-        console.log("onFromChange: " + JSON.stringify(val));
         props.setCurrentLocation(val);
     }
 
@@ -54,7 +53,7 @@ function StartSearchView(props){
                                 id="combo-box-demo"
                                 options={options}
                                 sx={{ input: { color: "black" }, width: 300, m: 2, backgroundColor: "white"}}
-                                InputLabelProps={{style: {color: "white",}}}
+                                inputlabelprops={{style: {color: "white",}}}
                                 renderInput={(params) => (<TextField {...params} label="From" />)}
                             />
                             <Autocomplete
@@ -64,7 +63,7 @@ function StartSearchView(props){
                                 id="combo-box-demo"
                                 options={options}
                                 sx={{ input: { color: "black" }, width: 300, m: 2, backgroundColor: "white"}}
-                                InputLabelProps={{style: {color: "white",}}}
+                                inputlabelprops={{style: {color: "white",}}}
                                 renderInput={(params) => (<TextField {...params} label="To" />)}
                             />
                     </div>

@@ -3,9 +3,7 @@ import "../App.css";
 import {MenuItems} from "./MenuItems";
 
 function NavigationView(props){
-    // function ACB(){
-    //     return props.onSideBarClick();
-    // }
+    
     function navigateStartSearchCB(){
         window.location.hash = "startsearch";
     }

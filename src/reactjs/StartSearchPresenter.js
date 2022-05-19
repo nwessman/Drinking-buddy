@@ -4,16 +4,6 @@ import React from "react";
 
 export default function Search(props){
 
-  //const [, searchBar]
-  
-  function searchForHotelsCB(){
-    //searchHotels({latitute:59.334591,longitute:18.063240})
-    //searchHotels({query:"burger", type: "main course"})
-    //props.model.doSearch(props.model.searchParams);
-    // GET HOTELS BEHÖVER OBJEKT {startDate, endDate, lat, lng}
-    // REQUIRES OBJECT {startDate, endDate, lat, lng}
-
-  }
   function setSearchLatCB(val){
     props.model.setSearchLatQuery(val);
   }
@@ -35,8 +25,6 @@ export default function Search(props){
   }
 
   function setStartDate(val){
-    console.log("setStartDate val: " + val);
-    console.log("setStartDate format: " + formatDateCB(val));
     props.model.setStartDate(formatDateCB(val));
   }
 
@@ -50,8 +38,6 @@ export default function Search(props){
       newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset()); 
       return newDate.toISOString().split('T')[0];
     } catch(error) {
-      console.log("Empty dates in search");
-      // Todo: better error handling
       props.model.setStartDate(null);
       props.model.setEndDate(null);
     }
@@ -63,7 +49,7 @@ export default function Search(props){
 
   return <StartSearchView updateSearchStringTo={updateSearchStringToInModel} 
   updateSearchStringFrom={updateSearchStringFromInModel} 
-  onSearchClick={doSearch} searchEvent={searchForHotelsCB} 
+  onSearchClick={doSearch} 
   setLat={setSearchLatCB} setLong={setSearchLongCB}
   setCurrentLocation={updateSearchStringFromInModel}
   setSearchDestination={updateSearchStringToInModel}

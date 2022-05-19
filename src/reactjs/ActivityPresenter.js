@@ -8,7 +8,7 @@ export default function Activity(props){
   const [, setLong] = React.useState(props.model.locationToLng);
   const [, setActivityList] = React.useState(props.model.activityList);
   const [, setCurrentActiivty] = React.useState(props.model.currentActivity);
- const [windowSize, setSize] = React.useState(true);
+
  
  
 
@@ -31,22 +31,9 @@ export default function Activity(props){
       }
      
       React.useEffect(wasCreatedACB,[]);
-      function sizeOfWindow(){
-        if(window.innerWidth > 800){
-          setSize(false);
-        }
-        else{
-          setSize(true);
-        }
-      }
-      React.useEffect(() => {window.addEventListener('resize',sizeOfWindow) 
-      sizeOfWindow();
-    },[])
 
       function searchActivites(){
-        
-      props.model.viewActivities();
-        //props.model.savedActivityQueries = evt.target.value()
+        props.model.viewActivities();
       }
 
       function saveQueryOptionsToModel(list){
@@ -63,7 +50,7 @@ export default function Activity(props){
   
     
   return (<ActivityView
-    setSize = {sizeOfWindow}
+    
     searchActivites={searchActivites}
     setQueryOptions = {saveQueryOptionsToModel}
     dropDownOptions = {[
@@ -77,6 +64,9 @@ export default function Activity(props){
     { key: 'theme_park', text: 'Theme parks', value: 'entertainment.theme_park' },
     { key: 'hospital', text: 'Hospitals', value: 'healthcare.hospital' }
 
-  ]} activities={props.model.activityList} latitude={props.model.locationToLat} longitude={props.model.locationToLng} saveCurrentActivity={saveCurrentActivityToModel}
+  ]} activities={props.model.activityList} 
+  latitude={props.model.locationToLat} 
+  longitude={props.model.locationToLng} 
+  saveCurrentActivity={saveCurrentActivityToModel}
   currentActivity={props.model.currentActivity}/>);
 }

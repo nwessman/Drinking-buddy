@@ -3,8 +3,6 @@ import "../App.css";
 import Navigation from "../reactjs/NavigationPresenter";
 
 export default function AccommodationView(props){
-    console.log("list of hotels: ");
-    console.log(props.hotels);
 
     try {
         return (
