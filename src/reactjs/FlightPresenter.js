@@ -7,6 +7,9 @@ export default function Flights(props){
   let from = String(props.model.searchParams.from).toUpperCase();
   let to = String(props.model.searchParams.to).toUpperCase();
 
+  function saveFlight(flight){
+    props.model.saveFlightChoice(flight)
+  }
 
   function ObserverACB(){
     setDeparFlights(props.model.flightsDepart)
@@ -24,5 +27,5 @@ export default function Flights(props){
   React.useEffect(wasCreatedACB, []);
 
   return <FlightView
-  flights={props.model.flightsDepart} from = {from} to = {to}/>;
+  flights={props.model.flightsDepart} from = {from} to = {to} saveFlightChoice={saveFlight}/>;
 }

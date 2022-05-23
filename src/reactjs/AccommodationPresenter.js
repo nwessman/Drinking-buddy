@@ -8,6 +8,10 @@ export default function Accommodations(props){
 
   let to = String(props.model.searchParams.to).toUpperCase();
   
+  function saveTrip(hotel){
+    props.model.saveHotelChoice(hotel)
+  }
+
   function ObserverACB(){
     setHotelsList(props.model.accommodationList)
   }
@@ -28,6 +32,8 @@ export default function Accommodations(props){
  
   React.useEffect(wasCreatedACB, []);
   
-  return <AccommodationView hotels={props.model.accommodationList} chosenAccomodation={clickCB} to={to}
+  return <AccommodationView hotels={props.model.accommodationList} 
+  chosenAccomodation={clickCB} to={to} 
+  saveHotelChoice={saveTrip}
   />;
 }

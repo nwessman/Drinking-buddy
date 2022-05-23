@@ -40,6 +40,7 @@ export default function renderFlights(props){
                     <div className= "flightsItem" >{item.destination}</div>
                 </div>
               <div className= "flightsItem">
+                <button onClick={() => {props.saveFlightChoice(item)}} className="bookFlight">Save flight</button>
                 <button onClick = {buttonClickACB} className= "bookFlight">Book flight</button>
                 Price: {item.price} SEK
               </div>

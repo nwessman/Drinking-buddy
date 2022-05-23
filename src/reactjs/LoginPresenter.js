@@ -24,8 +24,9 @@ export default function Login(props){
     // The signed-in user info.
     var user = result.user;
     console.log(user);
-    //props.model.setUserID(user);
-    props.model.loadUserModel(user);
+    props.model.setUserID(user.uid);
+    props.model.getSavedTrips();
+    window.location.hash = "startsearch"
  
 
   }).catch((error) => {

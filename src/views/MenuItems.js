@@ -27,6 +27,13 @@ import * as RiIcons from "react-icons/ri"
         cName: "menuItems"
         
     },
+    {
+        title: "My Trips",
+        hash:"#mytrips",
+        icon:<IoIcons.IoAccessibilitySharp></IoIcons.IoAccessibilitySharp>,
+        cName: "menuItems"
+        
+    }
 
 ]
 
