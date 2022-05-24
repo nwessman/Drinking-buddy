@@ -33,6 +33,13 @@ import * as RiIcons from "react-icons/ri"
         icon:<IoIcons.IoAccessibilitySharp></IoIcons.IoAccessibilitySharp>,
         cName: "menuItems"
         
+    },
+    {
+        title: "Log Out",
+        hash:"#login",
+        icon:<IoIcons.IoAccessibilitySharp></IoIcons.IoAccessibilitySharp>,
+        cName: "menuItems"
+        
     }
 
 ]

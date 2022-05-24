@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 
 function createTripName(model){
-    return model.searchParams.from + '*' +  model.searchParams.to + '*' + String(model.startDate) + '*' + String(model.endDate);
+    return model.locationParams.from + '*' +  model.locationParams.to + '*' + String(model.startDate) + '*' + String(model.endDate);
 }
 
 /** 
@@ -10,8 +10,8 @@ function createTripName(model){
 function makeNewTrip(model){
     let name = createTripName(model);
     return firebase.database().ref(model.userID + "/trips/" + name).set({
-        from: model.searchParams.from,
-        to: model.searchParams.to,
+        from: model.locationParams.from,
+        to: model.locationParams.to,
         departDate: model.startDate,
         returnDate: model.endDate,
         lat: model.locationToLat,

@@ -17,7 +17,7 @@ export default function Search(props){
   }
 
   function navToHotels(){
-    window.location.hash = "hotels"
+    window.location.hash = "mytrips"
   }
 
   function updateSearchStringFromInModel(val){

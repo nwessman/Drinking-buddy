@@ -23,6 +23,9 @@ function MyTripsView(props){
                       )
                     })
                   }
+
+                  <button onClick={props.doNewSearch}>Search for a new Trip!</button>
+
               </div>
           </div>
         );

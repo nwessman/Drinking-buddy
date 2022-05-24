@@ -8,6 +8,9 @@ export default function MyTrips(props){
   function loadTripIntoModel(tripName){
       props.model.loadSomeTrip(tripName);
   }
+  function goToSearch(){
+    window.location.hash = "startsearch"
+  }
 
   function deleteTrip(key){
     props.model.deleteSavedTrip(key);
@@ -28,7 +31,12 @@ export default function MyTrips(props){
 
   React.useEffect(wasCreatedACB, []);
 
-  return <MyTripsView savedTrips={props.model.userSavedTrips} 
+  return <MyTripsView 
+  savedTrips={props.model.userSavedTrips} 
   selectTrip={loadTripIntoModel}
-  deleteTrip={deleteTrip}/>;
+  deleteTrip={deleteTrip}
+  doNewSearch={goToSearch} 
+  
+  />;
+  
 }

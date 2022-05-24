@@ -19,6 +19,7 @@ class TravelBuddyModel {
   LocationTo;
   currentFlight;
   searchParams;
+  locationParams;
   searchResultsPromiseState;
   currentAccPromiseState;
   currentAccReviews;
@@ -37,6 +38,7 @@ class TravelBuddyModel {
   // Login user data
   credential;
   token;
+  user;
   userID;
   
   // Used for storing selected hotel and flight
@@ -54,6 +56,7 @@ class TravelBuddyModel {
     this.startDate = {};
     this.endDate = {};
     this.searchParams = {};
+    this.locationParams = {}
     this.searchResultsPromiseState = {};
     this.currentAccPromiseState = {};
     this.currentAccReviews= [];
@@ -74,6 +77,8 @@ class TravelBuddyModel {
     this.savedAccommodation = "none";
     this.savedFlight = "none";
     this.userSavedTrips = []
+
+    this.user = {photoURL: ""}
   }
 
   // FETCH AND SAVE ALL THE USERS SAVED TRIP FROM FIREBASE TO MODEL
@@ -105,7 +110,7 @@ class TravelBuddyModel {
   }
 
   
-
+  // THIS LOADS A SAVED TRIP INTO THE MODEL
   loadSomeTrip(someTrip){
     this.locationToLat = someTrip.lat;
     this.locationToLng = someTrip.lng;
@@ -113,8 +118,8 @@ class TravelBuddyModel {
     this.flightsDepart = (someTrip.flightsDepart) ? someTrip.flightsDepart : [];
     this.savedAccommodation = someTrip.savedAccommodation;
     this.savedFlight = someTrip.savedFlight;
-    this.searchParams.to = someTrip.to;
-    this.searchParams.from = someTrip.from;
+    this.locationParams.to = someTrip.to;
+    this.locationParams.from = someTrip.from;
     this.startDate = someTrip.departDate;
     this.endDate = someTrip.returnDate;
     this.notifyObservers();
@@ -128,6 +133,7 @@ class TravelBuddyModel {
   setCredential(c){this.credential = c;}
   setToken(t){this.token = t;}
   setUserID(u){this.userID = u;}
+  setFullUser(u){this.user = u;}
 
   addObserver(callback) {
       this.observers = [...this.observers, callback];
@@ -162,12 +168,16 @@ class TravelBuddyModel {
       )
   }
 
+  // SearchParams object is used for making a search, locationParams is used for the trip loaded into model.
   setCurrentLocation(from){
     this.searchParams.from = from;
+    this.locationParams.from = from;
   }
 
+  // SearchParams object is used for making a search, locationParams is used for the trip loaded into model.
   setSearchDestination(to){
     this.searchParams.to = to;
+    this.locationParams.to = to;
   }
 
 
@@ -198,10 +208,10 @@ class TravelBuddyModel {
       this.setLat(toObj.lat);
       this.setLng(toObj.lng);
 
-      if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
+      if(this.searchParams.startDate &&  this.searchParams.endDate && this.locationToLat && this.locationToLng){
         Promise.all([
-          getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng}),
-          getFlights({fromIATA: fromObj.AITA[0], toIATA: toObj.AITA[0], startDate: this.startDate, endDate: this.endDate})
+          getHotels({startDate: this.searchParams.startDate, endDate: this.searchParams.endDate, lat: this.locationToLat, lng: this.locationToLng}),
+          getFlights({fromIATA: fromObj.AITA[0], toIATA: toObj.AITA[0], startDate: this.searchParams.startDate, endDate: this.searchParams.endDate})
         ]).then(res => {
           console.log("promises resloved");
           console.log(res);
@@ -258,9 +268,18 @@ class TravelBuddyModel {
     //firebase.database().ref("model/locationToLng").set(this.locationToLng);
   }
 
+  // SearchParams object is used for making a search, startDate is used for the trip loaded into model.
   setStartDate(date){
+    this.searchParams.startDate = date;
     this.startDate = date;
   }
+
+  // SearchParams object is used for making a search, startDate is used for the trip loaded into model.
+  setEndDate(date){
+    this.searchParams.endDate = date;
+    this.endDate = date; 
+  }
+
 
   setAccommodationList(l){
     this.accommodationList = l;
@@ -268,13 +287,11 @@ class TravelBuddyModel {
     //firebase.database().ref("model/accommodationList").set(this.accommodationList);
   }
 
-  
   setFlightList(l){
     this.flightsDepart=l;
     this.notifyObservers();
     //firebase.database().ref("model/flightsDepart").set(this.flightsDepart);
   }
-
 
   setActivityList(l){
     this.activityList = l;
@@ -283,10 +300,6 @@ class TravelBuddyModel {
     //firebase.database().ref("model/activityList").set(this.activityList);
   }
  
-
-  setEndDate(date){
-    this.endDate = date; 
-  }
 
   /**
    * Accomondation currently checked by user.

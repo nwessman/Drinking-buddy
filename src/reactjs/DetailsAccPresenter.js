@@ -28,7 +28,12 @@ function DetailsAcc(props){
 
     return(
         <DetailsAccView
-        accomodationReviews={props.model.currentAccReviews} accomodationPhoto={props.model.currentAccPhoto} allAccPhotos={props.model.accPhotos} photoIndex={props.model.photoIndex} onClickChange={onClickChangePic}/>
+        accomodationReviews={props.model.currentAccReviews} 
+        accomodationPhoto={props.model.currentAccPhoto} 
+        allAccPhotos={props.model.accPhotos} 
+        photoIndex={props.model.photoIndex} 
+        onClickChange={onClickChangePic} 
+        />
         
     );
 }
