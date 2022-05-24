@@ -4,6 +4,24 @@ import React from "react";
 
 export default function Search(props){
 
+  const [, setUser] = React.useState(props.model.userName);
+
+  
+  function ObserverACB(){
+    setUser(props.model.userName);
+  }
+  function isTakenDownACB(){
+    props.model.removeObserver(ObserverACB);
+  }
+  
+  function wasCreatedACB(){
+    props.model.addObserver(ObserverACB);
+    return isTakenDownACB;
+  }
+  
+  React.useEffect(wasCreatedACB, []);
+  
+
   function setSearchLatCB(val){
     props.model.setSearchLatQuery(val);
   }
@@ -47,6 +65,8 @@ export default function Search(props){
     props.model.doSearch();
   }
 
+  
+
   return <StartSearchView updateSearchStringTo={updateSearchStringToInModel} 
   updateSearchStringFrom={updateSearchStringFromInModel} 
   onSearchClick={doSearch} 
@@ -58,5 +78,7 @@ export default function Search(props){
   startDate={props.model.startDate}
   endDate={props.model.endDate}
   searchParams={props.model.searchParams}
-  checkPreviousSearch={navToHotels}/>;
+  checkPreviousSearch={navToHotels}
+  user = {props.model.userName}/>;
+
 }

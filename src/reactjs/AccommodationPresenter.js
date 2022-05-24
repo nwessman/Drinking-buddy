@@ -24,6 +24,10 @@ export default function Accommodations(props){
     setAccPopUp(!AccPopUp);
 
   }
+
+  function addToSummary(){
+    props.model.addFlight()
+  }
   
  
   React.useEffect(wasCreatedACB, []);

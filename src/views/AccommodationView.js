@@ -4,6 +4,10 @@ import Navigation from "../reactjs/NavigationPresenter";
 
 export default function AccommodationView(props){
 
+    function onAddClickACB(){
+        props.addToSummary;
+    }
+
     try {
         return (
             <div className = "background_image">
@@ -28,6 +32,9 @@ export default function AccommodationView(props){
                                 <div className="text">{e.min_total_price} SEK</div>
                                 <div className = "bookHotel">
                                 <button onClick = {function buttonClickedACB(){ window.open(e.url);}} className = "bookHotelButton"> Book now! </button>
+                            </div>
+                            <div className = "bookHotel">
+                                <button onClick = {onAddClickACB} className = "bookHotelButton"> Book now! </button>
                             </div>
                             </div>
                         </div>

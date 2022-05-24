@@ -37,6 +37,7 @@ class TravelBuddyModel {
   credential;
   token;
   user;
+  userName;
   /**
    * userSavedTrips är en lista av sparade resor. En resa skapas när en användare sparar
    */
@@ -57,6 +58,11 @@ class TravelBuddyModel {
     this.currentAccommodationID = currentAccommodation;
     this.accomondations = accArray; 
 
+    //Summary Arrays
+    this.summaryFlights = [];
+    this.summaryHotels = [];
+    this.summaryActivities = [];
+
     this.flights = flightArray;
 
     this.currentAccPhoto = [];
@@ -66,17 +72,66 @@ class TravelBuddyModel {
     this.locationToLat = 59.334591; //default coordinates for map
     this.locationToLng = 18.063240; // default coordinates for map
     this.activityList = [];
+    this.user = ""
     this.userName = "";
+  
 
 
   }
+  // Add/remove from Summary List
+  addFlight(id){
+
+  }
+
+  removeFlight(id){
+
+  }
+
+  addHotel(h){
+    function hotelExists(hotel){
+      if(hotel.id === h.id){
+          return true;
+      } 
+      return false;
+    }
+    
+    if(this.dishes.find(hotelExists) !== undefined){
+        return;
+    }
+
+    this.summaryHotels= [...this.summaryHotels, h];
+  }
+
+  removeHotel(h){
+    let hotelExists = false;
+    function hasSameIdCB(hotel){
+        if(hotel.id !== h.id) return true;
+        hotelExists = true;
+        return false;
+    }
+    this.summaryHotels= this.summaryHotels.filter(hasSameIdCB);
+  }
+
+  addActivity(id){
+
+  }
+
+  removeActivity(id){
+
+  }
+
   setSearchLongQuery(long){this.searchParams.query.longitute=long}
   setSearchLatQuery(lat){this.searchParams.query.latitute=lat}
 
 
   setCredential(c){this.credential = c;}
   setToken(t){this.token = t;}
-  setUser(u){this.user = u;}
+  setUser(u){
+    this.user = u; 
+    this.userName = u.displayName;
+    console.log(this.user.displayName);
+    this.notifyObservers();
+  }
 
   addObserver(callback) {
       this.observers = [...this.observers, callback];

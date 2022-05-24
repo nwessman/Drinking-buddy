@@ -24,7 +24,7 @@ export default function Login(props){
     // The signed-in user info.
     var user = result.user;
     console.log(user);
-    //props.model.setUserID(user);
+    props.model.setUser(user);
     props.model.loadUserModel(user);
  
 

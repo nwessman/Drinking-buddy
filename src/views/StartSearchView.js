@@ -4,6 +4,7 @@ import { IoIosSearch } from "react-icons/io";
 import "../App.css";
 import { Autocomplete, TextField } from "@mui/material"
 import citiesList from "../cityInfoDB.js"
+import * as FaIcons from "react-icons/fa";
 
 function StartSearchView(props){
             
@@ -33,12 +34,24 @@ function StartSearchView(props){
     }
 
     let options =[...new Set(citiesList.map(x => x.city + ", " + x.country))] 
+
+    const userName = [{
+            title: props.user,
+            hash
+            icon:<FaIcons.FaUser></FaIcons.FaUser>,
     
+            
+        }];
+
     return (
             <div className="background_image">
 
                 <div className='navigationbar'>
-                    <h1 className='name_logo' onClick={navigateStartSearchACB}>TravelBuddy</h1>
+                    <h1 className='name_logo' onClick={navigateStartSearchACB}> TravelBuddy</h1>
+                        <a className='loginNav'>
+                        {userName[0].icon}  
+                        <span>{userName[0].title}</span>
+                        </a>
                 </div>
 
             

@@ -76,6 +76,13 @@
   padding: 30px 80px 0px 90px;
   font-size: 1.2rem;
 }
+.loginNav{
+  padding: 30px 80%;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.85);
+ 
+
+}
 
 .menuItems a {
   list-style: none;
