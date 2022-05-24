@@ -17,16 +17,16 @@ export default function AccommodationView(props){
                 {
                 props.hotels.map(e => {
                     return (
-                        <div key={e.hotel_id} className="boxItems" onClick={function clickCB(){
-                            return props.chosenAccomodation(e.hotel_id);}}
-                            >   
-                            <img src={e.max_photo_url} alt="Error 404" height="200" width="300"/>
+                        <div key={e.hotel_id} className="boxItems">   
+                            <img src={e.max_photo_url} alt="Error 404" height="200" width="300" onClick={function clickCB(){
+                            return props.chosenAccomodation(e.hotel_id);}}/>
                             <div className = "accDescription">
                                 <div className="text.bold">{e.hotel_name}</div>
                                 <div className="text">{e.city_trans}</div>
                                 <div className="text">{e.address}</div>
                                 <div className="text">{e.min_total_price} SEK</div>
                                 <div className = "bookHotel">
+                                <button onClick={() => {props.saveHotelChoice(e)}} className = "bookHotelButton">Save hotel</button>
                                 <button onClick = {function buttonClickedACB(){ window.open(e.url);}} className = "bookHotelButton"> Book now! </button>
                             </div>
                             </div>

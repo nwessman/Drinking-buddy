@@ -72,11 +72,12 @@ function StartSearchView(props){
                     </div>
                     <div className="search">
                         <button onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch size="50px"/></button>
-                    </div>    
+                    </div>
+                        
                 </div>
 
                 </div>
-                <button className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}> Check previous search </button>
+                <button className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}>  My saved trips </button>
             </div>
         );
 }

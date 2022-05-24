@@ -68,5 +68,6 @@ export default function Activity(props){
   latitude={props.model.locationToLat} 
   longitude={props.model.locationToLng} 
   saveCurrentActivity={saveCurrentActivityToModel}
-  currentActivity={props.model.currentActivity}/>);
+  currentActivity={props.model.currentActivity}
+  user={props.model.user}/>);
 }

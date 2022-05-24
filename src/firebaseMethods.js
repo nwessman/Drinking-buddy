@@ -1,22 +1,48 @@
-
-
 import firebase from 'firebase/app';
-/**
- * This will run every time the app loads and fetch values from firebase.
- * 
- * Make sure to save data X to firebase if it needs to be cached in the 
- * model.setX(value) and add a line to fetch X to the model into the function.
- */
-function updateModelFromFirebase(model){
-    firebase.database().ref("model/accommodationList").on("value", (snapshot => {if(snapshot.exists()) model.setAccommodationList(snapshot.val())}));
-    firebase.database().ref("model/currentAccommodationID").on("value", (snapshot => {if(snapshot.exists()) model.setCurrentAccomodationID(snapshot.val())}));
-    firebase.database().ref("model/currentAccReviews").on("value", (snapshot => {if(snapshot.exists()) model.setAccomodationReviews(snapshot.val())}));
-    firebase.database().ref("model/accPhotos").on("value", (snapshot => {if(snapshot.exists()) model.setAccomodationPhotos(snapshot.val())}));
-    firebase.database().ref("model/locationToLat").on("value", (snapshot => {if(snapshot.exists()) model.setLat(snapshot.val())}));
-    firebase.database().ref("model/locationToLng").on("value", (snapshot => {if(snapshot.exists()) model.setLng(snapshot.val())}));
-    firebase.database().ref("model/activityList").on("value", (snapshot => {if(snapshot.exists()) model.setActivityList(snapshot.val())}));
-    firebase.database().ref("model/activityQuerySelections").on("value", (snapshot => {if(snapshot.exists()) model.setActivityQuerySelections(snapshot.val())}));
-    firebase.database().ref("model/flightsDepart").on("value", (snapshot => {if(snapshot.exists()) model.setFlightList(snapshot.val())}));
+
+function createTripName(model){
+    return model.locationParams.from + '*' +  model.locationParams.to + '*' + String(model.startDate) + '*' + String(model.endDate);
 }
-export {updateModelFromFirebase};
+
+/** 
+ * makeNewTrip creates a new trip under userID/trips/
+*/
+function makeNewTrip(model){
+    let name = createTripName(model);
+    return firebase.database().ref(model.userID + "/trips/" + name).set({
+        from: model.locationParams.from,
+        to: model.locationParams.to,
+        departDate: model.startDate,
+        returnDate: model.endDate,
+        lat: model.locationToLat,
+        lng: model.locationToLng,
+        tripName: name,
+        accommodationList: model.accommodationList,
+        flightsDepart: model.flightsDepart,
+        savedAccommodation: model.savedAccommodation,
+        savedFlight: model.savedFlight
+    });
+}
+
+function deleteTripFromModel(userid, key){
+    return firebase.database().ref(userid + "/trips/" + key).set(null);
+}
+
+/**
+ * Get a object containing all trips for a user
+ * @param userID - send userID
+ */
+function getAllUserTrips(userID, model){
+    firebase.database().ref(userID + '/trips/').on("value", (snapshot => {
+            if (snapshot.exists()){
+                var res = [];
+                snapshot.forEach( snap => {res = [...res, snap.val()]} )
+                model.setUserSavedTrips(res);
+            } else {
+                model.setUserSavedTrips([]);
+            }
+        }))
+}
+
+export {makeNewTrip, getAllUserTrips, deleteTripFromModel};
 
