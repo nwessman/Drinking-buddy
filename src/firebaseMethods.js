@@ -39,7 +39,7 @@ function getAllUserTrips(userID, model){
                 snapshot.forEach( snap => {res = [...res, snap.val()]} )
                 model.setUserSavedTrips(res);
             } else {
-                return [];
+                model.setUserSavedTrips([]);
             }
         }))
 }

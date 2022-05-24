@@ -78,7 +78,7 @@ class TravelBuddyModel {
     this.savedFlight = "none";
     this.userSavedTrips = []
 
-    this.user = {photoURL: ""}
+    this.user = {}
   }
 
   // FETCH AND SAVE ALL THE USERS SAVED TRIP FROM FIREBASE TO MODEL
@@ -88,7 +88,6 @@ class TravelBuddyModel {
 
   setUserSavedTrips(v){
     this.userSavedTrips = v;
-    console.log(this.userSavedTrips)
     this.notifyObservers();
   }
 
@@ -192,7 +191,7 @@ class TravelBuddyModel {
 
   doSearch(){
 
-    if(!this.searchParams.from || !this.searchParams.to  || !this.startDate  || !this.endDate ){
+    if(!this.searchParams.from || !this.searchParams.to  || !this.searchParams.startDate  || !this.searchParams.endDate ){
         return;
       }
     // try because empty or wrong params in search input will crash this function 

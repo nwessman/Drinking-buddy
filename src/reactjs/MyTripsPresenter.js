@@ -5,8 +5,8 @@ import React from "react";
 export default function MyTrips(props){
   const [, setTrips] = React.useState(props.model.userSavedTrips);
 
-  function loadTripIntoModel(tripName){
-      props.model.loadSomeTrip(tripName);
+  function loadTripIntoModel(aTripObject){
+      props.model.loadSomeTrip(aTripObject);
   }
   function goToSearch(){
     window.location.hash = "startsearch"
@@ -17,7 +17,7 @@ export default function MyTrips(props){
   }
 
   function ObserverACB(){
-    setTrips(props.model.userSavedTrips)
+    setTrips(props.model.userSavedTrips);
   }
 
   function isTakenDownACB(){
