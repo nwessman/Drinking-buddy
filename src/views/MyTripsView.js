@@ -1,6 +1,7 @@
 import React from "react";
 import "../App.css";
 import Navigation from "../reactjs/NavigationPresenter";
+import { Button, Icon } from 'semantic-ui-react'
 
 
 // view needs work, check below for data structure of a saved trip
@@ -24,7 +25,7 @@ function MyTripsView(props){
                     })
                   }
 
-                  <button onClick={props.doNewSearch}>Search for a new Trip!</button>
+                  <Button color="#08243f" classname = "bookHotelButton" onClick={props.doNewSearch}>Search for a new Trip!</Button>
 
               </div>
           </div>

@@ -4,6 +4,7 @@ import { IoIosSearch } from "react-icons/io";
 import "../App.css";
 import { Autocomplete, TextField } from "@mui/material"
 import citiesList from "../cityInfoDB.js"
+import { Button, Icon } from 'semantic-ui-react'
 
 function StartSearchView(props){
             
@@ -71,13 +72,19 @@ function StartSearchView(props){
                         <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
                     </div>
                     <div className="search">
-                        <button onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch size="50px"/></button>
+                        <Button size = 'big' animated = 'horizontal' onClick = {onSearchClick}>
+                            
+                            <Button.Content visible>
+                                <Icon name='search' />
+                            </Button.Content>
+                            <Button.Content hidden>"Search"</Button.Content>
+                        </Button>
                     </div>
                         
                 </div>
 
                 </div>
-                <button className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}>  My saved trips </button>
+                <Button color="#08243f" className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}>My saved trips </Button>
             </div>
         );
 }

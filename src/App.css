@@ -23,17 +23,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 
     
 }
 
 .search {
-  margin-left: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
   display: inline-block;
-  min-width: 100px;
-  margin-bottom: -40%;
-
-
 }
 
 .searchInputs {
@@ -73,7 +71,7 @@
 
 }
 .menuItems {
-  padding: 30px 80px 0px 90px;
+  padding: 30px 40px 0px 90px;
   font-size: 1.2rem;
 }
 
@@ -127,7 +125,7 @@
   display: block;
 }
 
-.bookHotelButton {
+.ui.button.bookHotelButton {
   padding: 20px;
   border-radius: 6px;
   margin-top: 30px;
@@ -150,7 +148,7 @@
 
 }
 
-.checkPreviousSearchButton {
+.ui.button.checkPreviousSearchButton {
   padding: 20px;
   border-radius: 6px;
   margin-top: 10px;

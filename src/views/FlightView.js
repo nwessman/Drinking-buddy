@@ -65,7 +65,7 @@ export default function renderFlights(props){
           <Navigation></Navigation>
           <div className="box">
             <div className= "flightHeader"> 
-              <h2>No flights available at this date. Try searching for an earlier date.</h2>
+              No flights available at this date. Try searching for an earlier date.
                   </div>
               </div>
       </div>

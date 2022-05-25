@@ -1,6 +1,7 @@
 import React from "react";
 import "../App.css";
 import Navigation from "../reactjs/NavigationPresenter";
+import { Button, Icon } from 'semantic-ui-react'
 
 export default function AccommodationView(props){
 
@@ -26,8 +27,8 @@ export default function AccommodationView(props){
                                 <div className="text">{e.address}</div>
                                 <div className="text">{e.min_total_price} SEK</div>
                                 <div className = "bookHotel">
-                                <button onClick={() => {props.saveHotelChoice(e)}} className = "bookHotelButton">Save hotel</button>
-                                <button onClick = {function buttonClickedACB(){ window.open(e.url);}} className = "bookHotelButton"> Book now! </button>
+                                <Button onClick={() => {props.saveHotelChoice(e)}} className = "bookHotelButton">Save hotel</Button>
+                                <Button onClick = {function buttonClickedACB(){ window.open(e.url);}} className = "bookHotelButton"> Book now! </Button>
                             </div>
                             </div>
                         </div>

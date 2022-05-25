@@ -1,6 +1,8 @@
 import React from 'react'
 import * as IoIcons from "react-icons/io5"
 import * as RiIcons from "react-icons/ri"
+import * as AiIcons from "react-icons/ai";
+import { BsFillCalendar2CheckFill } from "react-icons/bs"
 
 
 
@@ -30,14 +32,14 @@ import * as RiIcons from "react-icons/ri"
     {
         title: "My Trips",
         hash:"#mytrips",
-        icon:<IoIcons.IoAccessibilitySharp></IoIcons.IoAccessibilitySharp>,
+        icon:<BsFillCalendar2CheckFill></BsFillCalendar2CheckFill>,
         cName: "menuItems"
         
     },
     {
         title: "Log Out",
         hash:"#login",
-        icon:<IoIcons.IoAccessibilitySharp></IoIcons.IoAccessibilitySharp>,
+        icon:<AiIcons.AiOutlinePoweroff></AiIcons.AiOutlinePoweroff>,
         cName: "menuItems"
         
     }

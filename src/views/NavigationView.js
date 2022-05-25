@@ -19,7 +19,7 @@ function NavigationView(props){
         <li key={index} className={item.cName}>
             <a onClick = {someCB} >
             {item.icon}
-            <span>{item.title}</span>
+            <span> {item.title}</span>
             </a>
         </li>
         );
