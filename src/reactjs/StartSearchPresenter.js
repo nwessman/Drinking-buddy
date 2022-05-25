@@ -3,6 +3,10 @@ import React from "react";
 
 
 export default function Search(props){
+/*   const [des, setDestination] = React.useState(false);
+  const [loc, setLocation] = React.useState(false);
+  const [start, setStart] = React.useState(false);
+  const [end, setEnd] = React.useState(false); */
 
   function setSearchLatCB(val){
     props.model.setSearchLatQuery(val);
@@ -14,6 +18,7 @@ export default function Search(props){
 
   function updateSearchStringToInModel(val){
     props.model.setSearchDestination(val);
+    //setDestination(true);
   }
 
   function navToHotels(){
@@ -22,14 +27,17 @@ export default function Search(props){
 
   function updateSearchStringFromInModel(val){
     props.model.setCurrentLocation(val);
+    //setLocation(true)
   }
 
   function setStartDate(val){
     props.model.setStartDate(formatDateCB(val));
+    //setStart(true)
   }
 
   function setEndDate(val){
     props.model.setEndDate(formatDateCB(val));
+    //setEnd(true)
   }
 
   function formatDateCB(date) {
@@ -43,9 +51,15 @@ export default function Search(props){
     }
   }
 
+/*   React.useEffect(() => {
+  }, [loc, des, start, end]); */
+
+
   function doSearch(){
     props.model.doSearch();
   }
+
+  //let params = {loc: loc, des: des, start: start, end: end}
 
   return <StartSearchView updateSearchStringTo={updateSearchStringToInModel} 
   updateSearchStringFrom={updateSearchStringFromInModel} 
@@ -58,5 +72,7 @@ export default function Search(props){
   startDate={props.model.startDate}
   endDate={props.model.endDate}
   searchParams={props.model.searchParams}
-  checkPreviousSearch={navToHotels}/>;
+  checkPreviousSearch={navToHotels}
+ /*  params = {params} */
+  />;
 }

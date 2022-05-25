@@ -4,20 +4,22 @@ import { IoIosSearch } from "react-icons/io";
 import "../App.css";
 import { Autocomplete, TextField } from "@mui/material"
 import citiesList from "../cityInfoDB.js"
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Message, Popup} from 'semantic-ui-react'
 
 function StartSearchView(props){
-            
+
     function onSearchClick(){
         props.onSearchClick();
-    }
+    } 
 
     function onFromChange(evt, val){
-        props.setCurrentLocation(val);
+        const location = val.toLowerCase();
+        props.setCurrentLocation(location);
     }
 
     function onToChange(evt, val){
-        props.setSearchDestination(val);
+        const destination = val.toLowerCase();
+        props.setSearchDestination(destination);
     }
 
     function onCalenderChange(evt) {
@@ -76,12 +78,9 @@ function StartSearchView(props){
                         <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
                     </div>
                     <div className="search">
-                        <Button size = 'big' animated = 'horizontal' onClick = {onSearchClick}>
-                            
-                            <Button.Content visible>
-                                <Icon name='search' />
-                            </Button.Content>
-                            <Button.Content hidden>"Search"</Button.Content>
+                        <Button 
+                                icon size = 'big' animated = "vertical" onClick = {onSearchClick}>
+                            <Icon name='search' />
                         </Button>
                     </div>
                         
