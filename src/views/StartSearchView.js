@@ -78,7 +78,7 @@ function StartSearchView(props){
                         <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
                     </div>
                     <div className="search">
-                        <Button 
+                        <Button disabled = {(props.params.loc && props.params.des && props.params.start && props.params.end) === false ? true : false}
                                 icon size = 'big' animated = "vertical" onClick = {onSearchClick}>
                             <Icon name='search' />
                         </Button>
