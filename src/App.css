@@ -170,7 +170,13 @@
   overflow-y: auto;
   justify-content: center;
   text-align: center;
+}
 
+.tripContainer{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 30px; 
 }
 
 .boxItems{

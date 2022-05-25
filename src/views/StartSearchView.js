@@ -33,7 +33,11 @@ function StartSearchView(props){
         window.location.hash = "startsearch";
     }
 
-    let options =[...new Set(citiesList.map(x => x.city + ", " + x.country))] 
+    function capitalize(value){
+        return  value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+    }
+
+    let options =[...new Set(citiesList.map(x => capitalize(x.city) + ", " + capitalize(x.country)))] 
     
     return (
             <div className="background_image">
