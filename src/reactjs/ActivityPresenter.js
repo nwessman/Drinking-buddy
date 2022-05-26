@@ -44,6 +44,10 @@ export default function Activity(props){
         props.model.setCurrentActivity(a);
       }
 
+      function saveTrip(activity){
+        props.model.saveActivityChoice(activity);
+      }
+
    
         
         
@@ -69,5 +73,6 @@ export default function Activity(props){
   longitude={props.model.locationToLng} 
   saveCurrentActivity={saveCurrentActivityToModel}
   currentActivity={props.model.currentActivity}
-  user={props.model.user}/>);
+  user={props.model.user}
+  saveActivityChoice={saveTrip}/>);
 }

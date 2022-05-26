@@ -20,7 +20,8 @@ function makeNewTrip(model){
         accommodationList: model.accommodationList,
         flightsDepart: model.flightsDepart,
         savedAccommodation: model.savedAccommodation,
-        savedFlight: model.savedFlight
+        savedFlight: model.savedFlight,
+        savedActivity: model.savedActivity,
     });
 }
 

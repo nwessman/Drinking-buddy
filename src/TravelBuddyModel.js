@@ -44,6 +44,7 @@ class TravelBuddyModel {
   // Used for storing selected hotel and flight
   savedAccommodation;
   savedFlight;
+  savedActivity;
 
   // Used for storing all saved trips
   userSavedTrips;
@@ -77,6 +78,7 @@ class TravelBuddyModel {
     this.savedAccommodation = "none";
     this.savedFlight = "none";
     this.userSavedTrips = []
+    this.savedActivity = "None";
 
     this.user = {}
   }
@@ -105,6 +107,12 @@ class TravelBuddyModel {
   // USED FOR SAVING A FLIGHT OPTION TO MY TRIP
   saveFlightChoice(flight){
     this.savedFlight = flight;
+    makeNewTrip(this).then(this.getSavedTrips())
+  }
+
+  // USED FOR SAVING AN ACTIVITY OPTION TO MY TRIP
+  saveActivityChoice(activity){
+    this.savedActivity = activity;
     makeNewTrip(this).then(this.getSavedTrips())
   }
 

@@ -8,6 +8,52 @@ import { Button} from 'semantic-ui-react'
 function MyTripsView(props){
 
   console.log(props.flights);
+  console.log(props.savedTrips)
+
+      function getCategory(categoryArray){
+        let category = categoryArray.find(e => 
+            (e === 'commercial.supermarket' || 
+             e === 'catering.bar' ||
+             e === 'entertainment.museum' ||
+             e === 'adult.nightclub' ||
+             e ==='commercial.shopping_mall'  ||
+             e ==='catering.restaurant'  ||
+             e === 'entertainment.cinema' ||
+             e === 'entertainment.theme_park'  ||
+             e === 'healthcare.hospital')
+        );
+        switch (category) {
+            case 'commercial.supermarket':
+                    return ["https://thumbs.dreamstime.com/b/shoppingvagn-i-en-supermarket-40320116.jpg", "Supermarket"] 
+    
+            case 'catering.bar':
+                    return ["https://static.thatsup.co/content/img/place/b/a/bar-nombre-0.jpg", "Bar"]
+        
+            case 'entertainment.museum':
+                    return ["https://cdn.britannica.com/51/194651-050-747F0C18/Interior-National-Gallery-of-Art-Washington-DC.jpg","Museum"]
+    
+            case 'adult.nightclub':
+                    return ["https://media.timeout.com/images/105520557/750/562/image.jpg", "Night Club"]
+    
+            case 'commercial.shopping_mall':
+                    return ["https://visitskane.com/sites/default/files/images/list-items/2016-11/Melodifestival_Malmo_2013_foto_Fredrik_Johansson.jpg", "Shopping Mall"] 
+    
+            case 'catering.restaurant':
+                    return ["https://static.thatsup.co/content/img/article/15/jul/b%C3%A4sta-restaurangerna-i-city.jpg", "Restaurant" ]
+    
+            case 'entertainment.cinema':
+                    return ["https://www.europa-cinemas.org/storage/1416/prix-europa-cinemas-2018.jpeg", "Cinema"]
+    
+            case 'entertainment.theme_park':
+                    return ["https://www.snl.com/articles/409719194.jpg", "Theme Park"]
+    
+            case 'healthcare.hospital':
+                    return ["https://cdn.systematic.com/media/g0sj1tbg/hospital-building-001-global.jpg?cropAlias=hero_large&width=992&height=483&quality=80&mode=crop&null", "Hospital"] 
+            
+            default:
+                return ["https://pngset.com/images/maps-icon-point-of-interest-heart-plectrum-paper-sweets-transparent-png-1545765.png", ""]
+        }
+    }
 
   function capitalize(value){
     return value.split(' ')
@@ -34,6 +80,7 @@ function MyTripsView(props){
                                 <div>
                                         <div>Hotel: {(e.savedAccommodation) ? String(e.savedAccommodation.hotel_name) : "None"}</div>
                                         <div>Flight: {(e.savedFlight === "none") ? "None" : String(e.savedFlight.origin) + " to " + String(e.savedFlight.destination) + " (" + String(e.savedFlight.price) + " SEK)"}</div>
+                                        <div>Activity: {(e.savedActivity === "None") ? "None" : String(e.savedActivity.name) + "  (" + String(getCategory(e.savedActivity.categories)[1]) + ")"}</div>
                                 </div>
                                 </div>
                                 <Button color = "red" onClick={() => props.deleteTrip(e.tripName)} class="ui right floated button">
