@@ -136,16 +136,17 @@
 
 .firstMessage {
   font-size: 15px;
-  margin-top: 10%;
+  font-weight: bold;
+  color: #252525;
+  margin: 40px; 
 }
 
 .show{
-  position:fixed;
+  display: inline-block;
 }
 
 .ui.button.loginButton {
   padding: 30px;
-  margin-top: 10%;
   background-color:#08243f;
   color: white;
 }
@@ -165,6 +166,16 @@
 }
 
 .box {
+  height: 77%;
+  background-image: url("./images/opaque_backg.png");
+  margin: 0vh 5vh 0vh 5vh;
+  overflow-y: auto;
+  justify-content: center;
+  text-align: center;
+  overflow-y:visible;
+}
+
+.tripBox {
   height: 77%;
   background-image: url("./images/opaque_backg.png");
   margin: 0vh 5vh 0vh 5vh;
@@ -308,23 +319,26 @@ padding-top: 10px;
 .flightsContainer {
   display:flex;
   background-color: white;
-  opacity: 0.5;
+  background: rgba(255, 255, 255, 0.5);
   width: auto;
   height: auto;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .flightsItem {
-  display:inline-block;
   text-align: center;
-  
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: #363636;
 }
 
 .flightBar {
   height: 4px; 
   width: 200px; 
-  background-color: black;
+  background-color: #363636;
   margin-top: 2px;
   margin-left: 10px;
   margin-right: 10px;
@@ -334,7 +348,7 @@ padding-top: 10px;
   display:flex;
 }
 
-.bookFlight {
+.ui.button.bookFlight {
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 10px;
@@ -345,6 +359,7 @@ padding-top: 10px;
   cursor: pointer;
   background-color:#08243f;
   color: white;
+  z-index: 2;
 }
 
 .duration{
@@ -361,6 +376,7 @@ padding-top: 10px;
   font-size: 20px;
   padding: 20px;
   margin: 0vh 5vh 0vh 5vh;
+  z-index: -999;
 }
 
 .boxHeader{
@@ -390,10 +406,10 @@ padding-top: 10px;
 
 }
 .box2 {
-  height: 350px;
-  top: 200px;
+  height: 250px;
+  top: 30%;
   position: absolute;
-  background-image: url("./images/opaque_backg.png");
+  background-color: rgba(255, 255, 255, 0.5);
   width: 500px;
   align-items: center;
   justify-content: center;

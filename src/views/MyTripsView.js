@@ -7,6 +7,8 @@ import { Button} from 'semantic-ui-react'
 // view needs work, check below for data structure of a saved trip
 function MyTripsView(props){
 
+  console.log(props.flights);
+
   function capitalize(value){
     return value.split(' ')
     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
@@ -16,7 +18,7 @@ function MyTripsView(props){
           <div className = "background_image">
               <Navigation></Navigation>
               <h1 className="flightHeader">My Trips</h1>
-              <div className="box">
+              <div className="tripBox">
                 <div className = "tripContainer">
                 <div className="ui cards">
                   {
@@ -31,7 +33,7 @@ function MyTripsView(props){
                                 <div className="description">
                                 <div>
                                         <div>Hotel: {(e.savedAccommodation) ? String(e.savedAccommodation.hotel_name) : "None"}</div>
-                                        <div>Flight: {(e.savedFlight) ? String(e.savedFlight) : "None"}</div>
+                                        <div>Flight: {(e.savedFlight === "none") ? "None" : String(e.savedFlight.origin) + " to " + String(e.savedFlight.destination) + " (" + String(e.savedFlight.price) + " SEK)"}</div>
                                 </div>
                                 </div>
                                 <Button color = "red" onClick={() => props.deleteTrip(e.tripName)} class="ui right floated button">

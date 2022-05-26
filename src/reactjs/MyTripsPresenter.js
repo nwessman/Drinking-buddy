@@ -36,7 +36,6 @@ export default function MyTrips(props){
   selectTrip={loadTripIntoModel}
   deleteTrip={deleteTrip}
   doNewSearch={goToSearch} 
-  
   />;
   
 }

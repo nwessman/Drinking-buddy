@@ -5,7 +5,9 @@ import { Button, Icon } from 'semantic-ui-react'
 
 export default function AccommodationView(props){
 
-    if(props.hotels !== undefined && props.hotels > 0)
+    console.log(props.hotels)
+
+    if(props.hotels !== undefined && props.hotels.length > 0)
         return (
             <div className = "background_image">
                 <Navigation></Navigation>   
@@ -13,7 +15,7 @@ export default function AccommodationView(props){
                 <h1 className= "flightHeader"> 
                         Available hotels at your chosen destination
                     </h1>
-                <div className="box">
+                <div className="tripBox">
                     <div className="boxContainer">
                 {
                 props.hotels.map(e => {
@@ -27,7 +29,7 @@ export default function AccommodationView(props){
                                 <div className="text">{e.address}</div>
                                 <div className="text">{e.min_total_price} SEK</div>
                                 <div className = "bookHotel">
-                                <Button onClick={() => {props.saveHotelChoice(e)}} className = "bookHotelButton">Save hotel</Button>
+                                <Button className = "bookHotelButton" data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveHotelChoice(e)}} ><Icon name='plus'/></Button>
                                 <Button onClick = {function buttonClickedACB(){ window.open(e.url);}} className = "bookHotelButton"> Book now! </Button>
                             </div>
                             </div>

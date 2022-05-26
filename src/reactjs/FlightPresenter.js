@@ -7,6 +7,10 @@ export default function Flights(props){
   let from = String(props.model.locationParams.from).toUpperCase();
   let to = String(props.model.locationParams.to).toUpperCase();
 
+  function goToSearch(){
+    window.location.hash = "startsearch"
+  }
+
   function saveFlight(flight){
     props.model.saveFlightChoice(flight)
   }
@@ -30,7 +34,8 @@ export default function Flights(props){
   flights={props.model.flightsDepart} 
   from = {from} 
   to = {to} 
-  saveFlightChoice={saveFlight} 
+  saveFlightChoice={saveFlight}
+  doNewSearch={goToSearch}  
   
   />;
 }
