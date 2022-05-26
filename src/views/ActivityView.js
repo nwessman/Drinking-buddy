@@ -95,7 +95,7 @@ function ActivityView(props){
                 <h3>{getCategory(features.properties.categories)[1]}</h3>
                 <img src={getCategory(features.properties.categories)[0]} width="150" height="150" alt="ERROR 404"/><br/>
                 <span className="popupText">{features.properties.address_line2}</span><br/>
-                <Popup hideOnScroll = "true" content = "Hotel is now added." on = "click" trigger = {<Button data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveActivityChoice(features.properties);}}><Icon name='plus'/></Button>}/>
+                <Button data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveActivityChoice(features.properties);}}><Icon name='plus'/></Button>
               </div>
             </Popup>
         </Marker>
