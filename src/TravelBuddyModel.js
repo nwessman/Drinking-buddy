@@ -1,4 +1,3 @@
-import firebase from 'firebase/app';
 import "firebase/database";
 import citiesList from "./cityInfoDB.js"
 import {makeNewTrip, getAllUserTrips, deleteTripFromModel} from "./firebaseMethods.js"
@@ -384,12 +383,6 @@ class TravelBuddyModel {
   setCurrentActivity(a){
     this.currentActivity = a;
     this.notifyObservers();
-  }
-  
-  
-  loadUserModel(user){
-    
-    window.location.hash="startsearch"
   }
 
 

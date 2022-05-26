@@ -78,7 +78,7 @@ function MyTripsView(props){
                                 </div>
                                 <div className="description">
                                 <div>
-                                        <div>Hotel: {(e.savedAccommodation) ? String(e.savedAccommodation.hotel_name) : "None"}</div>
+                                        <div>Hotel: {(e.savedAccommodation) ? String(e.savedAccommodation.hotel_name) + "  (" + String(e.savedAccommodation.min_total_price) + " SEK)" : "None"}</div>
                                         <div>Flight: {(e.savedFlight === "none") ? "None" : String(e.savedFlight.origin) + " to " + String(e.savedFlight.destination) + " (" + String(e.savedFlight.price) + " SEK)"}</div>
                                         <div>Activity: {(e.savedActivity === "None") ? "None" : String(e.savedActivity.name) + "  (" + String(getCategory(e.savedActivity.categories)[1]) + ")"}</div>
                                 </div>

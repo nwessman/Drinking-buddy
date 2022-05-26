@@ -7,16 +7,6 @@ export default function AccommodationView(props){
 
     console.log(props.hotels)
 
-    function showAddMessage(){
-        return (<div class="ui success message">
-                    <i class="close icon"></i>
-                    <div class="header">
-                    Your user registration was successful.
-                    </div>
-                    <p>You may now log-in with the username you have chosen</p>
-      </div>);
-    }
-
     if(props.hotels !== undefined && props.hotels.length > 0)
         return (
             <div className = "background_image">

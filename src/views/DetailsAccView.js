@@ -14,9 +14,9 @@ export default function DetailsAccView(props){
             <div key={review.review_hash} className = "reviews">
                 <div class="ui comments">
             <div class="comment">
-                <a class="avatar">
-                <img src={review.author.avatar}/>
-                </a>
+                <div class="avatar">
+                <img alt = "" src={review.author.avatar}/>
+                </div>
                 <div class="content">
                 <a class="author">{review.author.name}</a>
                 <div class="metadata">
