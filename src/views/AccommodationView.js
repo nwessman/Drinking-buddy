@@ -27,7 +27,7 @@ export default function AccommodationView(props){
                                 <div className="text.bold">{e.hotel_name}</div>
                                 <div className="text">{e.city_trans}</div>
                                 <div className="text">{e.address}</div>
-                                <div className="text">{e.min_total_price} SEK</div>
+                                <div className="text">{Math.round(e.min_total_price)} SEK</div>
                                 <div className = "bookHotel">
                                 <Button className = "bookHotelButton" data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveHotelChoice(e)}} ><Icon name='plus'/></Button>
                                 <Button onClick = {function buttonClickedACB(){ window.open(e.url);}} className = "bookHotelButton"> Book now! </Button>
