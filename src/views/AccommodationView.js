@@ -5,15 +5,15 @@ import { Button, Icon } from 'semantic-ui-react'
 
 export default function AccommodationView(props){
 
-    try {
+    if(props.hotels !== undefined && props.hotels > 0)
         return (
             <div className = "background_image">
                 <Navigation></Navigation>   
                 
-                <div className="box">
-                    <div className= "flightHeader"> 
+                <h1 className= "flightHeader"> 
                         Available hotels at your chosen destination
-                    </div>
+                    </h1>
+                <div className="box">
                     <div className="boxContainer">
                 {
                 props.hotels.map(e => {
@@ -42,11 +42,16 @@ export default function AccommodationView(props){
                 </div>
             );
         
-    } catch (error) {
+    else {
         return (
             <div className = "background_image">
                 <Navigation></Navigation>
-                <span>No hotels found at your destination.</span>
+                <h1 className= "flightHeader"> 
+              No hotels available at this destination. Try searching for an earlier date or change destination.
+                  </h1>
+          <div className="box">
+          <Button className = "bookHotelButton" onClick={props.doNewSearch}>Search for a new Trip!</Button>
+              </div>
             </div>
         );
     } 

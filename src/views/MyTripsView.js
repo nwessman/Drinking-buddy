@@ -15,6 +15,7 @@ function MyTripsView(props){
       return (
           <div className = "background_image">
               <Navigation></Navigation>
+              <h1 className="flightHeader">My Trips</h1>
               <div className="box">
                 <div className = "tripContainer">
                 <div className="ui cards">
@@ -47,7 +48,7 @@ function MyTripsView(props){
                   </div>
                   </div>
 
-                  <Button color="#08243f" classname = "bookHotelButton" onClick={props.doNewSearch}>Search for a new Trip!</Button>
+                  <Button className = "bookHotelButton" onClick={props.doNewSearch}>Search for a new Trip!</Button>
 
               </div>
           </div>

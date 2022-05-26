@@ -1,10 +1,9 @@
 import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars';
 import React from "react";
-import { IoIosSearch } from "react-icons/io";
 import "../App.css";
 import { Autocomplete, TextField } from "@mui/material"
 import citiesList from "../cityInfoDB.js"
-import { Button, Icon, Message, Popup} from 'semantic-ui-react'
+import { Button, Icon} from 'semantic-ui-react'
 
 function StartSearchView(props){
 
@@ -13,13 +12,23 @@ function StartSearchView(props){
     } 
 
     function onFromChange(evt, val){
-        const location = val.toLowerCase();
-        props.setCurrentLocation(location);
+        try{
+            const location = val.toLowerCase();
+            props.setCurrentLocation(location);
+        }
+        catch(error){
+            props.setCurrentLocation("");
+        }
     }
 
     function onToChange(evt, val){
-        const destination = val.toLowerCase();
-        props.setSearchDestination(destination);
+        try{
+            const destination = val.toLowerCase();
+            props.setSearchDestination(destination);
+        }
+        catch(error){
+            props.setSearchDestination("");
+        }
     }
 
     function onCalenderChange(evt) {
@@ -51,7 +60,7 @@ function StartSearchView(props){
             
                 <div className='searchWrapper'>
                 <div className='box3'>
-                    <h2 className='flightHeader'> Explore a new destination!</h2>
+                    <h2 className='boxHeader'> Explore a new destination!</h2>
                     <div className ="search">
                         <Autocomplete
                                 onChange={onFromChange}
@@ -78,16 +87,17 @@ function StartSearchView(props){
                         <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
                     </div>
                     <div className="search">
-                        <Button disabled = {(props.params.loc && props.params.des && props.params.start && props.params.end) === false ? true : false}
-                                icon size = 'big' animated = "vertical" onClick = {onSearchClick}>
+                        <div className="show" data-tooltip={(props.params.loc && props.params.des && props.params.start && props.params.end) === false ? "Did you fill out the forms correctly?" : "Let's explore!"}><Button disabled = {(props.params.loc && props.params.des && props.params.start && props.params.end) === false ? true : false}
+                                icon size = 'big' onClick = {onSearchClick}>
                             <Icon name='search' />
                         </Button>
+                        </div>
                     </div>
                         
                 </div>
 
                 </div>
-                <Button color="#08243f" className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}>My saved trips </Button>
+                <Button className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}>My saved trips </Button>
             </div>
         );
 }

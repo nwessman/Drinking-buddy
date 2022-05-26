@@ -1,6 +1,7 @@
 import React from "react";
 import "../App.css";
 import Navigation from "../reactjs/NavigationPresenter";
+import { Button } from "semantic-ui-react";
 
 export default function renderFlights(props){
 
@@ -18,9 +19,6 @@ export default function renderFlights(props){
 
         return(
           <div key = {index}>
-                <div className= "flightHeader"> 
-       Available flights from {props.from} to {props.to}
-                </div>
            <div className ="flightsContainer">
                 <div className ="flight">
                     <div className= "flightsItem"><div>
@@ -54,6 +52,9 @@ export default function renderFlights(props){
       return (
           <div className = "background_image">
               <Navigation></Navigation>
+              <h1 className= "flightHeader"> 
+       Available flights from {props.from} to {props.to}
+                </h1>
               <div className="box">
                   {props.flights.prices.map(renderFlightsCB)}
               </div>
@@ -63,10 +64,11 @@ export default function renderFlights(props){
       return (
           <div className = "background_image">
           <Navigation></Navigation>
+          <h1 className= "flightHeader"> 
+              No flights available at this date. Try searching for an earlier date or change destination.
+                  </h1>
           <div className="box">
-            <div className= "flightHeader"> 
-              No flights available at this date. Try searching for an earlier date.
-                  </div>
+          <Button className = "bookHotelButton" onClick={props.doNewSearch}>Search for a new Trip!</Button>
               </div>
       </div>
       );
