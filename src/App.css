@@ -63,7 +63,7 @@
 }
 .navigationbar{
   background: #08243f;
-  height: 12vh;
+  height: 10vh;
   width: 100%;
   display: flex;
 
@@ -134,6 +134,14 @@
 
 }
 
+.ui.button.backButton {
+  border-radius: 6px;
+  background-color:#08243f;
+  color: white;
+  margin: 20px 0px 0px 20px;
+  position:absolute;
+}
+
 .firstMessage {
   font-size: 15px;
   font-weight: bold;
@@ -166,7 +174,7 @@
 }
 
 .box {
-  height: 77%;
+  height: 80%;
   background-image: url("./images/opaque_backg.png");
   margin: 0vh 5vh 0vh 5vh;
   overflow-y: auto;
@@ -176,12 +184,20 @@
 }
 
 .tripBox {
-  height: 77%;
+  height: 80%;
   background-image: url("./images/opaque_backg.png");
   margin: 0vh 5vh 0vh 5vh;
   overflow-y: auto;
   justify-content: center;
   text-align: center;
+}
+
+.detBox {
+  height: 80%;
+  background-image: url("./images/opaque_backg.png");
+  margin: 0vh 5vh 0vh 5vh;
+  overflow-y: auto;
+  justify-content: center;
 }
 
 .tripContainer{
@@ -218,12 +234,14 @@
   border-radius: 10px;
 }
 .reviews{
-  background-color: rgba(255, 255, 255, 0.701);
-  margin:10px 45px 10px 20px;
-  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin:10px 45px 0px 20px;
   padding-left: 10px;
   padding-right: 10px;
-  padding:10px
+  padding:10px;
+  width: 50%;
+  border-radius: 3px;
+  align-items: flex-start;
 
 }
 .reviewer{
@@ -257,7 +275,7 @@
 }
 
 .detailsAcc_elements{
-justify-content: center;
+display: inline-block;
 width: 100%;
 
 }
@@ -327,6 +345,15 @@ padding-top: 10px;
   z-index: 1;
 }
 
+.detContainer {
+  display:flex;
+  width: auto;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
 .flightsItem {
   text-align: center;
   justify-content: center;
@@ -349,10 +376,6 @@ padding-top: 10px;
 }
 
 .ui.button.bookFlight {
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
   padding: 20px;
   border-radius: 6px;
   border: none;
@@ -380,25 +403,25 @@ padding-top: 10px;
 }
 
 .boxHeader{
-  opacity: 0.7;
+  background: rgba(255, 255, 255, 0.5);
   width: auto;
   height: auto;
-  background-color: white;
-  color: #000000;
+  color: #363636;
   text-align:center;
   font-size: 20px;
   padding: 20px;
 }
 
-.text {
+.t {
   font-size: 13px;
   display: block;
   margin-top: 10px;
 }
 
-.text.bold {
-  font-size: 15px;
+.bold {
+  font-size: 14px;
   display: block;
+  font-weight: bold;
 }
 
 .searchAButton{

@@ -1,11 +1,21 @@
 import React from "react";
 import "../App.css";
 import Navigation from "../reactjs/NavigationPresenter";
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Popup} from 'semantic-ui-react'
 
 export default function AccommodationView(props){
 
     console.log(props.hotels)
+
+    function showAddMessage(){
+        return (<div class="ui success message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                    Your user registration was successful.
+                    </div>
+                    <p>You may now log-in with the username you have chosen</p>
+      </div>);
+    }
 
     if(props.hotels !== undefined && props.hotels.length > 0)
         return (
@@ -24,12 +34,12 @@ export default function AccommodationView(props){
                             <img src={e.max_photo_url} alt="Error 404" height="200" width="300" onClick={function clickCB(){
                             return props.chosenAccomodation(e.hotel_id);}}/>
                             <div className = "accDescription">
-                                <div className="text.bold">{e.hotel_name}</div>
-                                <div className="text">{e.city_trans}</div>
-                                <div className="text">{e.address}</div>
-                                <div className="text">{Math.round(e.min_total_price)} SEK</div>
+                                <div className="bold">{e.hotel_name}</div>
+                                <div className="t">{e.city_trans}</div>
+                                <div className="t">{e.address}</div>
+                                <div className="t">{Math.round(e.min_total_price)} SEK</div>
                                 <div className = "bookHotel">
-                                <Button className = "bookHotelButton" data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveHotelChoice(e)}} ><Icon name='plus'/></Button>
+                                <Popup hideOnScroll = "true" content = "Hotel is now added." on = "click" trigger = {<Button className = "bookHotelButton" data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveHotelChoice(e);}} ><Icon name='plus'/></Button>}/>
                                 <Button onClick = {function buttonClickedACB(){ window.open(e.url);}} className = "bookHotelButton"> Book now! </Button>
                             </div>
                             </div>

@@ -2,23 +2,42 @@ import React from "react";
 import "../App.css";
 import Navigation from "../reactjs/NavigationPresenter";
 import * as FaIcons from "react-icons/fa"
+import { Button } from "semantic-ui-react";
 
 
 export default function DetailsAccView(props){
    
     function renderReviews(review){
         return (
-        <div key={review.review_hash} className="reviews">
-            <div className="reviewer">{review.author.name}<span> wrote in {review.date}</span></div>
-            <div className="reviewContent">
-            <div>{review.title}</div>
-            <div>Purpose of stay: {review.travel_purpose}</div>
-            <div>Pros: {review.pros}</div>
-            <div>Cons: {review.cons}</div>
-            <div>Score: {review.average_score.toFixed(2)}</div>
-            </div>
+            <div key={review.review_hash} className = "detContainer">
 
-       </div>
+            <div key={review.review_hash} className = "reviews">
+                <div class="ui comments">
+            <div class="comment">
+                <a class="avatar">
+                <img src={review.author.avatar}/>
+                </a>
+                <div class="content">
+                <a class="author">{review.author.name}</a>
+                <div class="metadata">
+                    <div class="date">{review.date}</div>
+                    <div class="rating">
+                    <i class="star icon"></i>
+                    {Math.round(review.average_score)}
+                    </div>
+                </div>
+                <div class="text">
+                    <div>Pros: {review.pros}</div>
+                </div>
+                <div class="text">
+                    <div>Cons: {review.cons}</div>
+                </div>
+                </div>
+                
+            </div>
+            </div>
+            </div>
+            </div>
        );
 
     }
@@ -37,18 +56,17 @@ export default function DetailsAccView(props){
        return(
         <div className = "background_image">
         <Navigation></Navigation> 
-        <button className="button"onClick={function goBack(){window.location.hash="hotels";}}>Go back   </button>
-        <div className="box">
+        <div className="flightHeader"><h1>{props.accomodationReviews.map((r) => r.hotelier_name)[0]}</h1></div>
+        <div className="detBox">
         <div className="detailsAcc_elements">
-     
-            <h1 className="accomodationTitle" alt="Accomodation, no name">{props.accomodationReviews.map((r) => r.hotelier_name)[0]}</h1>
+        <Button className="backButton" onClick={function goBack(){window.location.hash="hotels";}}>Go back   </Button>
             <div className="imageWrapper">
                 
                 <FaIcons.FaAngleLeft size="50px" onClick={onClickPrevCB} className="leftArrow" />  
                 <img className="images" src={props.accomodationPhoto} alt="hotel" height="200"/>
                 <FaIcons.FaAngleRight size="50px" onClick={onClickNextCB} className="rightArrow"/>  
             </div>
-            <h2 className="accomodationTitle">Reviews</h2>
+            <h2 className="boxHeader">Reviews</h2>
             <div key="reviews" >{props.accomodationReviews.map(renderReviews)}</div>
         </div>
        </div>
