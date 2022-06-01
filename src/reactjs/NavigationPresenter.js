@@ -3,10 +3,13 @@ import NavigationView from '../views/NavigationView';
 
 
 export default
-function Navigation(){
+function Navigation(props){
     const [sidebar, setSideBar] = React.useState(false);
+    const [, setRenderStatus] = React.useState();
 
     function logOutUser(){
+        props.model.setNavBarRender(false);
+        console.log("logging out");
         window.location.hash="login"
     }
     
@@ -14,9 +17,26 @@ function Navigation(){
         setSideBar(!sidebar);
     }
 
+
+    function ObserverACB(){
+        setRenderStatus(props.model.navBarRender);
+      }
+    
+      function isTakenDownACB(){
+        props.model.removeObserver(ObserverACB);
+      }
+    
+      function wasCreatedACB(){
+        props.model.addObserver(ObserverACB);
+        return isTakenDownACB;
+      }
+    
+    React.useEffect(wasCreatedACB, []);
+
     return (
         <NavigationView onSideBarClick={onSideBarChange}
-        logOut={logOutUser}/>
+        logOut={logOutUser}
+        renderStatus={props.model.navBarRender}/>
     );
 
 }

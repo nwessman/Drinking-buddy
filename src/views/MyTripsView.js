@@ -62,7 +62,7 @@ function MyTripsView(props){
   }
       return (
           <div className = "background_image">
-              <Navigation></Navigation>
+              
               <h1 className="flightHeader">My Trips</h1>
               <div className="tripBox">
                 <div className = "tripContainer">
@@ -119,6 +119,8 @@ export default MyTripsView;
  * savedFlight: { flight props } OR "none"
  * to: ""
  * tripName: "name of trip, which is also the key"
+
+         
 
                         <div key={e.tripName}>
                             <span>from {e.from} to {e.to}.</span>

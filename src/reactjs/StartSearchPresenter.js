@@ -39,6 +39,7 @@ export default function Search(props){
   }
 
   function navToHotels(){
+    props.model.setNavBarRender(true);
     window.location.hash = "mytrips"
   }
 

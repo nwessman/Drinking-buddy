@@ -25,14 +25,22 @@ function NavigationView(props){
 
     }
 
-return (
-    <div className="navigationbar">
-        <h1 onClick={navigateStartSearchCB} className="name_logo">TravelBuddy</h1>
-        <ul className="menuBar">
-        {MenuItems.map(renderMenuItems)}
-        </ul>
-    </div>
-        
-    );
+    if(props.renderStatus === true){
+        return (
+            <div className="navigationbar">
+                <h1 onClick={navigateStartSearchCB} className="name_logo">TravelBuddy</h1>
+                <ul className="menuBar">
+                {MenuItems.map(renderMenuItems)}
+                </ul>
+            </div>
+                
+            );
+    } else {
+        return (
+            <div className="navigationbar">
+                <h1 className="name_logo">TravelBuddy</h1>
+            </div>
+        );
+    }
 }
 export default NavigationView;

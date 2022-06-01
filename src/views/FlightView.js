@@ -53,7 +53,7 @@ export default function renderFlights(props){
     if(props.flights.prices !== undefined && props.flights.prices.length > 0){
       return (
           <div className = "background_image">
-              <Navigation></Navigation>
+              
               <h1 className= "flightHeader"> 
        Available flights from {props.from} to {props.to}
                 </h1>
@@ -65,7 +65,7 @@ export default function renderFlights(props){
     } else {
       return (
           <div className = "background_image">
-          <Navigation></Navigation>
+          
           <h1 className= "flightHeader"> 
               No flights available at this date. Try searching for an earlier date or change destination.
                   </h1>
