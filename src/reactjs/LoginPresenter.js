@@ -27,6 +27,7 @@ export default function Login(props){
     props.model.setFullUser(user);
     props.model.setUserID(user.uid);
     props.model.getSavedTrips();
+    props.model.setNavBarRender(1);
     window.location.hash = "startsearch"
  
 

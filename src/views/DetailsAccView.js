@@ -12,24 +12,24 @@ export default function DetailsAccView(props){
             <div key={review.review_hash} className = "detContainer">
 
             <div key={review.review_hash} className = "reviews">
-                <div class="ui comments">
-            <div class="comment">
-                <div class="avatar">
+                <div className="ui comments">
+            <div className="comment">
+                <div className="avatar">
                 <img alt = "" src={review.author.avatar}/>
                 </div>
-                <div class="content">
-                <a class="author">{review.author.name}</a>
-                <div class="metadata">
-                    <div class="date">{review.date}</div>
-                    <div class="rating">
-                    <i class="star icon"></i>
+                <div className="content">
+                <a className="author">{review.author.name}</a>
+                <div className="metadata">
+                    <div className="date">{review.date}</div>
+                    <div className="rating">
+                    <i className="star icon"></i>
                     {Math.round(review.average_score)}
                     </div>
                 </div>
-                <div class="text">
+                <div className="text">
                     <div>Pros: {review.pros}</div>
                 </div>
-                <div class="text">
+                <div className="text">
                     <div>Cons: {review.cons}</div>
                 </div>
                 </div>

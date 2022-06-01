@@ -8,7 +8,7 @@ function Navigation(props){
     const [, setRenderStatus] = React.useState();
 
     function logOutUser(){
-        props.model.setNavBarRender(false);
+        props.model.setNavBarRender(0);
         console.log("logging out");
         window.location.hash="login"
     }
@@ -36,7 +36,9 @@ function Navigation(props){
     return (
         <NavigationView onSideBarClick={onSideBarChange}
         logOut={logOutUser}
-        renderStatus={props.model.navBarRender}/>
+        renderStatus={props.model.navBarRender}
+        userImage={props.model.user.photoURL}
+        userName={props.model.user.displayName}/>
     );
 
 }
