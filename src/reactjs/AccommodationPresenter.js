@@ -13,6 +13,10 @@ export default function Accommodations(props){
     props.model.saveHotelChoice(hotel)
   }
 
+  function goToSearch(){
+    window.location.hash = "startsearch"
+  }
+
   function ObserverACB(){
     setHotelsList(props.model.accommodationList)
     setUser(props.model.user)
@@ -38,5 +42,6 @@ export default function Accommodations(props){
   chosenAccomodation={clickCB} to={to} 
   saveHotelChoice={saveTrip}
   user={props.model.user}
+  doNewSearch={goToSearch}
   />;
 }

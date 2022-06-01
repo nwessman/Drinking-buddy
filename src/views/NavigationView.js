@@ -1,4 +1,3 @@
-import userEvent from "@testing-library/user-event";
 import React from "react";
 import "../App.css";
 import {MenuItems} from "./MenuItems";
@@ -19,21 +18,29 @@ function NavigationView(props){
         <li key={index} className={item.cName}>
             <a onClick = {someCB} >
             {item.icon}
-            <span>{item.title}</span>
+            <span> {item.title}</span>
             </a>
         </li>
         );
 
     }
 
-return (
-    <div className="navigationbar">
-        <h1 onClick={navigateStartSearchCB} className="name_logo">TravelBuddy</h1>
-        <ul className="menuBar">
-        {MenuItems.map(renderMenuItems)}
-        </ul>
-    </div>
-        
-    );
+    if(props.renderStatus === true){
+        return (
+            <div className="navigationbar">
+                <h1 onClick={navigateStartSearchCB} className="name_logo">TravelBuddy</h1>
+                <ul className="menuBar">
+                {MenuItems.map(renderMenuItems)}
+                </ul>
+            </div>
+                
+            );
+    } else {
+        return (
+            <div className="navigationbar">
+                <h1 className="name_logo">TravelBuddy</h1>
+            </div>
+        );
+    }
 }
 export default NavigationView;

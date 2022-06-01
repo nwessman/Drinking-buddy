@@ -1,6 +1,7 @@
 import React from "react";
 import "../App.css";
 import Navigation from "../reactjs/NavigationPresenter";
+import { Button, Icon, Popup } from "semantic-ui-react";
 
 export default function renderFlights(props){
 
@@ -18,9 +19,6 @@ export default function renderFlights(props){
 
         return(
           <div key = {index}>
-                <div className= "flightHeader"> 
-       Available flights from {props.from} to {props.to}
-                </div>
            <div className ="flightsContainer">
                 <div className ="flight">
                     <div className= "flightsItem"><div>
@@ -40,8 +38,10 @@ export default function renderFlights(props){
                     <div className= "flightsItem" >{item.destination}</div>
                 </div>
               <div className= "flightsItem">
-                <button onClick={() => {props.saveFlightChoice(item)}} className="bookFlight">Save flight</button>
-                <button onClick = {buttonClickACB} className= "bookFlight">Book flight</button>
+                <Popup hideOnScroll = "true" content = "Hotel is now added." on = "click" trigger = {<Button data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveFlightChoice(item)}} className="bookFlight"><Icon name = "plus"/></Button>}/>
+                <Button onClick = {buttonClickACB} className= "bookFlight">Book flight</Button>
+              </div>
+              <div className= "flightsItem">
                 Price: {item.price} SEK
               </div>
             </div>
@@ -53,7 +53,10 @@ export default function renderFlights(props){
     if(props.flights.prices !== undefined && props.flights.prices.length > 0){
       return (
           <div className = "background_image">
-              <Navigation></Navigation>
+              
+              <h1 className= "flightHeader"> 
+       Available flights from {props.from} to {props.to}
+                </h1>
               <div className="box">
                   {props.flights.prices.map(renderFlightsCB)}
               </div>
@@ -62,11 +65,12 @@ export default function renderFlights(props){
     } else {
       return (
           <div className = "background_image">
-          <Navigation></Navigation>
+          
+          <h1 className= "flightHeader"> 
+              No flights available at this date. Try searching for an earlier date or change destination.
+                  </h1>
           <div className="box">
-            <div className= "flightHeader"> 
-              <h2>No flights available at this date. Try searching for an earlier date.</h2>
-                  </div>
+          <Button className = "bookHotelButton" onClick={props.doNewSearch}>Search for a new Trip!</Button>
               </div>
       </div>
       );

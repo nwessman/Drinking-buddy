@@ -1,22 +1,34 @@
 import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars';
 import React from "react";
-import { IoIosSearch } from "react-icons/io";
 import "../App.css";
 import { Autocomplete, TextField } from "@mui/material"
 import citiesList from "../cityInfoDB.js"
+import { Button, Icon} from 'semantic-ui-react'
 
 function StartSearchView(props){
-            
+
     function onSearchClick(){
         props.onSearchClick();
-    }
+    } 
 
     function onFromChange(evt, val){
-        props.setCurrentLocation(val);
+        try{
+            const location = val.toLowerCase();
+            props.setCurrentLocation(location);
+        }
+        catch(error){
+            props.setCurrentLocation("");
+        }
     }
 
     function onToChange(evt, val){
-        props.setSearchDestination(val);
+        try{
+            const destination = val.toLowerCase();
+            props.setSearchDestination(destination);
+        }
+        catch(error){
+            props.setSearchDestination("");
+        }
     }
 
     function onCalenderChange(evt) {
@@ -32,19 +44,19 @@ function StartSearchView(props){
         window.location.hash = "startsearch";
     }
 
-    let options =[...new Set(citiesList.map(x => x.city + ", " + x.country))] 
+    function capitalize(value){
+        return  value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+    }
+
+    let options =[...new Set(citiesList.map(x => capitalize(x.city) + ", " + capitalize(x.country)))] 
     
     return (
             <div className="background_image">
 
-                <div className='navigationbar'>
-                    <h1 className='name_logo' onClick={navigateStartSearchACB}>TravelBuddy</h1>
-                </div>
-
             
                 <div className='searchWrapper'>
                 <div className='box3'>
-                    <h2 className='flightHeader'> Explore a new destination!</h2>
+                    <h2 className='boxHeader'> Explore a new destination!</h2>
                     <div className ="search">
                         <Autocomplete
                                 onChange={onFromChange}
@@ -71,13 +83,17 @@ function StartSearchView(props){
                         <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
                     </div>
                     <div className="search">
-                        <button onClick = {onSearchClick} style = {{opacity: .8}}><IoIosSearch size="50px"/></button>
+                        <div className="show" data-tooltip={(props.params.loc && props.params.des && props.params.start && props.params.end) === false ? "Did you fill out the forms correctly?" : "Let's explore!"}><Button disabled = {(props.params.loc && props.params.des && props.params.start && props.params.end) === false ? true : false}
+                                icon size = 'big' onClick = {onSearchClick}>
+                            <Icon name='search' />
+                        </Button>
+                        </div>
                     </div>
                         
                 </div>
 
                 </div>
-                <button className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}>  My saved trips </button>
+                <Button className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}>My saved trips </Button>
             </div>
         );
 }

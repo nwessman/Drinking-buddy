@@ -1,4 +1,3 @@
-import firebase from 'firebase/app';
 import "firebase/database";
 import citiesList from "./cityInfoDB.js"
 import {makeNewTrip, getAllUserTrips, deleteTripFromModel} from "./firebaseMethods.js"
@@ -34,16 +33,22 @@ class TravelBuddyModel {
   activityList;
   activityQuerySelections;
   currentActivity;
+  navBarRender;
 
   // Login user data
   credential;
   token;
   user;
   userID;
+
+
+
   
+
   // Used for storing selected hotel and flight
   savedAccommodation;
   savedFlight;
+  savedActivity;
 
   // Used for storing all saved trips
   userSavedTrips;
@@ -76,12 +81,16 @@ class TravelBuddyModel {
 
     this.savedAccommodation = "none";
     this.savedFlight = "none";
+    this.savedActivity = "None";
     this.userSavedTrips = []
+    this.navBarRender = false;
 
     this.user = {}
   }
 
+
   // FETCH AND SAVE ALL THE USERS SAVED TRIP FROM FIREBASE TO MODEL
+
   getSavedTrips(){
     getAllUserTrips(this.userID, this);
   }
@@ -108,6 +117,17 @@ class TravelBuddyModel {
     makeNewTrip(this).then(this.getSavedTrips())
   }
 
+  // USED FOR SAVING AN ACTIVITY OPTION TO MY TRIP
+  saveActivityChoice(activity){
+    this.savedActivity = activity;
+    makeNewTrip(this).then(this.getSavedTrips())
+  }
+
+  setNavBarRender(b){
+    this.navBarRender = b
+    console.log("nav condition:" + this.navBarRender);  
+    this.notifyObservers();
+  }
   
   // THIS LOADS A SAVED TRIP INTO THE MODEL
   loadSomeTrip(someTrip){
@@ -219,6 +239,10 @@ class TravelBuddyModel {
             console.log(res)
             this.setAccommodationList(res[0].result);
             this.setFlightList(res[1]);
+            this.savedAccommodation = "none";
+            this.savedFlight = "none";
+            this.savedActivity = "None";
+            this.setNavBarRender(true);
             window.location.hash = "hotels";
             //makeNewTrip(this);
             
@@ -376,12 +400,6 @@ class TravelBuddyModel {
   setCurrentActivity(a){
     this.currentActivity = a;
     this.notifyObservers();
-  }
-  
-  
-  loadUserModel(user){
-    
-    window.location.hash="startsearch"
   }
 
 

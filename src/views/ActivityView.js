@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import { IoIosSearch} from "react-icons/io";
 import Navigation from "../reactjs/NavigationPresenter";
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Button, Icon } from 'semantic-ui-react'
 import {
     useMap,
     MapContainer,
@@ -95,6 +95,7 @@ function ActivityView(props){
                 <h3>{getCategory(features.properties.categories)[1]}</h3>
                 <img src={getCategory(features.properties.categories)[0]} width="150" height="150" alt="ERROR 404"/><br/>
                 <span className="popupText">{features.properties.address_line2}</span><br/>
+                <Button data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveActivityChoice(features.properties);}}><Icon name='plus'/></Button>
               </div>
             </Popup>
         </Marker>
@@ -114,7 +115,7 @@ function ActivityView(props){
         
         return (
             <div className="background_image">
-                <Navigation></Navigation> 
+                
                {window.resizeBy(200,200)}
                 <div className="searchActivity">
                     <Dropdown placeholder='Choose Activity' fluid multiple selection options={props.dropDownOptions} className="dropdown" style={{ width: "40rem"}} onChange={onActivitesChange} />
@@ -141,7 +142,7 @@ function ActivityView(props){
         return (
 
             <div className = "background_image">
-                <Navigation></Navigation>
+                
                 Null || undefined position
                 </div>
                 );
