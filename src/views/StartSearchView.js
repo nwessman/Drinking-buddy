@@ -49,6 +49,18 @@ function StartSearchView(props){
     }
 
     let options =[...new Set(citiesList.map(x => capitalize(x.city) + ", " + capitalize(x.country)))] 
+
+    function popUpText(){
+        if(props.loading){
+            return "Is searching...";
+        }
+        if((props.params.loc && props.params.des && props.params.start && props.params.end) === false)
+        {
+            return "Did you fill out the forms correctly?"; 
+        }
+        return "Let's explore!";
+
+    }
     
     return (
             <div className="background_image">
@@ -83,7 +95,7 @@ function StartSearchView(props){
                         <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
                     </div>
                     <div className="search">
-                        <div className="show" data-tooltip={(props.params.loc && props.params.des && props.params.start && props.params.end) === false ? "Did you fill out the forms correctly?" : "Let's explore!"}><Button disabled = {(props.params.loc && props.params.des && props.params.start && props.params.end) === false ? true : false}
+                        <div className="show" data-tooltip={popUpText()}><Button disabled = {(props.params.loc && props.params.des && props.params.start && props.params.end && !props.loading) === false ? true : false}
                                 icon size = 'big' onClick = {onSearchClick}>
                             <Icon name='search' />
                         </Button>

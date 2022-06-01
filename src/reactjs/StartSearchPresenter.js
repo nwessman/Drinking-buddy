@@ -7,9 +7,26 @@ export default function Search(props){
   const [loc, setLocation] = React.useState(false);
   const [start, setStart] = React.useState(false);
   const [end, setEnd] = React.useState(false);
+  const [,setLoading] = React.useState(props.model.loading);
+
+  function ObserverACB(){
+    setLoading(props.model.loading);  
+
+  }
+  function isTakenDownACB(){
+    props.model.removeObserver(ObserverACB);
+  }
+  
+  function wasCreatedACB(){
+    props.model.addObserver(ObserverACB);
+    return isTakenDownACB;
+  }
+ 
+
 
   function setSearchLatCB(val){
     props.model.setSearchLatQuery(val);
+ 
   }
 
   function setSearchLongCB(val){
@@ -52,8 +69,8 @@ export default function Search(props){
     }
   }
 
-  React.useEffect(() => {
-  }, [loc, des, start, end]);
+  React.useEffect(wasCreatedACB, [loc, des, start, end]);
+
 
 
   function doSearch(){
@@ -75,5 +92,6 @@ export default function Search(props){
   searchParams={props.model.searchParams}
   checkPreviousSearch={navToHotels}
   params = {params}
+  loading = {props.model.loading}
   />;
 }

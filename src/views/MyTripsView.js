@@ -80,7 +80,7 @@ function MyTripsView(props){
                                 <div>
                                         <div>Hotel: {(e.savedAccommodation) ? String(e.savedAccommodation.hotel_name) + "  (" + String(e.savedAccommodation.min_total_price) + " SEK)" : "None"}</div>
                                         <div>Flight: {(e.savedFlight === "none") ? "None" : String(e.savedFlight.origin) + " to " + String(e.savedFlight.destination) + " (" + String(e.savedFlight.price) + " SEK)"}</div>
-                                        <div>Activity: {(e.savedActivity === "None") ? "None" : String(e.savedActivity.name) + "  (" + String(getCategory(e.savedActivity.categories)[1]) + ")"}</div>
+                                       
                                 </div>
                                 </div>
                                 <Button color = "red" onClick={() => props.deleteTrip(e.tripName)} class="ui right floated button">
@@ -106,6 +106,7 @@ function MyTripsView(props){
 export default MyTripsView;
 
 /**
+ *  <div>Activity: {(e.savedActivity === "None") ? "None" : String(e.savedActivity.name) + "  (" + String(getCategory(e.savedActivity.categories)[1]) + ")"}</div>
  * STRUCTURE OF A LIST ITEM IN 'props.savedTrips'
  * accommodationList : [{..}, ... , {...}]
  * departDate: "2022 .."
