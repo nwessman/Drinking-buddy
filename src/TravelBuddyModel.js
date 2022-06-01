@@ -3,6 +3,7 @@ import citiesList from "./cityInfoDB.js"
 import {makeNewTrip, getAllUserTrips, deleteTripFromModel} from "./firebaseMethods.js"
 
 import { getFlights, getHotels, getHotelsReview, getActivites } from "./geoSource.js";
+import promiseNoData from "./views/promiseNoData.js";
 
 
 class TravelBuddyModel {
@@ -33,6 +34,7 @@ class TravelBuddyModel {
   activityList;
   activityQuerySelections;
   currentActivity;
+  loading;
 
   // Login user data
   credential;
@@ -57,12 +59,11 @@ class TravelBuddyModel {
     this.endDate = {};
     this.searchParams = {};
     this.locationParams = {}
-    this.searchResultsPromiseState = {};
-    this.currentAccPromiseState = {};
     this.currentAccReviews= [];
     this.accPhotos = [];
     this.currentAccommodationID = currentAccommodation;
     this.accomondations = accArray; 
+    this.loading = false;
 
     this.flights = flightArray;
 
@@ -80,6 +81,10 @@ class TravelBuddyModel {
     this.savedActivity = "None";
 
     this.user = {}
+  }
+  setState(state){
+    this.loading = state;
+
   }
 
   // FETCH AND SAVE ALL THE USERS SAVED TRIP FROM FIREBASE TO MODEL
@@ -195,9 +200,13 @@ class TravelBuddyModel {
     window.location.hash="startsearch"
   }
 
+   sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   doSearch(){
-
+   
+  
     if(!this.searchParams.from || !this.searchParams.to  || !this.searchParams.startDate  || !this.searchParams.endDate ){
         return;
       }
@@ -213,50 +222,32 @@ class TravelBuddyModel {
       
       this.setLat(toObj.lat);
       this.setLng(toObj.lng);
-
+      this.loading = true;
+      this.notifyObservers();
       if(this.searchParams.startDate &&  this.searchParams.endDate && this.locationToLat && this.locationToLng){
-        Promise.all([
+      Promise.all([
+       
           getHotels({startDate: this.searchParams.startDate, endDate: this.searchParams.endDate, lat: this.locationToLat, lng: this.locationToLng}),
-          getFlights({fromIATA: fromObj.AITA[0], toIATA: toObj.AITA[0], startDate: this.searchParams.startDate, endDate: this.searchParams.endDate})
+          getFlights({fromIATA: fromObj.AITA[0], toIATA: toObj.AITA[0], startDate: this.searchParams.startDate, endDate: this.searchParams.endDate}),
+          this.sleep(2000)
         ]).then(res => {
           console.log("promises resloved");
           console.log(res);
           Promise.all([res[0].json(), res[1].json()])
           .then(res => {
-            console.log(res)
+            console.log(res);
             this.setAccommodationList(res[0].result);
             this.setFlightList(res[1]);
             window.location.hash = "hotels";
             //makeNewTrip(this);
+            this.loading = false;
+            this.notifyObservers();
             
           })
         })
       }
 
-        // Accomodation
-      // if(this.startDate &&  this.endDate && this.locationToLat && this.locationToLng){
-      //   // REQUIRES OBJECT {startDate, endDate, lat, lng}
-      //   getHotels({startDate: this.startDate, endDate: this.endDate, lat: this.locationToLat, lng: this.locationToLng})
-      //   .then(response => response.json())
-      //   .then(response => { 
-      //           this.setAccommodationList(response.result);
-      //           window.location.hash = "hotels";
-      //           }
-      //     ).catch(err => console.error(err));
-      
-      // }
-        
-      // // Flights
-      // if(this.startDate && this.endDate && fromObj.AITA[0] && toObj.AITA[0]){
-      //   getFlights({fromIATA: fromObj.AITA[0], toIATA: toObj.AITA[0], startDate: this.startDate, endDate: this.endDate})
-      //   .then(results => results.json())
-      //   .then(results => {
-      //     this.setFlightList(results);
 
-      //   })
-      // }
-
-      // window.location.hash = "hotels";
     } catch(e) {
     }
 
@@ -265,13 +256,10 @@ class TravelBuddyModel {
 
   setLat(lat){
     this.locationToLat = lat;
-    //firebase.database().ref(this.user.uid + "/model/locationToLat").set( this.locationToLat);
-   
-
   }
+
   setLng(lng){
     this.locationToLng = lng;
-    //firebase.database().ref("model/locationToLng").set(this.locationToLng);
   }
 
   // SearchParams object is used for making a search, startDate is used for the trip loaded into model.
@@ -290,20 +278,16 @@ class TravelBuddyModel {
   setAccommodationList(l){
     this.accommodationList = l;
     this.notifyObservers();
-    //firebase.database().ref("model/accommodationList").set(this.accommodationList);
   }
 
   setFlightList(l){
     this.flightsDepart=l;
     this.notifyObservers();
-    //firebase.database().ref("model/flightsDepart").set(this.flightsDepart);
   }
 
   setActivityList(l){
     this.activityList = l;
     this.notifyObservers();
-    //if(this.activityList !== undefined)
-    //firebase.database().ref("model/activityList").set(this.activityList);
   }
  
 
@@ -312,19 +296,15 @@ class TravelBuddyModel {
    */
   setCurrentAccomodationID(id){
     this.currentAccommodationID=id;
-    this.notifyObservers();
-    //firebase.database().ref("model/currentAccommodationID").set(this.currentAccommodationID);
-    
+    this.notifyObservers();    
   }
+
   setAccomodationReviews(list){
-    this.currentAccReviews=list;
-    //firebase.database().ref("model/currentAccReviews").set(this.currentAccReviews);
-    
+    this.currentAccReviews=list;    
   }
+
   setAccomodationPhotos(list){
-    this.accPhotos=list;
-    //firebase.database().ref("model/accPhotos").set(this.accPhotos);
-    
+    this.accPhotos=list;    
   }
  
 
@@ -336,6 +316,8 @@ class TravelBuddyModel {
     }
   }
   viewDetailsOfAccomodation(id){
+    this.loading = true;
+    this.notifyObservers();
     if(id !== this.currentAccommodationID){
     let arr = [];
       Promise.all(getHotelsReview(id)).then(function(responses){
@@ -348,7 +330,7 @@ class TravelBuddyModel {
             arr = responses[1].map(({url_max}) => url_max); 
             this.setAccomodationPhotos(arr);
             this.setCurrentAccPhoto(0);
-
+            this.loading = false;
             this.notifyObservers();
             window.location.hash="#details_acc";
         }
@@ -374,7 +356,6 @@ class TravelBuddyModel {
 
   setActivityQuerySelections(val){
     this.activityQuerySelections = val;
-    //firebase.database().ref("model/activityQuerySelections").set(this.activityQuerySelections);
   }
 
   /**
