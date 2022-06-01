@@ -6,9 +6,6 @@ export default function LoginView(props){
   return (
     <div className="background_image">
       
-        <div className='navigationbar'>
-                <h1 className='name_logo'>TravelBuddy</h1>
-        </div>
         <div className="searchWrapper"> 
             <div className="box2">
             <h2 className='boxHeader'> Start planning your trip today!</h2>

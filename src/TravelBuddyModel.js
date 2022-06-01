@@ -33,13 +33,18 @@ class TravelBuddyModel {
   activityList;
   activityQuerySelections;
   currentActivity;
+  navBarRender;
 
   // Login user data
   credential;
   token;
   user;
   userID;
+
+
+
   
+
   // Used for storing selected hotel and flight
   savedAccommodation;
   savedFlight;
@@ -76,13 +81,16 @@ class TravelBuddyModel {
 
     this.savedAccommodation = "none";
     this.savedFlight = "none";
-    this.userSavedTrips = []
     this.savedActivity = "None";
+    this.userSavedTrips = []
+    this.navBarRender = false;
 
     this.user = {}
   }
 
+
   // FETCH AND SAVE ALL THE USERS SAVED TRIP FROM FIREBASE TO MODEL
+
   getSavedTrips(){
     getAllUserTrips(this.userID, this);
   }
@@ -115,6 +123,11 @@ class TravelBuddyModel {
     makeNewTrip(this).then(this.getSavedTrips())
   }
 
+  setNavBarRender(b){
+    this.navBarRender = b
+    console.log("nav condition:" + this.navBarRender);  
+    this.notifyObservers();
+  }
   
   // THIS LOADS A SAVED TRIP INTO THE MODEL
   loadSomeTrip(someTrip){
@@ -226,6 +239,10 @@ class TravelBuddyModel {
             console.log(res)
             this.setAccommodationList(res[0].result);
             this.setFlightList(res[1]);
+            this.savedAccommodation = "none";
+            this.savedFlight = "none";
+            this.savedActivity = "None";
+            this.setNavBarRender(true);
             window.location.hash = "hotels";
             //makeNewTrip(this);
             

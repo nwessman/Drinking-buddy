@@ -115,7 +115,7 @@ function ActivityView(props){
         
         return (
             <div className="background_image">
-                <Navigation></Navigation> 
+                
                {window.resizeBy(200,200)}
                 <div className="searchActivity">
                     <Dropdown placeholder='Choose Activity' fluid multiple selection options={props.dropDownOptions} className="dropdown" style={{ width: "40rem"}} onChange={onActivitesChange} />
@@ -142,7 +142,7 @@ function ActivityView(props){
         return (
 
             <div className = "background_image">
-                <Navigation></Navigation>
+                
                 Null || undefined position
                 </div>
                 );

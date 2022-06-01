@@ -55,7 +55,7 @@ export default function DetailsAccView(props){
    try{
        return(
         <div className = "background_image">
-        <Navigation></Navigation> 
+        
         <div className="flightHeader"><h1>{props.accomodationReviews.map((r) => r.hotelier_name)[0]}</h1></div>
         <div className="detBox">
         <div className="detailsAcc_elements">
