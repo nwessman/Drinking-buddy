@@ -6,7 +6,11 @@ import Accommodations from './reactjs/AccommodationPresenter';
 import Flights from './reactjs/FlightPresenter';
 import Login from './reactjs/LoginPresenter';
 import MyTrips from './reactjs/MyTripsPresenter';
+
+import LoadBar from './reactjs/LoadBarPresenter';
+
 import Navigation from './reactjs/NavigationPresenter';
+
 
 const Search=require('./reactjs/StartSearchPresenter.js').default;
 const Activities=require('./reactjs/ActivityPresenter.js').default;
@@ -17,7 +21,11 @@ function App(props) {
   return (
     <>
       <div >
+
+        <div className=''><LoadBar model={props.model}/></div>
+
         <Navigation model ={props.model}></Navigation>
+
          <div className=''><Show hash = "#startsearch"><Search model={props.model}/></Show></div>
          <div className='zoom'><Show hash = "#activities"><Activities model={props.model}/></Show></div>
          <div className=''><Show hash = "#hotels"><Accommodations model={props.model}/></Show></div>
