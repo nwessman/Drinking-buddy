@@ -1,7 +1,8 @@
 import React from "react";
 import "../App.css";
 import Navigation from "../reactjs/NavigationPresenter";
-import { Button} from 'semantic-ui-react'
+import { Button, Message} from 'semantic-ui-react'
+import { unstable_getThemeValue } from "@mui/system";
 
 
 // view needs work, check below for data structure of a saved trip
@@ -60,17 +61,19 @@ function MyTripsView(props){
     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
     .join(' ');
   }
+
+  if(props.savedTrips.length > 0){
       return (
           <div className = "background_image">
               
               <h1 className="flightHeader">My Trips</h1>
               <div className="tripBox">
                 <div className = "tripContainer">
-                <div className="ui cards">
-                  {
-                    props.savedTrips.map(e => {
+
+                                <div className="ui cards">
+                  {props.savedTrips.map(e => {
                       return(
-                          <div className="ui card">
+                          <div key={e.tripName} className="ui card">
                               <div className="content">
                                 <a className="header">{capitalize(e.from)} to {capitalize(e.to)}</a>
                                 <div className="meta">
@@ -78,30 +81,56 @@ function MyTripsView(props){
                                 </div>
                                 <div className="description">
                                 <div>
-                                        <div>Hotel: {(e.savedAccommodation) ? String(e.savedAccommodation.hotel_name) + "  (" + String(e.savedAccommodation.min_total_price) + " SEK)" : "None"}</div>
+                                        <div>Hotel: {(e.savedAccommodation) === "none" ? "None" : String(e.savedAccommodation.hotel_name) + "  (" + String(Math.round(e.savedAccommodation.min_total_price)) + " SEK)" }</div>
+                                        <br/>
                                         <div>Flight: {(e.savedFlight === "none") ? "None" : String(e.savedFlight.origin) + " to " + String(e.savedFlight.destination) + " (" + String(e.savedFlight.price) + " SEK)"}</div>
-                                        <div>Activity: {(e.savedActivity === "None") ? "None" : String(e.savedActivity.name) + "  (" + String(getCategory(e.savedActivity.categories)[1]) + ")"}</div>
+                                        <br/>
+                                        <div>Activity: <ul>{(e.savedActivity === "None") ? "None" : e.savedActivity.map(a => {
+                                                return (
+                                                <li className="noBullets"key={a.name}>
+                                                {String(a.name) + " " + String(a.address_line2) + "  (" + String(getCategory(a.categories)[1]) + ")"}
+                                                <br/>
+                                                <br/>
+                                                </li>
+                                                );
+                                        }
+                                        )}</ul> 
+                                        </div>
                                 </div>
                                 </div>
-                                <Button color = "red" onClick={() => props.deleteTrip(e.tripName)} class="ui right floated button">
+                                <Button color = "red" onClick={() => props.deleteTrip(e.tripName)} className="ui right floated button">
                                   Delete Trip
                                 </Button>
-                                <Button onClick={() => props.selectTrip(e)} class="ui left floated button">
+                                <Button onClick={() => props.selectTrip(e)} className="ui left floated button">
                                   Explore Trip
                                 </Button>
                               </div>
                           </div>
-                      )
-                    })
-                  }
-                  </div>
-                  </div>
-
-                  <Button className = "bookHotelButton" onClick={props.doNewSearch}>Search for a new Trip!</Button>
-
-              </div>
-          </div>
+                      )})
+                }
+                </div>
+                </div> 
+                <Button className="bookHotelButton" onClick={props.doNewSearch}> Search for a new Trip!</Button>
+                </div>
+                </div>              
         );
+} else {
+        return (
+
+                <div className = "background_image">
+                        <h1 className="flightHeader">My Trips</h1>
+                        <div className="tripBox">
+                        <Message negative>
+                        <Message.Header>Oops!</Message.Header>
+                        <p>You have no saved trips! 
+                                Add a hotel, flight or activity in order to save your trip.</p>
+                        </Message>
+                        <Button className="bookHotelButton" onClick={props.doNewSearch}> Search for a new Trip!</Button>
+                        </div>
+                </div>
+        );
+        
+}
 }
 export default MyTripsView;
 

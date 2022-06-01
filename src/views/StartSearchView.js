@@ -7,6 +7,8 @@ import { Button, Icon} from 'semantic-ui-react'
 
 function StartSearchView(props){
 
+    let minDate = new Date();
+
     function onSearchClick(){
         props.onSearchClick();
     } 
@@ -80,7 +82,7 @@ function StartSearchView(props){
                             />
                     </div>
                     <div className="search">
-                        <DateRangePickerComponent delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
+                        <DateRangePickerComponent min={minDate} delayUpdate={true} placeholder="Choose Date Range" change = {onCalenderChange}/>
                     </div>
                     <div className="search">
                         <div className="show" data-tooltip={(props.params.loc && props.params.des && props.params.start && props.params.end) === false ? "Did you fill out the forms correctly?" : "Let's explore!"}><Button disabled = {(props.params.loc && props.params.des && props.params.start && props.params.end) === false ? true : false}
@@ -93,7 +95,6 @@ function StartSearchView(props){
                 </div>
 
                 </div>
-                <Button className='checkPreviousSearchButton' onClick={props.checkPreviousSearch}>My saved trips </Button>
             </div>
         );
 }

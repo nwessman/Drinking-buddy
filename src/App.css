@@ -15,6 +15,31 @@
   font-family: 'Lato', sans-serif;
 }
 
+.noBullets{
+  list-style: none;
+}
+
+.userIcon{
+  width: 50px;
+  height: auto;
+  border-radius: 30px;
+  align-items: center;
+  border: 5px;
+  border-color: white;
+}
+
+.userName{
+  font-size: 1.2rem;
+  align-items: center;
+}
+
+.centerUser{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 15px;
+}
+
 .hidden{
   display: none;
 }
@@ -52,11 +77,15 @@
 
 }
 
+.e-daterangepicker.e-popup .e-range-header {
+  background: beige;
+  height: 10px;
+}
 
 .background_image{
   background-image: radial-gradient(at center center, #2d7e9270 0%, #1c40617c 100%), url("./images/view.jpg");
   background-size: cover;
-  height: 100vh;
+  height: 90vh;
   background-position: center;
 
  
@@ -66,6 +95,9 @@
   height: 10vh;
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 
 }
 .menuItems {

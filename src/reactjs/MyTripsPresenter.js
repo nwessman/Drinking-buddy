@@ -6,7 +6,8 @@ export default function MyTrips(props){
   const [, setTrips] = React.useState(props.model.userSavedTrips);
 
   function loadTripIntoModel(aTripObject){
-      props.model.loadSomeTrip(aTripObject);
+    props.model.setNavBarRender(2);
+    props.model.loadSomeTrip(aTripObject);
   }
   function goToSearch(){
     window.location.hash = "startsearch"

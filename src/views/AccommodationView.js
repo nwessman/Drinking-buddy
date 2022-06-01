@@ -29,7 +29,7 @@ export default function AccommodationView(props){
                                 <div className="t">{e.address}</div>
                                 <div className="t">{Math.round(e.min_total_price)} SEK</div>
                                 <div className = "bookHotel">
-                                <Popup hideOnScroll = "true" content = "Hotel is now added." on = "click" trigger = {<Button className = "bookHotelButton" data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveHotelChoice(e);}} ><Icon name='plus'/></Button>}/>
+                                <Popup hideOnScroll = {true} content = "Hotel is now added." on = "click" trigger = {<Button className = "bookHotelButton" data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveHotelChoice(e);}} ><Icon name='plus'/></Button>}/>
                                 <Button onClick = {function buttonClickedACB(){ window.open(e.url);}} className = "bookHotelButton"> Book now! </Button>
                             </div>
                             </div>

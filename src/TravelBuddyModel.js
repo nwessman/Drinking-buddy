@@ -82,8 +82,8 @@ class TravelBuddyModel {
     this.savedAccommodation = "none";
     this.savedFlight = "none";
     this.savedActivity = "None";
-    this.userSavedTrips = []
-    this.navBarRender = false;
+    this.userSavedTrips = [];
+    this.navBarRender = 0;
 
     this.user = {}
   }
@@ -119,13 +119,20 @@ class TravelBuddyModel {
 
   // USED FOR SAVING AN ACTIVITY OPTION TO MY TRIP
   saveActivityChoice(activity){
-    this.savedActivity = activity;
-    makeNewTrip(this).then(this.getSavedTrips())
+    if (this.savedActivity === "None"){
+      this.savedActivity = [activity];
+    } else {
+      if(!this.savedActivity.includes(activity)){
+        this.savedActivity = [...this.savedActivity, activity];
+      }
+    }
+    if(this.accommodationList){
+      makeNewTrip(this).then(this.getSavedTrips())
+    }
   }
 
   setNavBarRender(b){
     this.navBarRender = b
-    console.log("nav condition:" + this.navBarRender);  
     this.notifyObservers();
   }
   
@@ -242,7 +249,7 @@ class TravelBuddyModel {
             this.savedAccommodation = "none";
             this.savedFlight = "none";
             this.savedActivity = "None";
-            this.setNavBarRender(true);
+            this.setNavBarRender(2);
             window.location.hash = "hotels";
             //makeNewTrip(this);
             
