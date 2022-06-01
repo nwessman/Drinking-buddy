@@ -200,9 +200,7 @@ class TravelBuddyModel {
     window.location.hash="startsearch"
   }
 
-   sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+ 
 
   doSearch(){
    
@@ -228,8 +226,7 @@ class TravelBuddyModel {
       Promise.all([
        
           getHotels({startDate: this.searchParams.startDate, endDate: this.searchParams.endDate, lat: this.locationToLat, lng: this.locationToLng}),
-          getFlights({fromIATA: fromObj.AITA[0], toIATA: toObj.AITA[0], startDate: this.searchParams.startDate, endDate: this.searchParams.endDate}),
-          this.sleep(2000)
+          getFlights({fromIATA: fromObj.AITA[0], toIATA: toObj.AITA[0], startDate: this.searchParams.startDate, endDate: this.searchParams.endDate})
         ]).then(res => {
           console.log("promises resloved");
           console.log(res);
