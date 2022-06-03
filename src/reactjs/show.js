@@ -1,6 +1,6 @@
 
 import React from 'react'
-/* Will be implemented later on */
+
 export default
 function Show(props){
     const [hashState, setHash]=React.useState(window.location.hash);

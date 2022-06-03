@@ -3,7 +3,6 @@ import "../App.css";
 import { Button, Message} from 'semantic-ui-react'
 
 
-// view needs work, check below for data structure of a saved trip
 function MyTripsView(props){
 
       function getCategory(categoryArray){
@@ -76,12 +75,12 @@ function MyTripsView(props){
                                 </div>
                                 <div className="description">
                                 <div>
-                                        <div>Hotel: {(e.savedAccommodation) === "none" ? "None" : String(e.savedAccommodation.hotel_name) + "  (" + String(Math.round(e.savedAccommodation.min_total_price)) + " SEK)" }</div>
+                                        <div><b>Hotel:</b> {(e.savedAccommodation) === "none" ? "None" : String(e.savedAccommodation.hotel_name) + "  (" + String(Math.round(e.savedAccommodation.min_total_price)) + " SEK)" }</div>
                                         <br/>
-                                        <div>Flight: {(e.savedFlight === "none") ? "None" : String(e.savedFlight.origin) + " to " + String(e.savedFlight.destination) + " (" + String(e.savedFlight.price) + " SEK)"}</div>
+                                        <div><b>Flight:</b> {(e.savedFlight === "none") ? "None" : String(e.savedFlight.origin) + " to " + String(e.savedFlight.destination) + " (" + String(e.savedFlight.price) + " SEK)"}</div>
 
                                         <br/>
-                                        <div>Activity: <ul>{(e.savedActivity === "None") ? "None" : e.savedActivity.map(a => {
+                                        <div><b>Activities:</b> <ul>{(e.savedActivity === "None") ? "None" : e.savedActivity.map(a => {
                                                 return (
                                                 <li className="noBullets"key={a.name}>
                                                 {String(a.name) + " " + String(a.address_line2) + "  (" + String(getCategory(a.categories)[1]) + ")"}
@@ -131,31 +130,3 @@ function MyTripsView(props){
 }
 export default MyTripsView;
 
-/**
- *  <div>Activity: {(e.savedActivity === "None") ? "None" : String(e.savedActivity.name) + "  (" + String(getCategory(e.savedActivity.categories)[1]) + ")"}</div>
- * STRUCTURE OF A LIST ITEM IN 'props.savedTrips'
- * accommodationList : [{..}, ... , {...}]
- * departDate: "2022 .."
- * returndate: "2022 .."
- * flightsDepart: [{..}, ... , {...}]
- * from: ""
- * lat: 123
- * lng: 123
- * savedAccommodation: { hotel props } OR "none"
- * savedFlight: { flight props } OR "none"
- * to: ""
- * tripName: "name of trip, which is also the key"
-
-         
-
-                        <div key={e.tripName}>
-                            <span>from {e.from} to {e.to}.</span>
-                            <span>Date {e.departDate} to {e.returnDate}.</span>
-                            <button onClick={() => props.selectTrip(e)}>Explore Trip</button>
-                            <button onClick={() => props.deleteTrip(e.tripName)}>Delete Trip</button>
-                            <span>my saved hotel: {(e.savedAccommodation) ? String(e.savedAccommodation) : "None"}</span>
-                            <span>my saved flight: {(e.savedFlight) ? String(e.savedFlight) : "None"}</span>
-                        </div>
-
-
-*/

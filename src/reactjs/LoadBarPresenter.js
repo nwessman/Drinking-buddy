@@ -1,19 +1,12 @@
 import React from "react";
 import LoadBarView from "../views/LoadBarView";
 
-
-
-
-
 export default function LoadBar(props){
   const [,setLoading] = React.useState(props.model.loading);
   function ObserverACB(){
     setLoading(props.model.loading);  
-   
-   
-    
-
   }
+
   function isTakenDownACB(){
     props.model.removeObserver(ObserverACB);
   }
@@ -25,8 +18,6 @@ export default function LoadBar(props){
  
   React.useEffect(wasCreatedACB,[]);
 
-
-  
   if(props.model.loading){
     return <LoadBarView />;
 

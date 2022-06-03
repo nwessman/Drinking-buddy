@@ -72,7 +72,7 @@ export default function DetailsAccView(props){
     </div>
        );
     }catch(error){
-           return <div>NO hotels reviews </div>
+           return <div>No hotel reviews </div>
        }
 
 }

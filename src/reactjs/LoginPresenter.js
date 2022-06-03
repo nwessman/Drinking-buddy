@@ -3,9 +3,6 @@ import LoginView from "../views/LoginView";
 import firebase from 'firebase/app';
 
 
-
-
-
 export default function Login(props){
 
   var provider = new firebase.auth.GoogleAuthProvider();
