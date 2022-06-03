@@ -37,7 +37,7 @@ export default function Activity(props){
       }
 
       function saveQueryOptionsToModel(list){
-        props.model.setActivityQuerySelections(list); // Sparar sök-options i modellen
+        props.model.setActivityQuerySelections(list); // Save search options in the model
       }
       
       function saveCurrentActivityToModel(a){

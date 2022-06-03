@@ -11,8 +11,8 @@ export default function Search(props){
 
   function ObserverACB(){
     setLoading(props.model.loading);  
-
   }
+
   function isTakenDownACB(){
     props.model.removeObserver(ObserverACB);
   }
@@ -22,11 +22,8 @@ export default function Search(props){
     return isTakenDownACB;
   }
  
-
-
   function setSearchLatCB(val){
     props.model.setSearchLatQuery(val);
- 
   }
 
   function setSearchLongCB(val){
@@ -69,7 +66,6 @@ export default function Search(props){
   }
 
   React.useEffect(wasCreatedACB, [loc, des, start, end]);
-
 
 
   function doSearch(){

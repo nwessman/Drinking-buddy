@@ -35,13 +35,6 @@ import { BsFillCalendar2CheckFill } from "react-icons/bs"
         cName: "menuItems"
         
     }
-    // {
-    //     title: "Log Out",
-    //     hash:"#login",
-    //     icon:<AiIcons.AiOutlinePoweroff></AiIcons.AiOutlinePoweroff>,
-    //     cName: "menuItems"
-        
-    // }
 
 ]
 

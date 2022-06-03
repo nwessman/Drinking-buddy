@@ -13,14 +13,6 @@ export default function LoginView(props){
             <Button className = "loginButton" size = "massive" onClick={props.userLogin}> Get started! </Button>
             </div>
         </div>        
-
-        {/* <TextField id = "email" label = "Email" onChange = {setEmailACB}>
-
-        </TextField>
-        
-        <TextField id = "password" label = "Password" onChange = {setPasswordACB}>
-
-        </TextField> */}
     </div>);
         
 }

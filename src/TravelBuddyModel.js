@@ -214,11 +214,7 @@ class TravelBuddyModel {
   }
 
 
-  loadUserModel(uid){
-    //updateModelFromFirebase(uid);
-
-   
-    
+  loadUserModel(uid){    
     window.location.hash="startsearch"
   }
 
@@ -259,7 +255,6 @@ class TravelBuddyModel {
             this.savedActivity = "None";
             this.setNavBarRender(2);
             window.location.hash = "hotels";
-            //makeNewTrip(this);
             this.loading = false;
             this.notifyObservers();
             
