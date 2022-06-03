@@ -1,15 +1,10 @@
 import React from "react";
 import "../App.css";
-import Navigation from "../reactjs/NavigationPresenter";
 import { Button, Message} from 'semantic-ui-react'
-import { unstable_getThemeValue } from "@mui/system";
 
 
 // view needs work, check below for data structure of a saved trip
 function MyTripsView(props){
-
-  console.log(props.flights);
-  console.log(props.savedTrips)
 
       function getCategory(categoryArray){
         let category = categoryArray.find(e => 
@@ -75,7 +70,7 @@ function MyTripsView(props){
                       return(
                           <div key={e.tripName} className="ui card">
                               <div className="content">
-                                <a className="header">{capitalize(e.from)} to {capitalize(e.to)}</a>
+                                <div className="header">{capitalize(e.from)} to {capitalize(e.to)}</div>
                                 <div className="meta">
                                   <div>{e.departDate} - {e.returnDate}</div>
                                 </div>

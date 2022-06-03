@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import 'firebase/auth';        // for authentication
 
 function createTripName(model){
     return model.locationParams.from + '*' +  model.locationParams.to + '*' + String(model.startDate) + '*' + String(model.endDate);

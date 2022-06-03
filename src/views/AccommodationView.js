@@ -1,11 +1,8 @@
 import React from "react";
 import "../App.css";
-import Navigation from "../reactjs/NavigationPresenter";
 import { Button, Icon, Popup} from 'semantic-ui-react'
 
 export default function AccommodationView(props){
-
-    console.log(props.hotels)
 
     if(props.hotels !== undefined && props.hotels.length > 0)
         return (

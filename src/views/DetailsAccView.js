@@ -1,6 +1,5 @@
 import React from "react";
 import "../App.css";
-import Navigation from "../reactjs/NavigationPresenter";
 import * as FaIcons from "react-icons/fa"
 import { Button } from "semantic-ui-react";
 
@@ -18,7 +17,7 @@ export default function DetailsAccView(props){
                 <img alt = "" src={review.author.avatar}/>
                 </div>
                 <div className="content">
-                <a className="author">{review.author.name}</a>
+                <div className="author">{review.author.name}</div>
                 <div className="metadata">
                     <div className="date">{review.date}</div>
                     <div className="rating">

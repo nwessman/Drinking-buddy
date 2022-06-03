@@ -3,7 +3,6 @@ import citiesList from "./cityInfoDB.js"
 import {makeNewTrip, getAllUserTrips, deleteTripFromModel} from "./firebaseMethods.js"
 
 import { getFlights, getHotels, getHotelsReview, getActivites } from "./geoSource.js";
-import promiseNoData from "./views/promiseNoData.js";
 
 
 class TravelBuddyModel {
@@ -251,11 +250,8 @@ class TravelBuddyModel {
           getHotels({startDate: this.searchParams.startDate, endDate: this.searchParams.endDate, lat: this.locationToLat, lng: this.locationToLng}),
           getFlights({fromIATA: fromObj.AITA[0], toIATA: toObj.AITA[0], startDate: this.searchParams.startDate, endDate: this.searchParams.endDate})
         ]).then(res => {
-          console.log("promises resloved");
-          console.log(res);
           Promise.all([res[0].json(), res[1].json()])
           .then(res => {
-            console.log(res);
             this.setAccommodationList(res[0].result);
             this.setFlightList(res[1]);
             this.savedAccommodation = "none";

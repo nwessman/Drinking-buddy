@@ -18,10 +18,10 @@ function NavigationView(props){
         
         return (
         <li key={index} className={item.cName}>
-            <a onClick = {someCB} >
+            <div className="navLink" onClick = {someCB} >
             {item.icon}
             <span> {item.title}</span>
-            </a>
+            </div>
         </li>
         );
 
@@ -34,7 +34,7 @@ function NavigationView(props){
                 <ul className="menuBar">
                 {MenuItems.map(renderMenuItems)}
                 <div className ="centerUser">
-                <Dropdown icon = {<img className="userIcon" src={props.userImage} text = {<div className="userName">{props.userName}</div>}/>}>
+                <Dropdown icon = {<img alt = "userIcon" className="userIcon" src={props.userImage} text = {<div className="userName">{props.userName}</div>}/>}>
                     <Dropdown.Menu>
                     <Dropdown.Item onClick={() => props.logOut()} text = "Log out"/>
                     </Dropdown.Menu>
@@ -57,7 +57,7 @@ function NavigationView(props){
                 <ul className="menuBar">
                 {renderMenuItems(MenuItems[3])}
                 <div className ="centerUser">
-                <Dropdown icon = {<img className="userIcon" src={props.userImage} text = {<div className="userName">{props.userName}</div>}/>}>
+                <Dropdown icon = {<img alt = "userIcon" className="userIcon" src={props.userImage} text = {<div className="userName">{props.userName}</div>}/>}>
                     <Dropdown.Menu>
                     <Dropdown.Item onClick={() => props.logOut()} text = "Log out"/>
                     </Dropdown.Menu>

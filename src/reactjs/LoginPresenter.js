@@ -1,6 +1,6 @@
 import React from "react";
 import LoginView from "../views/LoginView";
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 
 
@@ -14,7 +14,6 @@ export default function Login(props){
     firebase.auth()
   .signInWithPopup(provider)
   .then((result) => {
-    console.log(result);
     /** @type {firebase.auth.OAuthCredential} */
     var credential = result.credential;
     props.model.setCredential(credential);
@@ -23,7 +22,6 @@ export default function Login(props){
     props.model.setToken(token);
     // The signed-in user info.
     var user = result.user;
-    console.log(user);
     props.model.setFullUser(user);
     props.model.setUserID(user.uid);
     props.model.getSavedTrips();

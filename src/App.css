@@ -19,6 +19,14 @@
   list-style: none;
 }
 
+.navLink{
+  color: rgba(255, 255, 255, 0.85);
+  padding: 2vh;
+  margin-bottom: 2vh;
+  height: auto;
+  border-radius: 4px;
+}
+
 .userIcon{
   width: 50px;
   height: auto;
@@ -37,7 +45,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 .hidden{
@@ -119,7 +127,7 @@
   list-style: none;
   justify-content: center;
 }
-.menuItems a:hover {
+.menuItems :hover {
   background-color:#407fdd;
   cursor: pointer;
 }
