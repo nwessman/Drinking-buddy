@@ -1,6 +1,5 @@
 import AccommodationView from "../views/AccommodationView";
 import React from "react";
-import promiseNoData from "../views/promiseNoData"
 
 
 export default function Accommodations(props){

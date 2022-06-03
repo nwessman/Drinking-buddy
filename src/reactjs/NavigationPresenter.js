@@ -9,7 +9,6 @@ function Navigation(props){
 
     function logOutUser(){
         props.model.setNavBarRender(0);
-        console.log("logging out");
         window.location.hash="login"
     }
     

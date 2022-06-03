@@ -1,6 +1,5 @@
 import React from "react";
 import "../App.css";
-import Navigation from "../reactjs/NavigationPresenter";
 import { Button, Icon, Popup } from "semantic-ui-react";
 
 export default function renderFlights(props){
@@ -38,7 +37,7 @@ export default function renderFlights(props){
                     <div className= "flightsItem" >{item.destination}</div>
                 </div>
               <div className= "flightsItem">
-                <Popup hideOnScroll = "true" content = "Flight is now added." on = "click" trigger = {<Button data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveFlightChoice(item)}} className="bookFlight"><Icon name = "plus"/></Button>}/>
+                <Popup hideOnScroll = {true} content = "Flight is now added." on = "click" trigger = {<Button data-tooltip= 'Add to "My Trips"' onClick={() => {props.saveFlightChoice(item)}} className="bookFlight"><Icon name = "plus"/></Button>}/>
                 <Button onClick = {buttonClickACB} className= "bookFlight">Book flight</Button>
               </div>
               <div className= "flightsItem">

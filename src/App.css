@@ -19,6 +19,10 @@
   list-style: none;
 }
 
+.navLink{
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .userIcon{
   width: 50px;
   height: auto;
